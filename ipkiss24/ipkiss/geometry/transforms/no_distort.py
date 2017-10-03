@@ -191,17 +191,17 @@ class NoDistortTransform(GenericNoDistortTransform):
 
     def __magnify_array__(self, coords):
         """ internal use: applies magnification to a numpy array """
-        coords *= numpy.array([self.magnification, self.magnification])
+        coords = coords * numpy.array([self.magnification, self.magnification])
         return coords
 
     def __v_flip_array__(self, coords):
         """ internal use: applies v_mirror to a numpy array """
-        coords *= (numpy.array([False, self.v_mirror]) * -2.0 + 1.0)
+        coords = coords * (numpy.array([False, self.v_mirror]) * -2.0 + 1.0)
         return coords
 
     def __inv_translate_array__(self, coords):
         """ internal use: applies reverse translation to a numpy array """
-        coords -= numpy.array([self.translation.x, self.translation.y])
+        coords = coords - numpy.array([self.translation.x, self.translation.y])
         return coords
     
     def __inv_rotate_array__(self, coords):
