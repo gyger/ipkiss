@@ -69,7 +69,7 @@ class RingLoadedMZI(Structure):
         si_rings = si_ring1.transform(t_ring1) + si_ring2.transform(t_ring2)
         
         # combiner
-        t_combiner = Translation((si_rings.east - si_combiner.west + spacing,0.0))
+        t_combiner = Translation((si_rings.east - si_combiner.west + spacing, 0.0))
         
         return (t_ring1, t_ring2, t_splitter, t_combiner)
 

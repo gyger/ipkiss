@@ -44,7 +44,7 @@ W_wg = 0.45 #no tapers
 offset = 0.5*D_wg + 0.5*W_wg
 L_taper = 8.0
 mmi = ShallowMmi1x2Tapered(width=W_mmi, length=L_mmi, wg_offset=offset, 
-                           taper_width=W_wg, taper_length=L_taper, straight_extension=[0.12,0.2])
+                           taper_width=W_wg, taper_length=L_taper, straight_extension=[0.12, 0.2])
 mmi.write_gdsii("simul_mmi.gds")
 
 #Set simulation parameters
@@ -77,7 +77,7 @@ class MyProcedure(LowLevelPythonMeepProcedure):
         pulse_width_freq = ( (float(pulse_width)/1000.0) / (float(center_wavelength)/1000.0) ) * center_freq 			
         src_gaussian = meep.gaussian_src_time(center_freq, pulse_width_freq)
         #add a point source (linked to the Gaussian source) at the position of the west port
-        source_position_vec = self.make_meep_vec(mmi.west_ports[0].transform_copy(Translation(translation=(-9.0,0))).position)
+        source_position_vec = self.make_meep_vec(mmi.west_ports[0].transform_copy(Translation(translation=(-9.0, 0))).position)
         fields.add_point_source(meep.Hz, src_gaussian, source_position_vec)		
         #add a probing point to the upper output arm
         probing_point_vec = self.make_meep_vec(mmi.east_ports[1].position)

@@ -65,16 +65,16 @@ class RouteToAngle(__RouteBasic__):
 
         angle = round(self.angle_out - self.input_port.angle_deg, 5)%360.0
         if angle == 0.0:
-            pts = points_add_polar(pts,max(self.start_straight, self.end_straight) , self.angle_out)
+            pts = points_add_polar(pts, max(self.start_straight, self.end_straight), self.angle_out)
         elif angle == 180.0:
             bs1_90, bs2_90 = self.get_bend90_size()
-            pts = points_add_polar(pts,self.start_straight + bs1_90, self.input_port.angle_deg)
-            pts = points_add_polar(pts,self.min_straight + bs1_90 + bs2_90, self.input_port.angle_deg + 90.0)
-            pts = points_add_polar(pts,self.end_straight + bs2_90, self.input_port.angle_deg + 180.0)
+            pts = points_add_polar(pts, self.start_straight + bs1_90, self.input_port.angle_deg)
+            pts = points_add_polar(pts, self.min_straight + bs1_90 + bs2_90, self.input_port.angle_deg + 90.0)
+            pts = points_add_polar(pts, self.end_straight + bs2_90, self.input_port.angle_deg + 180.0)
         else:
             bs1, bs2 = self.get_bend_size(angle)
-            pts = points_add_polar(pts,self.start_straight + bs1, self.input_port.angle_deg)
-            pts = points_add_polar(pts,self.end_straight + bs2 , self.angle_out)
+            pts = points_add_polar(pts, self.start_straight + bs1, self.input_port.angle_deg)
+            pts = points_add_polar(pts, self.end_straight + bs2, self.angle_out)
         return pts
 
 class RouteToEast(RouteToAngle):
@@ -154,16 +154,16 @@ class RouteToParallelLine(__RouteToLine__):
     def define_angle_out(self):
         return self.input_port.angle_deg
 
-    def find_angle(self,D,max_a, min_a, res_a):
+    def find_angle(self, D, max_a, min_a, res_a):
         if int(abs(max_a-min_a)/abs(res_a))<=2.0:
             return min_a
         h_a = 0.5*(max_a+min_a)
         h_bs1, h_bs2 = self.get_bend_size(h_a)
         Lh = (h_bs1 + h_bs2 + self.min_straight)
         if  D < Lh * sin(h_a * DEG2RAD):
-            return self.find_angle(D,h_a,min_a, res_a)
+            return self.find_angle(D, h_a, min_a, res_a)
         else:
-            return self.find_angle(D,max_a,h_a, res_a)
+            return self.find_angle(D, max_a, h_a, res_a)
         
         
     def define_points(self, pts):
@@ -174,14 +174,14 @@ class RouteToParallelLine(__RouteToLine__):
         # parallel or coinciding
         if line == line2:
             # coinciding
-            pts = points_add_polar(pts,max(self.start_straight, self.end_straight), self.angle_out)
+            pts = points_add_polar(pts, max(self.start_straight, self.end_straight), self.angle_out)
         else:
             D = line.distance(self.input_port.position)
             max_bs1, max_bs2 = self.get_bend_size(self.max_s_bend_angle)
             Lmax = (max_bs1 + max_bs2 + self.min_straight)
             if  D >= Lmax * sin(self.max_s_bend_angle * DEG2RAD):
                 angle = self.max_s_bend_angle
-            angle = self.find_angle(D,self.max_s_bend_angle,0.0,self.s_bend_angle_resolution)
+            angle = self.find_angle(D, self.max_s_bend_angle, 0.0, self.s_bend_angle_resolution)
             #for angle in arange(self.max_s_bend_angle, 0.0, self.s_bend_angle_resolution):
                 #bs1, bs2 = self.get_bend_size(angle)
                 #L = (bs1 + bs2 + self.min_straight)
@@ -224,14 +224,14 @@ class RouteToLine(__RouteToLine__):
                 pts.append(self.input_port.position)
                 if (self.input_port.angle_deg - self.angle_out)%360.0 < 0.1:
                     # same direction: min_straight
-                    pts = points_add_polar(pts,max(self.start_straight , self.end_straight), self.angle_out)
+                    pts = points_add_polar(pts, max(self.start_straight, self.end_straight), self.angle_out)
                 else:
                     # opposite_direction: U-turn
-                    pts = points_add_polar(pts,self.start_straight + bs1, self.input_port.angle_deg)
-                    pts = points_add_polar(pts,bs1+bs2 + self.min_straight, self.input_port.angle_deg + 90.0)
-                    pts = points_add_polar(pts,bs1+bs2 + max(self.min_straight, self.start_straight), self.input_port.angle_deg + 180.0)
-                    pts = points_add_polar(pts,bs1+bs2 + self.min_straight, self.input_port.angle_deg + 270.0)
-                    pts = points_add_polar(pts,bs2+ self.end_straight, self.angle_out)
+                    pts = points_add_polar(pts, self.start_straight + bs1, self.input_port.angle_deg)
+                    pts = points_add_polar(pts, bs1+bs2 + self.min_straight, self.input_port.angle_deg + 90.0)
+                    pts = points_add_polar(pts, bs1+bs2 + max(self.min_straight, self.start_straight), self.input_port.angle_deg + 180.0)
+                    pts = points_add_polar(pts, bs1+bs2 + self.min_straight, self.input_port.angle_deg + 270.0)
+                    pts = points_add_polar(pts, bs2+ self.end_straight, self.angle_out)
             else:
                 D = line.distance(self.input_port.position)
                 if (self.input_port.angle_deg - self.angle_out)%360.0 < 0.1:
@@ -249,15 +249,15 @@ class RouteToLine(__RouteToLine__):
                 elif D - (bs1 + bs2+ self.min_straight) >= -0.1/get_grids_per_unit():
                         # sufficient distance
                         pts.append(self.input_port.position)
-                        pts = points_add_polar(pts,self.start_straight + bs1, self.input_port.angle_deg)
+                        pts = points_add_polar(pts, self.start_straight + bs1, self.input_port.angle_deg)
                         pts.append(line.closest_point(pts[-1]))
-                        pts = points_add_polar(pts,self.end_straight+bs2, self.angle_out)
+                        pts = points_add_polar(pts, self.end_straight+bs2, self.angle_out)
                 else:
                         # insufficient distance
                         pts.append(self.input_port.position)
-                        pts = points_add_polar(pts,self.start_straight + bs1, self.input_port.angle_deg)
+                        pts = points_add_polar(pts, self.start_straight + bs1, self.input_port.angle_deg)
                         A = angle_deg(line.closest_point(self.input_port.position), self.input_port.position)
-                        pts = points_add_polar(pts,bs1+bs2+ self.min_straight, A)
+                        pts = points_add_polar(pts, bs1+bs2+ self.min_straight, A)
                         P2 = Coord2(pts[-1][0], pts[-1][1]).move_polar(bs2+ self.min_straight, self.angle_out)
                         P = RouteToParallelLine(input_port = OpticalPort(position = P2, 
                                                              wg_definition = self.input_port.wg_definition, 
@@ -282,7 +282,7 @@ class RouteToLine(__RouteToLine__):
                     # simple case: just a single bend
                     pts.append(self.input_port.position)
                     pts.append(i)
-                    pts = points_add_polar(pts,bs2 + self.end_straight, self.angle_out)
+                    pts = points_add_polar(pts, bs2 + self.end_straight, self.angle_out)
 
                 else:
                     pts.append(self.input_port.position)
@@ -317,7 +317,7 @@ class RouteToLine(__RouteToLine__):
                             if distance(P2, P1) >= L1_2+L2_1+s:
                                 break
                     pts.extend([P1, P2])
-                    pts = points_add_polar(pts,L2_2+self.end_straight, self.angle_out)                                       
+                    pts = points_add_polar(pts, L2_2+self.end_straight, self.angle_out)                                       
             else:
                 pts.append(self.input_port.position)
                 pts = points_add_polar(pts, self.start_straight + bs1, self.input_port.angle_deg)

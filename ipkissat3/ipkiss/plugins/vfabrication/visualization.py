@@ -73,7 +73,7 @@ class StructureVisualizationAspect(object):
             return filename_png
 
 
-    def visualize_3d_povray(self, camera_pos, look_at=(0,0,1), z_extrusion_factor = 1.0):
+    def visualize_3d_povray(self, camera_pos, look_at=(0, 0, 1), z_extrusion_factor = 1.0):
         self.__initialize()
         from pysimul.visualization.visualization import SimulationVolumeVisualization3D
         vis = SimulationVolumeVisualization3D(simulation_volume = self.simul_def.landscape.simulation_volume)    	
@@ -141,7 +141,7 @@ class StructureVisualizationAspect(object):
         filename_without_ext = self.name
         meep_engine = self.__generate_3d_hdf5__(filename_without_ext, resolution)
         from ipkiss.all import Coord3
-        meep_coord = meep_engine.__calc_meep_coord__(Coord3(x_co,0,0))
+        meep_coord = meep_engine.__calc_meep_coord__(Coord3(x_co, 0, 0))
         x_co_meep = int(meep_coord[0] * float(resolution))
         target_filename = filename_without_ext+"_section_x_"+str(x_co)+".png"
         cmd_make_section_png = "h5topng -x "+str(x_co_meep)+" "+filename_without_ext+".eps.h5 -o "+target_filename
@@ -160,7 +160,7 @@ class StructureVisualizationAspect(object):
         filename_without_ext = self.name 
         meep_engine = self.__generate_3d_hdf5__(filename_without_ext, resolution)
         from ipkiss.all import Coord3
-        meep_coord = meep_engine.__calc_meep_coord__(Coord3(0,y_co,0))
+        meep_coord = meep_engine.__calc_meep_coord__(Coord3(0, y_co, 0))
         y_co_meep = int(meep_coord[1] * float(resolution))
         target_filename = filename_without_ext+"_section_y_"+str(y_co)+".png"
         cmd_make_section_png = "h5topng -y "+str(y_co_meep)+" "+filename_without_ext+".eps.h5 -o "+target_filename
@@ -220,11 +220,10 @@ class __StructuresVFabricationDialog__(tkinter.simpledialog.Dialog):
         self.checkbox.pack()
         #scrollbar and listbox
         max_len = 0
-        structs = self.library.structures
-        structs.sort()
+        structs = sorted(self.library.structures)
         for s in structs:
             max_len = max(max_len, len(s.name))
-        self.listbox = Listbox(master, height=min(20,len(self.library.structures)), width=max_len)
+        self.listbox = Listbox(master, height=min(20, len(self.library.structures)), width=max_len)
         yscroll = Scrollbar(master, command=self.listbox.yview, orient=VERTICAL)
         yscroll.config(command=self.listbox.yview)
         yscroll.pack(side=RIGHT, fill=Y)
@@ -246,7 +245,7 @@ class LibraryVisualizationAspect(object):
 
     def select_structures(self, func = lambda x : x):
         aspect_ratio_equal = True
-        while 1:
+        while True:
             root = Tk() 
             root.geometry("0x0") # make root "tiny"
             root.overrideredirect(1) # get rid of the frame, border, etc. 

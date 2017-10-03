@@ -49,8 +49,7 @@ class GratingGeneric(Structure):
     cells_positions = RestrictedProperty(restriction = RestrictType(dict), required = True) # should be elaborated?
 
     def define_elements(self, elems):
-        k = list(self.cells_positions.keys()) 
-        k.sort() #to ensure a deterministic build-up of the elements. -- FIXME : this should not be required, but the best solution right now to get the unit testing framework in order
+        k = sorted(list(self.cells_positions.keys())) 
         for cell in k:
             positions = self.cells_positions[cell]
             for p in positions:
@@ -81,9 +80,9 @@ class GratingUniform(GratingUnitCell):
 
     def define_name(self):
         L = []
-        L.extend([str(int(self.origin[0]*1000)) , str(int(self.origin[0]*1000))])
-        L.extend([str(int(self.period[0]*1000)) , str(int(self.period[0]*1000))])
-        L.extend([str(self.n_o_periods[0]) , str(self.n_o_periods[0])])
+        L.extend([str(int(self.origin[0]*1000)), str(int(self.origin[0]*1000))])
+        L.extend([str(int(self.period[0]*1000)), str(int(self.period[0]*1000))])
+        L.extend([str(self.n_o_periods[0]), str(self.n_o_periods[0])])
         return "%s_%s_%d" % (self.__name_prefix__,
                              self.unit_cell.name,
                              do_hash("_".join(L))
@@ -95,7 +94,7 @@ class GratingUniform(GratingUnitCell):
     
 def GratingUniformLine(line_width, line_length, period, n_o_periods, purpose = TECH.PURPOSE.DF.TRENCH, process = TECH.PROCESS.FC):
     """ 1-D grating (X-direction) with uniform lines"""
-    unit_cell = Structure("line"+ str(int(line_width * 1000)) + "_" + str(int(line_length * 1000)) + "_" + str(PPLayer(process,purpose)).replace(" ","_").replace("-","_"), 
+    unit_cell = Structure("line"+ str(int(line_width * 1000)) + "_" + str(int(line_length * 1000)) + "_" + str(PPLayer(process, purpose)).replace(" ", "_").replace("-", "_"), 
                              Rectangle(PPLayer(process, purpose), (-0.5*line_width, 0.0), (line_width, line_length)))
     origin = (- 0.5 * (n_o_periods-1)*period, 0.0)
     return GratingUniform(unit_cell = unit_cell, 

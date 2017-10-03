@@ -31,7 +31,7 @@ except ImportError as e:
     except ImportError as e:
         raise Exception("Modules 'meep' or 'meep_mpi' not found.")   
 
-class ProcedureClass(LowLevelPythonMeepProcedure,StrongPropertyInitializer):
+class ProcedureClass(LowLevelPythonMeepProcedure, StrongPropertyInitializer):
 
     property_object = DefinitionProperty(default = 0)
     #wavelength = NumberProperty(default = 1.55)
@@ -56,27 +56,27 @@ class ProcedureClass(LowLevelPythonMeepProcedure,StrongPropertyInitializer):
 
         ## Sources
 
-        print('Center wavelength:',po.wavelength)
-        print('Bandwidth:',po.pulse_width)
+        print('Center wavelength:', po.wavelength)
+        print('Bandwidth:', po.pulse_width)
         center_freq = 1.0 / (float(po.wavelength))
         pulse_width_freq =  (float(po.pulse_width)) / (float(po.wavelength)) * center_freq 	
-        print('Center frequency:',center_freq)
-        print('Bandwidth:',pulse_width_freq)
+        print('Center frequency:', center_freq)
+        print('Bandwidth:', pulse_width_freq)
 
         if (po.pulsed_source):	    
             src = meep.gaussian_src_time(center_freq, pulse_width_freq)
         else:
             src = meep.continuous_src_time(center_freq)
 
-        source_port_position = po.input_port.transform_copy(Translation(translation=(po.source_input_port_offset,0))).position
-        print('wg_center_old:',wg_center)
+        source_port_position = po.input_port.transform_copy(Translation(translation=(po.source_input_port_offset, 0))).position
+        print('wg_center_old:', wg_center)
         wg_center = (po.input_port.wg_definition.process.wg_upper_z_coord+
                      po.input_port.wg_definition.process.wg_lower_z_coord)/2.
-        print('wg_center_new:',wg_center)
+        print('wg_center_new:', wg_center)
         c = Coord3(source_port_position[0],
                    source_port_position[1],
                    wg_center)
-        print('coord:',c)
+        print('coord:', c)
         source_position_vec = self.make_meep_vec(c)
 
         fields.add_point_source(meep.Ey, src, source_position_vec)
@@ -105,10 +105,10 @@ class ProcedureClass(LowLevelPythonMeepProcedure,StrongPropertyInitializer):
 
 
             ## Be aware: this is only for ports along y-axis!!
-            vec_near = self.make_meep_vec(Coord3(pp[0],pp[1]-port_width/2.0,wg_bottom))
-            vec_far = self.make_meep_vec(Coord3(pp[0],pp[1]+port_width/2.0,wg_top))
+            vec_near = self.make_meep_vec(Coord3(pp[0], pp[1]-port_width/2.0, wg_bottom))
+            vec_far = self.make_meep_vec(Coord3(pp[0], pp[1]+port_width/2.0, wg_top))
 
-            fluxplane = meep.volume(vec_near,vec_far)
+            fluxplane = meep.volume(vec_near, vec_far)
             fx = fields.add_dft_flux_plane(fluxplane,
                                            center_freq-(pulse_width_freq/4.0),
                                            center_freq+(pulse_width_freq/4.0),
@@ -125,7 +125,7 @@ class ProcedureClass(LowLevelPythonMeepProcedure,StrongPropertyInitializer):
         else:
             stop = po.stop_time
 
-        print('Simulation will run for',stop,'time units')
+        print('Simulation will run for', stop, 'time units')
 
         output_files = []
         for oc in po.output_cuts:
@@ -140,20 +140,20 @@ class ProcedureClass(LowLevelPythonMeepProcedure,StrongPropertyInitializer):
                 j = 0
                 for oc in po.output_cuts:
                     vol = oc.get_output_volume(self.engine.meepVol)
-                    fields.output_hdf5(meep.Ey,vol, output_files[j], 1)
+                    fields.output_hdf5(meep.Ey, vol, output_files[j], 1)
                     j+= 1
                 n_o_output += 1
                 i = 0
             fields.step()
             i += 1
 
-        print(n_o_output,'images outputted')
+        print(n_o_output, 'images outputted')
         print('Outputting field images..')
         del output_files[:]
         for oc in po.output_cuts:
             fn = '%s.h5'%oc.filename
             fn_eps = '%s_eps.h5'%oc.filename
-            st = 'h5topng -t 0:%d -R -Zc dkbluered -a yarg -A %s %s'%(n_o_output-1,fn_eps,fn)
+            st = 'h5topng -t 0:%d -R -Zc dkbluered -a yarg -A %s %s'%(n_o_output-1, fn_eps, fn)
             print(st)
             system(st)
         print('Outputting done!')
@@ -174,10 +174,10 @@ class ProcedureClass(LowLevelPythonMeepProcedure,StrongPropertyInitializer):
 
         return 
 
-    def set_property_object(self,property_object):
+    def set_property_object(self, property_object):
         self.property_object = property_object
         return
-    def get_flux_data(self,port_ID):
+    def get_flux_data(self, port_ID):
         fd = self.flux_data[port_ID]
         return fd
 
@@ -188,26 +188,26 @@ class OutputCut(StrongPropertyInitializer):
     cut_value = NumberProperty(default = -1)
     filename = StringProperty(required = True)
 
-    def get_output_volume(self,meepVolume):
+    def get_output_volume(self, meepVolume):
         sur_max_vec = meepVolume.surroundings().get_max_corner()
 
         if (self.normal_vector == 'x'):
             if (self.cut_value <0.):
                 self.cut_value = sur_max_vec.x()/2.0
-            front_vec = meep.vec(self.cut_value,0.0,0.0)
-            rear_vec = meep.vec(self.cut_value,sur_max_vec.y(),sur_max_vec.z())
+            front_vec = meep.vec(self.cut_value, 0.0, 0.0)
+            rear_vec = meep.vec(self.cut_value, sur_max_vec.y(), sur_max_vec.z())
         elif (self.normal_vector == 'y'):
             if (self.cut_value <0.):
                 self.cut_value = sur_max_vec.y()/2.0
-            front_vec = meep.vec(0.0,self.cut_value,0.0)
-            rear_vec = meep.vec(sur_max_vec.x(),self.cut_value,sur_max_vec.z())
+            front_vec = meep.vec(0.0, self.cut_value, 0.0)
+            rear_vec = meep.vec(sur_max_vec.x(), self.cut_value, sur_max_vec.z())
         else :
             if (self.cut_value <0.):
                 self.cut_value = sur_max_vec.z()/2.0
-            front_vec = meep.vec(0.0,0.0,self.cut_value)
-            rear_vec = meep.vec(sur_max_vec.x(),sur_max_vec.y(),self.cut_value)
+            front_vec = meep.vec(0.0, 0.0, self.cut_value)
+            rear_vec = meep.vec(sur_max_vec.x(), sur_max_vec.y(), self.cut_value)
 
-        perp_vol = meep.volume(front_vec,rear_vec)
+        perp_vol = meep.volume(front_vec, rear_vec)
         return perp_vol
 
 class StructureMeep3DSimulator(StrongPropertyInitializer):
@@ -237,7 +237,7 @@ class StructureMeep3DSimulator(StrongPropertyInitializer):
 
 
 
-    def add_output_cut(self,output_cut):
+    def add_output_cut(self, output_cut):
         self.output_cuts.append(output_cut)
 
 
@@ -263,5 +263,5 @@ class StructureMeep3DSimulator(StrongPropertyInitializer):
         self.simul_def.procedure.run()
 
 
-    def get_flux(self,port_ID):
+    def get_flux(self, port_ID):
         return self.simul_def.procedure.get_flux_data(port_ID)

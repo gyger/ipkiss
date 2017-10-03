@@ -88,7 +88,7 @@ class __ProcessSuperpositionMaterialStackGeometry2DPolygons__(CartesianGeometry2
                                                      size_info = self.size_info)
                 canvas_polygon = empty_polygon.bitwise_not()
                 id = self.material_stack_factory.get_material_stack_id(material_stack)
-                mp.append((id,canvas_polygon))
+                mp.append((id, canvas_polygon))
             else:
                 process_polygon = None
                 debug_counter = 0
@@ -98,18 +98,18 @@ class __ProcessSuperpositionMaterialStackGeometry2DPolygons__(CartesianGeometry2
                     else:
                         process_polygon = process_polygon.bitwise_and(self.process_polygons[p])
                     if (self.save_debug_images):
-                        process_polygon.save_to_image("DEBUG_PROCESS_POLYGONS__%i__%i__AND_%s.png" %(debug_counter_line,debug_counter,p.extension))
+                        process_polygon.save_to_image("DEBUG_PROCESS_POLYGONS__%i__%i__AND_%s.png" %(debug_counter_line, debug_counter, p.extension))
                     debug_counter = debug_counter + 1
                 for e_p in exclude_process_set:
                     process_polygon = process_polygon.difference(self.process_polygons[e_p])
                     if (self.save_debug_images):
-                        process_polygon.save_to_image("DEBUG_PROCESS_POLYGONS__%i__%i__DIFFERENCE_%s.png" %(debug_counter_line,debug_counter,e_p.extension))
+                        process_polygon.save_to_image("DEBUG_PROCESS_POLYGONS__%i__%i__DIFFERENCE_%s.png" %(debug_counter_line, debug_counter, e_p.extension))
                     debug_counter = debug_counter + 1
                 process_polygon.unionize()
                 if (self.save_debug_images):
-                    process_polygon.save_to_image("DEBUG_PROCESS_POLYGONS__%i__%i__UNION.png" %(debug_counter_line,debug_counter))
+                    process_polygon.save_to_image("DEBUG_PROCESS_POLYGONS__%i__%i__UNION.png" %(debug_counter_line, debug_counter))
                 id = self.material_stack_factory.get_material_stack_id(material_stack)
-                mp.append((id,process_polygon))
+                mp.append((id, process_polygon))
             debug_counter_line = debug_counter_line + 1
         return mp
 
@@ -145,7 +145,7 @@ class __ProcessSuperpositionMaterialStackGeometry2DPolygons__(CartesianGeometry2
             pyplot.ion()
             pyplot.clf()
             pyplot.contourf(material_array)
-            pyplot.savefig(str(count)+"_"+self.material_stack_factory[material_stack_id].name.replace(" ","_")+"_"+str(count_progress)+"_MATERIAL_ARRAY.png")
+            pyplot.savefig(str(count)+"_"+self.material_stack_factory[material_stack_id].name.replace(" ", "_")+"_"+str(count_progress)+"_MATERIAL_ARRAY.png")
             #-end of debug code-        
 
     def __debug_savefig_polygon__(self, polygon_points, count, count_progress, material_stack_id):      
@@ -156,7 +156,7 @@ class __ProcessSuperpositionMaterialStackGeometry2DPolygons__(CartesianGeometry2
             debug_lbm = LayerShapelyPolygons(layer = Layer(number = 0, name = "VFABRICATION_EMPTY"),
                                              size_info = SizeInfo(west = 0, east = self.canvas_size[0], south =0, north = self.canvas_size[1]))
             debug_lbm.add_shape(debug_shape)
-            debug_lbm.save_to_image(str(count)+"_"+self.material_stack_factory[material_stack_id].name.replace(" ","_")+"_"+str(count_progress)+".png")
+            debug_lbm.save_to_image(str(count)+"_"+self.material_stack_factory[material_stack_id].name.replace(" ", "_")+"_"+str(count_progress)+".png")
             #-end of debug code-        
 
     def get_material_array(self):
@@ -178,14 +178,14 @@ class __ProcessSuperpositionMaterialStackGeometry2DPolygons__(CartesianGeometry2
                     if not mb.georep.is_empty:
                         #-debug code-
                         if self.save_debug_images:
-                            mb.save_to_image(str(count)+"_"+self.material_stack_factory[material_stack_id].name.replace(" ","_")+".png")
+                            mb.save_to_image(str(count)+"_"+self.material_stack_factory[material_stack_id].name.replace(" ", "_")+".png")
                         #-end of debug code-
                         total_geoms = float(len(mb.georep_list))
                         count_progress = 0.0
                         for polygon in mb.georep_list:
                             if polygon.is_ring:
                                 polygon_points = polygon.boundary.coords
-                                self.__debug_savefig_polygon__(polygon_points,count, count_progress, material_stack_id)
+                                self.__debug_savefig_polygon__(polygon_points, count, count_progress, material_stack_id)
                                 polygon_points = self.__scale_polygon_points(polygon_points)
                                 __common_function_apply_polygon_to_array_memory_sparing__(material_array, polygon_points, do_bitwise_or = False, value = material_stack_id)
                                 self.__debug_savefig_material_array__(material_array, count, count_progress, material_stack_id)
@@ -216,10 +216,10 @@ class __ProcessSuperpositionMaterialStackGeometry2DPolygons__(CartesianGeometry2
             material_array[-1,:] = material_array[-3,:]
             material_array[-2,:] = material_array[-3,:]
 
-            material_array[:,0] = material_array[:,2]
-            material_array[:,1] = material_array[:,2]
-            material_array[:,-1] = material_array[:,-3]
-            material_array[:,-2] = material_array[:,-3]
+            material_array[:, 0] = material_array[:, 2]
+            material_array[:, 1] = material_array[:, 2]
+            material_array[:, -1] = material_array[:, -3]
+            material_array[:, -2] = material_array[:, -3]
             self.__material_array__ = material_array	    
         return self.__material_array__
 

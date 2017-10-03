@@ -74,7 +74,7 @@ TUNGSTEN = Material(name="Tungsten",
                     display_style = DisplayStyle(color = COLOR_GRAY))
 COPPER = Material(name="Copper",
                   display_style = DisplayStyle(color=COLOR_COPPER))
-TANTALUM = Material(name="Tantalum",display_style = DisplayStyle(color = COLOR_SCARLET))
-TANTALUM_NITRIDE = Material(name="Tantalum_Nitride",display_style = DisplayStyle(color = COLOR_SANGRIA))
+TANTALUM = Material(name="Tantalum", display_style = DisplayStyle(color = COLOR_SCARLET))
+TANTALUM_NITRIDE = Material(name="Tantalum_Nitride", display_style = DisplayStyle(color = COLOR_SANGRIA))
 
 ALUMINIUM_COPPER = Material(name="AlCu", display_style = DisplayStyle(color=COLOR_DARKSEA_GREEN))

@@ -37,10 +37,10 @@ class NameScrambleFilter(Filter):
         if item is None:
             return None
         name = copy.copy(item)
-        name = name.replace("-","_")
-        name = name.replace(" ","_")
-        name = name.replace(".","_")
-        name = name.replace("/","_")
+        name = name.replace("-", "_")
+        name = name.replace(" ", "_")
+        name = name.replace(".", "_")
+        name = name.replace("/", "_")
         if self.scramble_all:
             hashval = hash(name)
             if hashval < 0:

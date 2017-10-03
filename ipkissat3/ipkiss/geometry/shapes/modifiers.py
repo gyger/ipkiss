@@ -701,7 +701,7 @@ class ShapeGrow(__ShapeModifier__):
 
     def is_closed(self):
         return self.original_shape.is_closed()
-    closed = FunctionProperty(is_closed,Shape.set_closed)
+    closed = FunctionProperty(is_closed, Shape.set_closed)
 
     def define_offset(self):
         o = self.original_shape.orientation() * self.amount

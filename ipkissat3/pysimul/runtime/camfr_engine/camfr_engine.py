@@ -50,14 +50,14 @@ TECH.CAMFR.NMODES_PER_MICRON = 3
 TECH.CAMFR.PML = -0.05
 TECH.CAMFR.WAVELENGTH = 1550
 
-PLOTCOLOR = ['g','r','b','y','c','m','k','ro']
+PLOTCOLOR = ['g', 'r', 'b', 'y', 'c', 'm', 'k', 'ro']
 global PLOTCOLORCOUNTER
 PLOTCOLORCOUNTER = 0
 
 class IncFieldParameters(object):
     params = dict()
 
-    def set_parameter(self,name,value):
+    def set_parameter(self, name, value):
         self.params[name] = value
 
     def get_parameter(self, name):
@@ -126,7 +126,7 @@ class CamfrEngine(ModeSolverEngine):
         n_o_sources = len(landscape.sources)
         if (n_o_sources!=1):
             raise PythonSimulateException("Expected exactly 1 source and got %i...." %n_o_sources)
-        elif type(landscape.sources[0]) != ContinuousPointSource:
+        elif not isinstance(landscape.sources[0], ContinuousPointSource):
             raise PythonSimulateException("Expected a datasource of type ContinuousPointSource, but got type %s..." %str(type(landscape.sources[0])))
         self.camfr_technology = copy.deepcopy(TECH.CAMFR)
         self.camfr_technology.WAVELENGTH = landscape.sources[0].center_wavelength
@@ -135,7 +135,7 @@ class CamfrEngine(ModeSolverEngine):
     def set_camfr_settings(self, camfr_technology):
         camfr_technology.overwrite_allowed = ["WAVELENGTH"] 
         self.camfr_technology = camfr_technology	
-        if (type(self.camfr_technology.WAVELENGTH) == int):
+        if (isinstance(self.camfr_technology.WAVELENGTH, int)):
             raise Exception("Invalid type for camfr_technology.WAVELENGTH : expected float, not int. ")	
         if (self.camfr_technology.WAVELENGTH > 1.7) or (self.camfr_technology.WAVELENGTH<1.0):
             raise Exception("Invalid range for camfr_technology.WAVELENGTH : expected a float value between 1.0 (1000 nm) and 1.7 (1.7000nm). ")		    
@@ -155,7 +155,7 @@ class CamfrEngine(ModeSolverEngine):
         inc[0] = 1
         return camfr_stack.set_inc_field(inc) 
 
-    def set_mode_profile_field(self, camfr_stack,inc_field, si_south):
+    def set_mode_profile_field(self, camfr_stack, inc_field, si_south):
         inc_field_parameters= IncFieldParameters()
 
         inc_field_parameters.set_parameter("inc_field_x_coord", inc_field[0])
@@ -307,7 +307,7 @@ class CamfrEngine(ModeSolverEngine):
                 geometry_x_position = z_position + si.west		    
                 fp = ElectroMagneticFieldProfile2D(positions = [Coord2(geometry_x_position, camfr_x + si.south) for camfr_x in camfr_x_positions], fields = f)
                 field_profiles.append(fp)
-                transmission = camfr_stack.T21(0,0)
+                transmission = camfr_stack.T21(0, 0)
 
                 if self.save_images:
                     #ensure that output directories exist
@@ -330,12 +330,12 @@ class CamfrEngine(ModeSolverEngine):
                     #pyplot.plot(geometry_y_positions,field_for_plot_abs ,'g')
                     #pyplot.plot(geometry_y_positions,field_for_plot_real,'b')
                     #pyplot.plot(geometry_y_positions,field_for_plot_imag,'r')	
-                    image_file = "%sHz_%f_W%f_%s"%(img_output_dir,geometry_x_position,self.camfr_technology.WAVELENGTH,mode_profile_figure_filename)
+                    image_file = "%sHz_%f_W%f_%s"%(img_output_dir, geometry_x_position, self.camfr_technology.WAVELENGTH, mode_profile_figure_filename)
                     #pyplot.savefig(image_file)
                     #save values to csv   
-                    csv_file = image_file.replace('images','csv')
-                    csv_file = csv_file.replace('png','csv')
-                    csv_file_handle = open(csv_file,'w')
+                    csv_file = image_file.replace('images', 'csv')
+                    csv_file = csv_file.replace('png', 'csv')
+                    csv_file_handle = open(csv_file, 'w')
                     data_for_csv = [[p, f.H.value.z.real] for p, f in zip(geometry_y_positions, fp.fields)] 	    
                     numpy.savetxt(csv_file_handle, numpy.array(data_for_csv), delimiter=', ')
                     csv_file_handle.close()	 
@@ -349,12 +349,12 @@ class CamfrEngine(ModeSolverEngine):
                     #pyplot.plot(geometry_y_positions,field_for_plot_abs ,'g')
                     #pyplot.plot(geometry_y_positions,field_for_plot_real,'b')
                     #pyplot.plot(geometry_y_positions,field_for_plot_imag,'r')
-                    image_file = "%sHy_%f_W%f_%s"%(img_output_dir,geometry_x_position,self.camfr_technology.WAVELENGTH,mode_profile_figure_filename)
+                    image_file = "%sHy_%f_W%f_%s"%(img_output_dir, geometry_x_position, self.camfr_technology.WAVELENGTH, mode_profile_figure_filename)
                     #pyplot.savefig(image_file)
                     #save values to csv
-                    csv_file = image_file.replace('images','csv')	    
-                    csv_file = csv_file.replace('png','csv')
-                    csv_file_handle = open(csv_file,'w')
+                    csv_file = image_file.replace('images', 'csv')	    
+                    csv_file = csv_file.replace('png', 'csv')
+                    csv_file_handle = open(csv_file, 'w')
                     data_for_csv = [[p, f.H.value.y.real] for p, f in zip(geometry_y_positions, fp.fields)] 	    
                     numpy.savetxt(csv_file_handle, numpy.array(data_for_csv), delimiter=', ')
                     csv_file_handle.close()		    
@@ -368,12 +368,12 @@ class CamfrEngine(ModeSolverEngine):
                     #pyplot.plot(geometry_y_positions,field_for_plot_abs ,'g')                
                     #pyplot.plot(geometry_y_positions,field_for_plot_real,'b')
                     #pyplot.plot(geometry_y_positions,field_for_plot_imag,'r')
-                    image_file = "%sHx_%f_W%f_%s"%(img_output_dir,geometry_x_position,self.camfr_technology.WAVELENGTH,mode_profile_figure_filename)
+                    image_file = "%sHx_%f_W%f_%s"%(img_output_dir, geometry_x_position, self.camfr_technology.WAVELENGTH, mode_profile_figure_filename)
                     #pyplot.savefig(image_file)
                     #save values to csv
-                    csv_file = image_file.replace('images','csv')	    
-                    csv_file = csv_file.replace('png','csv')
-                    csv_file_handle = open(csv_file,'w')
+                    csv_file = image_file.replace('images', 'csv')	    
+                    csv_file = csv_file.replace('png', 'csv')
+                    csv_file_handle = open(csv_file, 'w')
                     data_for_csv = [[p, f.H.value.x.real] for p, f in zip(geometry_y_positions, fp.fields)] 	    
                     numpy.savetxt(csv_file_handle, numpy.array(data_for_csv), delimiter=', ')
                     csv_file_handle.close()
@@ -387,12 +387,12 @@ class CamfrEngine(ModeSolverEngine):
                     #pyplot.plot(geometry_y_positions,field_for_plot_abs ,'g')                
                     #pyplot.plot(geometry_y_positions,field_for_plot_real,'b')
                     #pyplot.plot(geometry_y_positions,field_for_plot_imag,'r')	    
-                    image_file = "%sEz_%f_W%f_%s"%(img_output_dir,geometry_x_position,self.camfr_technology.WAVELENGTH,mode_profile_figure_filename)
+                    image_file = "%sEz_%f_W%f_%s"%(img_output_dir, geometry_x_position, self.camfr_technology.WAVELENGTH, mode_profile_figure_filename)
                     #pyplot.savefig(image_file)
                     ##save values to csv
-                    csv_file = image_file.replace('images','csv')	    
-                    csv_file = csv_file.replace('png','csv')
-                    csv_file_handle = open(csv_file,'w')
+                    csv_file = image_file.replace('images', 'csv')	    
+                    csv_file = csv_file.replace('png', 'csv')
+                    csv_file_handle = open(csv_file, 'w')
                     data_for_csv = [[p, f.E.value.z.real] for p, f in zip(geometry_y_positions, fp.fields)] 	    
                     numpy.savetxt(csv_file_handle, numpy.array(data_for_csv), delimiter=', ')
                     csv_file_handle.close()
@@ -406,12 +406,12 @@ class CamfrEngine(ModeSolverEngine):
                     #pyplot.plot(geometry_y_positions,field_for_plot_abs ,'g')                
                     #pyplot.plot(geometry_y_positions,field_for_plot_real,'b')
                     #pyplot.plot(geometry_y_positions,field_for_plot_imag,'r')
-                    image_file = "%sEy_%f_W%f_%s"%(img_output_dir,geometry_x_position, self.camfr_technology.WAVELENGTH,mode_profile_figure_filename)
+                    image_file = "%sEy_%f_W%f_%s"%(img_output_dir, geometry_x_position, self.camfr_technology.WAVELENGTH, mode_profile_figure_filename)
                     #pyplot.savefig(image_file)
                     ##save values to csv
-                    csv_file = image_file.replace('images','csv')	    
-                    csv_file = csv_file.replace('png','csv')
-                    csv_file_handle = open(csv_file,'w')
+                    csv_file = image_file.replace('images', 'csv')	    
+                    csv_file = csv_file.replace('png', 'csv')
+                    csv_file_handle = open(csv_file, 'w')
                     data_for_csv = [[p, f.E.value.y.real] for p, f in zip(geometry_y_positions, fp.fields)] 	    
                     numpy.savetxt(csv_file_handle, numpy.array(data_for_csv), delimiter=', ')
                     csv_file_handle.close()	    
@@ -425,12 +425,12 @@ class CamfrEngine(ModeSolverEngine):
                     #pyplot.plot(geometry_y_positions,field_for_plot_abs ,'g')                
                     #pyplot.plot(geometry_y_positions,field_for_plot_real,'b')
                     #pyplot.plot(geometry_y_positions,field_for_plot_imag,'r')	    
-                    image_file = "%sEx_%f_W%f_%s"%(img_output_dir,geometry_x_position,self.camfr_technology.WAVELENGTH,mode_profile_figure_filename)
+                    image_file = "%sEx_%f_W%f_%s"%(img_output_dir, geometry_x_position, self.camfr_technology.WAVELENGTH, mode_profile_figure_filename)
                     #pyplot.savefig(image_file)
                     ##save values to csv
-                    csv_file = image_file.replace('images','csv')	    
-                    csv_file = csv_file.replace('png','csv')
-                    csv_file_handle = open(csv_file,'w')
+                    csv_file = image_file.replace('images', 'csv')	    
+                    csv_file = csv_file.replace('png', 'csv')
+                    csv_file_handle = open(csv_file, 'w')
                     data_for_csv = [[p, f.E.value.x.real] for p, f in zip(geometry_y_positions, fp.fields)] 	    
                     numpy.savetxt(csv_file_handle, numpy.array(data_for_csv), delimiter=', ')
                     csv_file_handle.close()	    

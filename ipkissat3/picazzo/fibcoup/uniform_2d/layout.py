@@ -80,15 +80,15 @@ class UniformSquare2dGrating(__AutoUnitCell__, Uniform2dGrating):
     hole_diameter = PositiveNumberProperty(required = True)
     
     def define_unit_cell(self):
-        s = ShapeRectangle((0.0,0.0),(self.hole_diameter,self.hole_diameter))
-        return Structure(self.name + "_hp", Boundary(PPLayer(self.process, TECH.PURPOSE.DF.SQUARE),s))
+        s = ShapeRectangle((0.0, 0.0), (self.hole_diameter, self.hole_diameter))
+        return Structure(self.name + "_hp", Boundary(PPLayer(self.process, TECH.PURPOSE.DF.SQUARE), s))
         
     def define_elements(self, elems):
         # FCW
         sqrt2_2 = 0.5*sqrt(2)
         side=self.period*self.n_o_periods
-        my_shape = Shape([(0.0, side*sqrt2_2),(side*sqrt2_2, 0.0),(0.0, -side*sqrt2_2),(-side*sqrt2_2,0.0)])
-        elems += Boundary(PPLayer(self.process, TECH.PURPOSE.DF.TRENCH),coordinates = my_shape) 
+        my_shape = Shape([(0.0, side*sqrt2_2), (side*sqrt2_2, 0.0), (0.0, -side*sqrt2_2), (-side*sqrt2_2, 0.0)])
+        elems += Boundary(PPLayer(self.process, TECH.PURPOSE.DF.TRENCH), coordinates = my_shape) 
         return elems
 
 class UniformRect2dGrating(__AutoUnitCell__, BiaxialUniform2dGrating):
@@ -96,11 +96,11 @@ class UniformRect2dGrating(__AutoUnitCell__, BiaxialUniform2dGrating):
     hole_diameters = Size2Property(required = True)
 
     def define_unit_cell(self):
-        s = ShapeRectangle(center = (0.0,0.0), box_size = (self.hole_diameters[0],self.hole_diameters[1]))       
+        s = ShapeRectangle(center = (0.0, 0.0), box_size = (self.hole_diameters[0], self.hole_diameters[1]))       
         s.transform(Rotation(rotation=45.0))
-        return Structure(self.name+"_hpr",Boundary(PPLayer(self.process, TECH.PURPOSE.DF.SQUARE),s))
+        return Structure(self.name+"_hpr", Boundary(PPLayer(self.process, TECH.PURPOSE.DF.SQUARE), s))
 
-class UniformLongOctagon2dGrating(__AutoUnitCell__,BiaxialUniform2dGrating):
+class UniformLongOctagon2dGrating(__AutoUnitCell__, BiaxialUniform2dGrating):
     """uniformt 2D grating with irregular octagonal unit cell """
     hole_diameters = Size2Property(required = True)
 
@@ -109,16 +109,16 @@ class UniformLongOctagon2dGrating(__AutoUnitCell__,BiaxialUniform2dGrating):
         s = Shape()
         d0 = 0.5*self.hole_diameters[0]
         d1 = 0.5*self.hole_diameters[1]
-        s += (-d0+stub,d1)
-        s += (d0-stub,d1)
-        s += (d0,d1-stub)
-        s += (d0,-d1+stub)
-        s += (d0-stub,-d1)
-        s += (-d0+stub,-d1)
-        s += (-d0,-d1+stub)
-        s += (-d0,d1-stub)      
+        s += (-d0+stub, d1)
+        s += (d0-stub, d1)
+        s += (d0, d1-stub)
+        s += (d0, -d1+stub)
+        s += (d0-stub, -d1)
+        s += (-d0+stub, -d1)
+        s += (-d0, -d1+stub)
+        s += (-d0, d1-stub)      
         s.transform(Rotation(rotation=-45.0))
-        return Structure(self.name+"_hpr",Boundary(PPLayer(self.process, TECH.PURPOSE.DF.SQUARE),s))
+        return Structure(self.name+"_hpr", Boundary(PPLayer(self.process, TECH.PURPOSE.DF.SQUARE), s))
     
 
 class UniformDodec2dGrating(__AutoUnitCell__, Uniform2dGrating):
@@ -190,34 +190,34 @@ class ThreeportUniform2dGrating(__AutoSocket__, Uniform2dGrating):
 
     def __get_grating__(self):
         sqrt2_2 = 0.5*sqrt(2)
-        pitch = snap_value(self.period*sqrt2_2 * 2,self.unit/self.grid)
-        positions = [Coord2(-0.5 * (self.n_o_periods-1 ) * pitch + t * pitch , 0.0) for t in range((self.truncate_periods_3port+1)/2, self.n_o_periods)]
-        for i in range(1,self.n_o_periods):
+        pitch = snap_value(self.period*sqrt2_2 * 2, self.unit/self.grid)
+        positions = [Coord2(-0.5 * (self.n_o_periods-1 ) * pitch + t * pitch, 0.0) for t in range((self.truncate_periods_3port+1)/2, self.n_o_periods)]
+        for i in range(1, self.n_o_periods):
             N = self.n_o_periods - i + max(0, i/2 - self.truncate_periods_3port)
             positions += [Coord2(-0.5 * (self.n_o_periods-1-i%2) * pitch + t * pitch, 0.5 * i * pitch) for t in range((self.truncate_periods_3port+1-i%2)/2, self.n_o_periods - (i+1)/2)]
             positions += [Coord2(-0.5 * (self.n_o_periods-1-i%2) * pitch + t * pitch, -0.5 * i * pitch) for t in range((self.truncate_periods_3port+1-i%2)/2, self.n_o_periods - (i+1)/2)]
-        return (GratingUnitCell(unit_cell = self.unit_cell,positions = positions), None)
+        return (GratingUnitCell(unit_cell = self.unit_cell, positions = positions), None)
         
-class SymmetricUniformRect2dGrating(__SymmetricSocket2dGrating__,UniformDodec2dGrating):
+class SymmetricUniformRect2dGrating(__SymmetricSocket2dGrating__, UniformDodec2dGrating):
     """ uniform 2D grating with rectangular unit cell and 2 symmetry planes """
 
-class SymmetricUniformBiaxialRect2dGrating(__SymmetricSocket2dGrating__,UniformRect2dGrating):
+class SymmetricUniformBiaxialRect2dGrating(__SymmetricSocket2dGrating__, UniformRect2dGrating):
     """ biaxial uniform 2D grating with rectangula unit cell and 2 symmetry planes """
 
     def __get_grating__(self):
         return UniformRect2dGrating.__get_grating__(self)
 
-class SymmetricUniformBiaxialLongOctagon2dGrating(__SymmetricSocket2dGrating__,UniformLongOctagon2dGrating):
+class SymmetricUniformBiaxialLongOctagon2dGrating(__SymmetricSocket2dGrating__, UniformLongOctagon2dGrating):
     """ biaxial uniform 2D grating with rectangula unit cell and 2 symmetry planes """
 
     def __get_grating__(self):
         return UniformLongOctagon2dGrating.__get_grating__(self)
     
-class AsymmetricUniformRect2dGrating(AsymmetricUniform2dGrating,UniformDodec2dGrating):
+class AsymmetricUniformRect2dGrating(AsymmetricUniform2dGrating, UniformDodec2dGrating):
     """ uniform 2D grating with rectangular unit cell and 1 symmetry plane """
 
 
-class ThreeportUniformRect2dGrating(ThreeportUniform2dGrating,UniformDodec2dGrating):
+class ThreeportUniformRect2dGrating(ThreeportUniform2dGrating, UniformDodec2dGrating):
     """ uniform 2D grating with rectangular unit cell and 3 ports """
 
      

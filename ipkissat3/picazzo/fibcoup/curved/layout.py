@@ -21,7 +21,7 @@
 
 from .curved_basic import CurveDimension, CurvedGrating
 from ..basic import FiberCouplerGrating
-from math import tan, floor, ceil, asin, cos, sin, atan,sqrt
+from math import tan, floor, ceil, asin, cos, sin, atan, sqrt
 from ipkiss.all import *
 
 __all__ = ["ConcentricCurvedGrating",
@@ -90,7 +90,7 @@ def ConcentricCurvedGratingBox(min_r_h, min_r_v, h_period, v_period, n_o_trenche
 def FiberCouplerConcentricCurvedGratingBox(min_r_h, min_r_v, h_period, v_period, n_o_trenches, trench_width, box_width, socket , process = TECH.PROCESS.FC, socket_position=(0.0, 0.0)):
     """ Concentric elliptical curved grating fit inside a rectangular box """
     grating = ConcentricCurvedGratingBox(min_r_h, min_r_v, h_period, v_period, n_o_trenches, trench_width, box_width, process )
-    return FiberCouplerGrating(socket=socket,socket_position=socket_position, grating=grating)
+    return FiberCouplerGrating(socket=socket, socket_position=socket_position, grating=grating)
 
 ##############################################################
 
@@ -124,8 +124,8 @@ def FiberCouplerConfocalCurvedGratingBoxGeneric(line_widths_positions, focus_pos
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle
         This can be a set of arbitraty lines and x-positions. The ellipses are made confocal, and the h_v_ratio gives the ratio of the vertical versus the 
         horizontal size of the ellipses. (Should be between zero and one) """
-    grating = ConfocalCurvedGratingBoxGeneric(line_widths_positions, focus_position, box_width, v_h_ratio , process = process)
-    return FiberCouplerGrating(socket=socket,socket_position=socket_position, grating=grating)
+    grating = ConfocalCurvedGratingBoxGeneric(line_widths_positions, focus_position, box_width, v_h_ratio, process = process)
+    return FiberCouplerGrating(socket=socket, socket_position=socket_position, grating=grating)
 
 ##############################################################
 
@@ -156,8 +156,8 @@ def ConfocalCurvedGratingBox(min_index,  h_period, v_period, n_o_trenches, box_w
 
 def FiberCouplerConfocalCurvedGratingBox(min_index,  h_period, v_period, n_o_trenches, box_width, socket, fill_factor = 0.5, process = TECH.PROCESS.FC, socket_position=(0.0, 0.0)):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle"""
-    grating = ConfocalCurvedGratingBox(min_index,  h_period, v_period, n_o_trenches, box_width, fill_factor , process = process)
-    return FiberCouplerGrating(socket=socket, socket_position = socket_position,grating= grating)
+    grating = ConfocalCurvedGratingBox(min_index,  h_period, v_period, n_o_trenches, box_width, fill_factor, process = process)
+    return FiberCouplerGrating(socket=socket, socket_position = socket_position, grating= grating)
 ##############################################################
 
 def ConfocalCurvedGratingBoxApodized(min_index,  h_period, v_period, n_o_trenches, box_width, fill_factor = 0.5, apo_func = lambda t:t, chirp_func  = lambda p:p, process = TECH.PROCESS.FC):
@@ -193,8 +193,8 @@ def ConfocalCurvedGratingBoxApodized(min_index,  h_period, v_period, n_o_trenche
 
 def FiberCouplerConfocalCurvedGratingBoxApodized(min_index,  h_period, v_period, n_o_trenches, box_width, socket, fill_factor = 0.5, apo_func = lambda t:t, chirp_func = lambda p:p, process = TECH.PROCESS.FC, socket_position=(0.0, 0.0)):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle"""
-    grating = ConfocalCurvedGratingBox(min_index,  h_period, v_period, n_o_trenches, box_width, fill_factor , apo_func, chirp_func, process = process)
-    return FiberCouplerGrating(socket=socket, socket_position = socket_position,grating= grating)
+    grating = ConfocalCurvedGratingBox(min_index,  h_period, v_period, n_o_trenches, box_width, fill_factor, apo_func, chirp_func, process = process)
+    return FiberCouplerGrating(socket=socket, socket_position = socket_position, grating= grating)
 
 ##############################################################
 
@@ -207,20 +207,20 @@ def MinXConfocalCurvedGratingBox(min_x, h_period, v_period, box_length, box_widt
 
 def FiberCouplerMinXConfocalCurvedGratingBox(min_x, h_period, v_period, box_length, box_width,  socket, fill_factor = 0.5, process = TECH.PROCESS.FC, socket_position=(0.0, 0.0)):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle, starting from a given distance from the focus point"""
-    grating = MinXConfocalCurvedGratingBox(min_x, h_period, v_period, box_length, box_width, fill_factor , process )
-    return FiberCouplerGrating(socket=socket,socket_position=socket_position ,grating= grating)
+    grating = MinXConfocalCurvedGratingBox(min_x, h_period, v_period, box_length, box_width, fill_factor, process )
+    return FiberCouplerGrating(socket=socket, socket_position=socket_position, grating= grating)
 
 ##############################################################
 
 def AngleConfocalCurvedGratingBox(h_period, v_period, box_length, box_width, angle, fill_factor = 0.5, extra_width = 0.0, process = TECH.PROCESS.FC,**kwargs):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle, with focus distance calculated from the aperture spread angle"""
     min_x = 0.5 * box_width / tan(0.5*angle*DEG2RAD) - 0.5 * box_length
-    return MinXConfocalCurvedGratingBox(min_x, h_period, v_period, box_length, box_width + extra_width, fill_factor, process,**kwargs)
+    return MinXConfocalCurvedGratingBox(min_x, h_period, v_period, box_length, box_width + extra_width, fill_factor, process, **kwargs)
 
-def FiberCouplerAutoConfocalCurvedGratingBox(h_period, v_period, box_length, box_width,  socket, fill_factor = 0.5, extra_width = 0.0, process = TECH.PROCESS.FC,socket_position = (0.0,0.0),**kwargs):
+def FiberCouplerAutoConfocalCurvedGratingBox(h_period, v_period, box_length, box_width,  socket, fill_factor = 0.5, extra_width = 0.0, process = TECH.PROCESS.FC,socket_position = (0.0, 0.0),**kwargs):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle, with focus distance calculated from the aperture spread angle"""
-    grating = AngleConfocalCurvedGratingBox(h_period, v_period, box_length, box_width, socket.angle_deg(), fill_factor , extra_width , process )    
-    return FiberCouplerGrating(socket=socket,socket_position=socket_position, grating=grating,**kwargs)
+    grating = AngleConfocalCurvedGratingBox(h_period, v_period, box_length, box_width, socket.angle_deg(), fill_factor, extra_width, process )    
+    return FiberCouplerGrating(socket=socket, socket_position=socket_position, grating=grating, **kwargs)
 
 ##############################################################
 def MinXConfocalCurvedGratingBoxApodized(min_x, h_period, v_period, box_length, box_width, fill_factor = 0.5, apo_func = lambda t:t, chirp_func = lambda p:p, process = TECH.PROCESS.FC):
@@ -233,12 +233,12 @@ def MinXConfocalCurvedGratingBoxApodized(min_x, h_period, v_period, box_length, 
 def AngleConfocalCurvedGratingBoxApodized(h_period, v_period, box_length, box_width, angle, fill_factor = 0.5, apo_func = lambda t:t, chirp_func = lambda p:p, extra_width = 0.0, process = TECH.PROCESS.FC,**kwargs):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle, with focus distance calculated from the aperture spread angle"""
     min_x = 0.5 * box_width / tan(0.5*angle*DEG2RAD) - 0.5 * box_length
-    return MinXConfocalCurvedGratingBoxApodized(min_x, h_period, v_period, box_length, box_width + extra_width, fill_factor, apo_func, chirp_func, process,**kwargs)
+    return MinXConfocalCurvedGratingBoxApodized(min_x, h_period, v_period, box_length, box_width + extra_width, fill_factor, apo_func, chirp_func, process, **kwargs)
 
-def FiberCouplerAutoConfocalCurvedGratingBoxApodized(h_period, v_period, box_length, box_width,  socket, fill_factor = 0.5, apo_func = lambda t:t, chirp_func =  lambda p:p, extra_width = 0.0, process = TECH.PROCESS.FC,socket_position = (0.0,0.0),**kwargs):
+def FiberCouplerAutoConfocalCurvedGratingBoxApodized(h_period, v_period, box_length, box_width,  socket, fill_factor = 0.5, apo_func = lambda t:t, chirp_func =  lambda p:p, extra_width = 0.0, process = TECH.PROCESS.FC,socket_position = (0.0, 0.0),**kwargs):
     """ Confocal elliptical curved grating (all ellipses share the east focus point) fit inside a rectangle, with focus distance calculated from the aperture spread angle"""
-    grating = AngleConfocalCurvedGratingBoxApodized(h_period, v_period, box_length, box_width, socket.angle_deg(), fill_factor , apo_func, chirp_func, extra_width , process )    
-    return FiberCouplerGrating(socket=socket,socket_position=socket_position, grating=grating,**kwargs)
+    grating = AngleConfocalCurvedGratingBoxApodized(h_period, v_period, box_length, box_width, socket.angle_deg(), fill_factor, apo_func, chirp_func, extra_width, process )    
+    return FiberCouplerGrating(socket=socket, socket_position=socket_position, grating=grating, **kwargs)
 ##############################################################
 
 # FIXME - not working, to be looked at by Wim or Pieter 

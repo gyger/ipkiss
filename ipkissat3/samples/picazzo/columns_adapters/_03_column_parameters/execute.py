@@ -28,7 +28,7 @@ class ExampleColumnParameters1(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),  # column width = 2000um
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),  # column width = 2000um
                                   y_spacing = 25.0)           # vertical spacing between waveguides
         
         
@@ -39,7 +39,7 @@ class ExampleColumnParameters1(Structure):
         # add the component to the column
         from picazzo.io.fibcoup import IoFibcoup
         my_column.add(my_ring,
-                      offset = (50,50),          # offset the structure from the center
+                      offset = (50, 50),          # offset the structure from the center
                       adapter = IoFibcoup,          # this is the default adapter.
                       transformation = Rotation(rotation=10.0)) # transform the structure
         
@@ -55,7 +55,7 @@ class ExampleColumnParameters2(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),  # column width = 2000um
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),  # column width = 2000um
                                   y_spacing = 25.0)           # vertical spacing between waveguides
         
         
@@ -72,7 +72,7 @@ class ExampleColumnParameters2(Structure):
                       connect_length = 100.0,                  # horizontal length of Fanout. Default = 40.0
                       bend_radius = 30.0,                      # bend radius of Fanout. Default from TECH 
                       minimum_straight = 8.0,                  # minimum straight sections
-                      fibcoup = TECH.IO.FIBCOUP.DEFAULT_GRATING ,# default fiber coupler
+                      fibcoup = TECH.IO.FIBCOUP.DEFAULT_GRATING,# default fiber coupler
                       fibcoup_offset = 30.0,                   # offset of grating coupler from the edge. Default = 25.6
                       fibcoup_taper_length = 200.0,            # Taper length from intermedeate waveguide to fiber coupler
                       merged_waveguides = False                # bundle waveguide in Fanout

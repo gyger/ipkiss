@@ -104,8 +104,8 @@ class WgElSlottedDefinition(__SlotWgDefinition__, BaseWaveguideDefinition):
                 elems += Boundary(PPLayer(self.process, TECH.PURPOSE.LF.LINE), C2a + C2b.reversed())
                 T1 = ShapeOffset(s, 0.5*self.wg_width + self.trench_width)
                 T2 = ShapeOffset(s, -0.5*self.wg_width - self.trench_width)
-                end_face = Shape([C1b[-1],C1a[-1],C2a[-1],C2b[-1]])
-                start_face = Shape([C2b[0],C2a[0],C1a[0],C1b[0]])
+                end_face = Shape([C1b[-1], C1a[-1], C2a[-1], C2b[-1]])
+                start_face = Shape([C2b[0], C2a[0], C1a[0], C1b[0]])
                 elems += Boundary(PPLayer(self.process, TECH.PURPOSE.LF_AREA), T1 + end_face + T2.reversed() + start_face)
             return elems    
         
@@ -149,8 +149,8 @@ class Wg2ElSlottedDefinition(WgElSlottedDefinition):
                 elems += Boundary(self.layer, C2a + C2b.reversed())
                 T1 = ShapeOffset(ts, 0.5*self.wg_width + self.trench_width)
                 T2 = ShapeOffset(ts, -0.5*self.wg_width - self.trench_width)
-                end_face = Shape([C1b[-1],C1a[-1],C2a[-1],C2b[-1]])
-                start_face = Shape([C2b[0],C2a[0],C1a[0],C1b[0]])
+                end_face = Shape([C1b[-1], C1a[-1], C2a[-1], C2b[-1]])
+                start_face = Shape([C2b[0], C2a[0], C1a[0], C1b[0]])
                 elems += Boundary(self.inv_layer, T1 + end_face + T2.reversed() + start_face)
             return elems
         

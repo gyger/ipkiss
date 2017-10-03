@@ -56,12 +56,12 @@ class BroadWgSocket(__WgSocket__):
     wg_length = PositiveNumberProperty(default = 50.0)
 
     def define_name(self):
-        return "%s_%d_%d_%d_%s"%(self.__name_prefix__,self.wg_definition.wg_width*1000,
+        return "%s_%d_%d_%d_%s"%(self.__name_prefix__, self.wg_definition.wg_width*1000,
                                  self.wg_definition.trench_width*1000, self.wg_length*1000,
                                  self.wg_definition.process.extension)
     
     def define_elements(self, elems):
-        elems += self.wg_definition(shape = [(0.0,0.0), (self.wg_length, 0.0)])
+        elems += self.wg_definition(shape = [(0.0, 0.0), (self.wg_length, 0.0)])
         return elems
     
     def define_ports(self, ports):
@@ -101,7 +101,7 @@ class LinearTaperSocket(TaperSocket):
         end_wg_def = WgElDefinition(wg_width = extended_start_width, trench_width = self.end_wg_definition.trench_width, process = self.end_wg_definition.process)
         end_wg_def_ext = WgElDefinition(wg_width = extended_start_width+0.05, trench_width = self.end_wg_definition.trench_width-0.05, process = self.end_wg_definition.process)
 
-        elems += WgElTaperLinear(start_position = (self.center[0] - self.extension ,self.center[1]),
+        elems += WgElTaperLinear(start_position = (self.center[0] - self.extension, self.center[1]),
                                  end_position = (self.center[0] + self.length, self.center[1]), 
                                  start_wg_def = end_wg_def,
                                  end_wg_def = self.start_wg_definition,
@@ -114,7 +114,7 @@ class LinearTaperSocket(TaperSocket):
                                      straight_extension = (0.0, 0.0))
    
         if self.straight_entrance > 0.0:
-            elems += self.start_wg_definition(shape = [(self.center[0] + self.length ,self.center[1]), (self.center[0] + self.length + self.straight_entrance, self.center[1])])
+            elems += self.start_wg_definition(shape = [(self.center[0] + self.length, self.center[1]), (self.center[0] + self.length + self.straight_entrance, self.center[1])])
 
         return elems
     

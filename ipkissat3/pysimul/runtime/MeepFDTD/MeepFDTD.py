@@ -49,7 +49,7 @@ class MeepChi3_2D(Meep.CallbackMatrix2D):
             if not isinstance(simul_volume, __SimulationVolume__):
                 raise AttributeException("Parameter simul_volume of class MeepMaterial2D must be of type __SimulationVolume__")
             resolution_factor = simul_volume.resolution_factor
-            LOG.debug("Meep : using a resolution factor of %i (Numpy matrix has %i times higher resolution than the Meep grid)." %(resolution_factor,resolution_factor))
+            LOG.debug("Meep : using a resolution factor of %i (Numpy matrix has %i times higher resolution than the Meep grid)." %(resolution_factor, resolution_factor))
             meep_resolution = meep_volume.a
             material_matrix =  simul_volume.get_material_dataset_window(meep_resolution * resolution_factor)
             #convert the material matrix to a matrix with epsilon values (doubles)
@@ -72,7 +72,7 @@ class MeepMaterial2DMatrix(Meep.CallbackMatrix2D):
         if not isinstance(simul_volume, __SimulationVolume__):
             raise AttributeException("Parameter simul_volume of class MeepMaterial2D must be of type __SimulationVolume__")
         resolution_factor = simul_volume.resolution_factor
-        LOG.debug("Meep : using a resolution factor of %i (Numpy matrix has %i times higher resolution than the Meep grid)." %(resolution_factor,resolution_factor))
+        LOG.debug("Meep : using a resolution factor of %i (Numpy matrix has %i times higher resolution than the Meep grid)." %(resolution_factor, resolution_factor))
         meep_resolution = meep_volume.a
         material_matrix =  simul_volume.get_material_dataset_window(meep_resolution * resolution_factor)
         #convert the material matrix to a matrix with epsilon values (doubles)
@@ -97,7 +97,7 @@ class __MeepMaterialPolygons__(object):
         for c in coords :
             x = c[0] - self.south_west_coord[0]
             y = c[1] - self.south_west_coord[1]
-            transformed_coords.append([x,y])
+            transformed_coords.append([x, y])
         arr = numpy.array(transformed_coords)
         arr = arr[:-1]
         return arr
@@ -153,19 +153,19 @@ class AmplitudeFactor(Meep.Callback):
         Meep.Callback.__init__(self)
         self.source = source
 
-    def complex_vec(self,vec):
+    def complex_vec(self, vec):
         #BEWARE, these are coordinates RELATIVE to the source center !!!!
         try:
             x = vec.x()
             y = vec.y()
-            factor = self.source.get_amplitude_factor(Coord2(x,y))	
-            LOG.debug("Meep node %i -Amplitude factor for x=%f - y=%f is: %f \n" %(int(Meep.my_rank()),x,y, factor) )
+            factor = self.source.get_amplitude_factor(Coord2(x, y))	
+            LOG.debug("Meep node %i -Amplitude factor for x=%f - y=%f is: %f \n" %(int(Meep.my_rank()), x, y, factor) )
             if (isinstance(factor, complex)):
                 return factor
             else:
                 return complex(factor)
         except Exception as e:
-            print("Exception in AmplitudeFactor::complex_vec (%f,%f): %s" %(x,y,e))
+            print("Exception in AmplitudeFactor::complex_vec (%f,%f): %s" %(x, y, e))
             raise e
 
     def __getstate__(self): #for pickle : do not serialize
@@ -207,8 +207,8 @@ class MeepSimulationEngine(FDTDEngine):
         symmetry_object = Meep.identity()
         if( self.symmY ):
             LOG.debug("Meep node %i -Using y symmetry!" %(self.node_nr))
-            symmetry_object = Meep.mirror(Meep.Y,self.meepVol)
-            symmetry_object = symmetry_object * complex(1.0,0.0)
+            symmetry_object = Meep.mirror(Meep.Y, self.meepVol)
+            symmetry_object = symmetry_object * complex(1.0, 0.0)
 
         # When there is a certain PML direction, use that one.
         if isinstance( landscape.pml_direction, str ):
@@ -221,7 +221,7 @@ class MeepSimulationEngine(FDTDEngine):
         else:
             pml = Meep.pml(landscape.pml_thickness)
 
-        self.structure = Meep.structure(self.meepVol , Meep.EPS, pml, symmetry=symmetry_object )
+        self.structure = Meep.structure(self.meepVol, Meep.EPS, pml, symmetry=symmetry_object )
         if self.is_nonlinear:
             LOG.debug("Meep node %i, setting chi3"%(self.node_nr))
             self.chi3 = MeepChi3_2D(landscape.simulation_volume, self.meepVol)
@@ -271,10 +271,10 @@ class MeepSimulationEngine(FDTDEngine):
     def __make_meep_vec__(self, coord):
         '''Convert a Coord3 object into a Meep vec object'''
         if (self.dim == 3):
-            (x,y,z) = self.__calc_meep_coord__(coord)
+            (x, y, z) = self.__calc_meep_coord__(coord)
             return Meep.vec(x, y, z)
         elif (self.dim == 2):
-            (x,y) = self.__calc_meep_coord__(coord)
+            (x, y) = self.__calc_meep_coord__(coord)
             return Meep.vec(x, y)
         elif (self.dim == 1):
             (x) = self.__calc_meep_coord__(coord)
@@ -341,7 +341,7 @@ class MeepSimulationEngine(FDTDEngine):
         vec1 = self.__make_meep_vec__(flx.north)
         vec2 = self.__make_meep_vec__(flx.south)
         print("Meep node %i : flux plane between points (%f , %f) and (%f , %f) " %(self.node_nr, vec1.x(), vec1.y(), vec2.x(), vec2.y()))	
-        meepFlxVol = Meep.volume(vec1,vec2)
+        meepFlxVol = Meep.volume(vec1, vec2)
         center_freq = 1.0 / (float(flx.center_wavelength) / 1000.0)
         pw = ( (float(flx.pulse_width)/1000.0) / (float(flx.center_wavelength)/1000.0) ) * center_freq 	
         max_freq = center_freq + pw / 2.0
@@ -357,12 +357,12 @@ class MeepSimulationEngine(FDTDEngine):
         LOG.debug("Meep node %i - done with fluxplane ..." %(self.node_nr))
 
     def __saveFluxToHDF5(self, pFluxplane, filename):
-        LOG.debug("Meep node %i -Saving flux to HDF5 in file %s ..." %(self.node_nr,filename))
+        LOG.debug("Meep node %i -Saving flux to HDF5 in file %s ..." %(self.node_nr, filename))
         pFluxplane.save_hdf5(self.meep_fields, filename)
         return None
 
     def __loadFluxFromHDF5(self, pFluxplane, filename):
-        LOG.debug("Meep node %i -Loading initial values for fluxplane from HDF5 file %s..." %(self.node_nr,filename))
+        LOG.debug("Meep node %i -Loading initial values for fluxplane from HDF5 file %s..." %(self.node_nr, filename))
         pFluxplane.load_hdf5(self.meep_fields, filename)
         return None    
 
@@ -375,7 +375,7 @@ class MeepSimulationEngine(FDTDEngine):
         '''Export the dielectric to a HDF5 output file'''
         if (fileName == None):
             fileName = "meep_eps.h5"
-        LOG.debug("Meep node %i -Exporting dielectric to H5-file : %s" %(self.node_nr,fileName))   
+        LOG.debug("Meep node %i -Exporting dielectric to H5-file : %s" %(self.node_nr, fileName))   
         dielectric_file_handle =  Meep.prepareHDF5File(fileName)
         self.meep_fields.output_hdf5(Meep.Dielectric, self.meepVol.surroundings(), dielectric_file_handle)   
         self.closeHDF5File(dielectric_file_handle)
@@ -388,7 +388,7 @@ class MeepSimulationEngine(FDTDEngine):
         #let Meep export the dielectricum to HDF5
         self.exportDielectricH5(filename)	
         if (Meep.am_master()):	
-            LOG.debug("Meep node %i -Dielectricum saved to file %s..." %(self.node_nr,filename))
+            LOG.debug("Meep node %i -Dielectricum saved to file %s..." %(self.node_nr, filename))
             if self.dim == 2:
                 cmd = "h5topng -a /home/emmanuel/workspace/Meep_tutorial/colormaps/yarg "+filename
                 os.system(cmd)	
@@ -411,9 +411,9 @@ class MeepSimulationEngine(FDTDEngine):
         x_range = ds.shape[0]
         y_range = ds.shape[1]
         mat = numpy.zeros((x_range, y_range), Material)
-        for x in range(0,x_range):
-            for y in range(0,y_range):
-                mat[x,y] = Material(name = "dielectricum_material", epsilon = ds[x, y])
+        for x in range(0, x_range):
+            for y in range(0, y_range):
+                mat[x, y] = Material(name = "dielectricum_material", epsilon = ds[x, y])
         return mat
 
     def getFieldAmplitudeAtMonitorPoint(self, pCoord, pComp):

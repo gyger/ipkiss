@@ -65,7 +65,7 @@ class IoBlock (StrongPropertyInitializer):
         return SizeInfo(self.south_west[0], 
                              self.south_east[0], 
                              max(self.south_west[1] + self.count_west * self.y_spacing, self.south_east[1], self.south_east[1] + self.count_east * self.y_spacing),
-                             min(self.south_west[1] , self.south_east[1])
+                             min(self.south_west[1], self.south_east[1])
                              )
     
 
@@ -118,7 +118,7 @@ class BlockList(TypedList):
 ##########################################################
 
 class BlocksDefinitionProperty(DefinitionProperty):
-    __allowed_keyword_arguments__ = ["required","restriction","default","fdef_name"]
+    __allowed_keyword_arguments__ = ["required", "restriction", "default", "fdef_name"]
     
     def __init__(self, **kwargs):        
         super(BlocksDefinitionProperty, self).__init__(**kwargs)    
@@ -135,7 +135,7 @@ class BlocksDefinitionProperty(DefinitionProperty):
         except KeyError:
             stored_value = BlockList()
         value = f(stored_value)
-        DefinitionProperty.__set__(self,obj, value)
+        DefinitionProperty.__set__(self, obj, value)
         return value        
                 
 

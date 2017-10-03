@@ -58,7 +58,7 @@ class Io2dFibcoup(Structure):
     
     
     def define_elements(self, elems):
-        elems += SRef(self.fibcoup,(0.0,0.0))
+        elems += SRef(self.fibcoup, (0.0, 0.0))
         return elems
     
     @cache()
@@ -77,12 +77,12 @@ class Io2dFibcoup(Structure):
     def define_end_coords(self):
         return self.start_coords_end_coords[1]    
                        
-    def add_taper(self,elems, angle_start,angle_end):
-        sp = self.start_coords.get_ports_within_angles(angle_start,angle_end)
-        ep = self.end_coords.get_ports_within_angles(angle_start,angle_end)
+    def add_taper(self, elems, angle_start, angle_end):
+        sp = self.start_coords.get_ports_within_angles(angle_start, angle_end)
+        ep = self.end_coords.get_ports_within_angles(angle_start, angle_end)
         
         wg_ext = 0.1
-        for i in range(0,len(sp)):
+        for i in range(0, len(sp)):
             elems += WgElTaperParabolic(start_position = sp[i].position, end_position = ep[i].position, 
                                         start_wg_def = sp[i].wg_definition, end_wg_def = ep[i].wg_definition)
         return elems
@@ -93,30 +93,30 @@ class IoSingleSided2dFibcoupBase(Io2dFibcoup):
     __name_prefix__ = "Io2dFibcoup_ss"
     
     def define_elements(self, elems):
-        elems += SRef(self.fibcoup,(0.0,0.0))
-        elems = self.add_taper(elems, 0.0,90.0)
-        elems = self.add_taper(elems, 270.0,360.0)
+        elems += SRef(self.fibcoup, (0.0, 0.0))
+        elems = self.add_taper(elems, 0.0, 90.0)
+        elems = self.add_taper(elems, 270.0, 360.0)
         return elems
                     
     def define_ports(self, ports):
-        for port in self.end_coords.get_ports_within_angles(270.0,90.0):
+        for port in self.end_coords.get_ports_within_angles(270.0, 90.0):
             port = OutOpticalPort(wg_definition = port.wg_definition, position = port.position, angle = port.angle)
             ports += port
         return ports
         
             
 def IoSingleSided2dFibcoup(wg_definition = TECH.WGDEF.WIRE, taper_length=250.0):
-    return IoSingleSided2dFibcoupBase(fibcoup = TECH.IO.FIBCOUP.DEFAULT_2D_GRATING,wg_definition = wg_definition,taper_length = taper_length)
+    return IoSingleSided2dFibcoupBase(fibcoup = TECH.IO.FIBCOUP.DEFAULT_2D_GRATING, wg_definition = wg_definition, taper_length = taper_length)
 
 class IoDoubleSided2dFibcoupBase(Io2dFibcoup):
     __name_prefix__ = "Io2dFibcoup_ds"
         
     def define_elements(self, elems):
-        elems += SRef(self.fibcoup,(0.0,0.0))
-        elems = self.add_taper(elems,0.0,90.0)
-        elems = self.add_taper(elems,90.0,180.0)
-        elems = self.add_taper(elems,180.0,270.0)
-        elems = self.add_taper(elems,270.0,360.0)
+        elems += SRef(self.fibcoup, (0.0, 0.0))
+        elems = self.add_taper(elems, 0.0, 90.0)
+        elems = self.add_taper(elems, 90.0, 180.0)
+        elems = self.add_taper(elems, 180.0, 270.0)
+        elems = self.add_taper(elems, 270.0, 360.0)
         return elems
                     
     def define_ports(self, ports):
@@ -124,7 +124,7 @@ class IoDoubleSided2dFibcoupBase(Io2dFibcoup):
         return ports
 
 def IoDoubleSided2dFibcoup(wg_definition = TECH.WGDEF.WIRE, taper_length=250.0):
-    return IoDoubleSided2dFibcoupBase(fibcoup = TECH.IO.FIBCOUP.DEFAULT_2D_GRATING,wg_definition = wg_definition, taper_length = taper_length)
+    return IoDoubleSided2dFibcoupBase(fibcoup = TECH.IO.FIBCOUP.DEFAULT_2D_GRATING, wg_definition = wg_definition, taper_length = taper_length)
 
 
 class FibcoupDuplex4Port(Io2dFibcoup):
@@ -133,11 +133,11 @@ class FibcoupDuplex4Port(Io2dFibcoup):
     
         
     def define_elements(self, elems):
-        elems += SRef(self.fibcoup,(0.0,0.0))
-        elems = self.add_taper(elems,0.0,90.0)
-        elems = self.add_taper(elems,90.0,180.0)
-        elems = self.add_taper(elems,180.0,270.0)
-        elems = self.add_taper(elems,270.0,360.0)
+        elems += SRef(self.fibcoup, (0.0, 0.0))
+        elems = self.add_taper(elems, 0.0, 90.0)
+        elems = self.add_taper(elems, 90.0, 180.0)
+        elems = self.add_taper(elems, 180.0, 270.0)
+        elems = self.add_taper(elems, 270.0, 360.0)
         return elems
         
     def define_ports(self, ports):
@@ -149,10 +149,10 @@ class FibcoupDuplex3Port(Io2dFibcoup):
     __name_prefix__ = "FibcoupDuplex3Port"
                
     def define_elements(self, elems):
-        elems += SRef(self.fibcoup,(0.0,0.0))
-        elems = self.add_taper(elems,0.0,90.0)
-        elems = self.add_taper(elems,270.0,360.0)
-        elems = self.add_taper(elems,135.0,225.0)
+        elems += SRef(self.fibcoup, (0.0, 0.0))
+        elems = self.add_taper(elems, 0.0, 90.0)
+        elems = self.add_taper(elems, 270.0, 360.0)
+        elems = self.add_taper(elems, 135.0, 225.0)
         return elems
         
     def define_ports(self, ports):
@@ -166,12 +166,12 @@ class FibcoupDuplex3Port(Io2dFibcoup):
 ############################################
            
 def IoSingleSided2dFibcoupArray(num_fibcoup=4, wg_definition = TECH.WGDEF.WIRE, spacing=250.0):
-    FC = IoSingleSided2dFibcoup(wg_definition,140.0) 
+    FC = IoSingleSided2dFibcoup(wg_definition, 140.0) 
     return IoPeriodicArray(FC, num_fibcoup, spacing)
 
            
 def IoDoubleSided2dFibcoupArray(num_fibcoup=4, wg_definition =TECH.WGDEF.WIRE, spacing=250.0):
-    FC = IoDoubleSided2dFibcoup(wg_definition,140.0) 
+    FC = IoDoubleSided2dFibcoup(wg_definition, 140.0) 
     return IoPeriodicArray(FC, num_fibcoup, spacing, library)
 
         

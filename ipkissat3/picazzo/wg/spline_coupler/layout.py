@@ -31,7 +31,7 @@ TECH = get_technology()
 
 def PartialProperty(internal_member_name= None, restriction = None,**kwargs):    
     R = restrictions.RestrictType(functools.partial) & restriction
-    P = RestrictedProperty(internal_member_name, restriction = R,**kwargs)   
+    P = RestrictedProperty(internal_member_name, restriction = R, **kwargs)   
     P.__get_default__ = lambda : P.default
     return P
 
@@ -51,17 +51,17 @@ class SplineDirectionalCoupler(__RoundedWaveguide__, __DirectionalCoupler__):
         return (bend_size[0]+0.01, bend_size[1]+0.01)
 
     def define_elements(self, elems):
-        super(SplineDirectionalCoupler,self).define_elements(elems)
+        super(SplineDirectionalCoupler, self).define_elements(elems)
         SI = elems.size_info()
-        elems += Rectangle(layer = PPLayer(self.wg_definition1.process,TECH.PURPOSE.LF_AREA),
+        elems += Rectangle(layer = PPLayer(self.wg_definition1.process, TECH.PURPOSE.LF_AREA),
                            center = SI.center, box_size = (SI.width, SI.height))
         return elems
     
     def define_waveguides(self):
-        (bs1,bs2) = self.get_bend90_size()
+        (bs1, bs2) = self.get_bend90_size()
         rect_size = (bs1+self.length, bs2)
-        S = Shape([(-bs1-0.5*self.length,-bs2),(-bs1-0.5*self.length,0.0),(-0.5*self.length,0.0),
-                   (0.5*self.length,0.0),(bs1+0.5*self.length,0.0),(bs1+0.5*self.length,-bs2)])
+        S = Shape([(-bs1-0.5*self.length, -bs2), (-bs1-0.5*self.length, 0.0), (-0.5*self.length, 0.0),
+                   (0.5*self.length, 0.0), (bs1+0.5*self.length, 0.0), (bs1+0.5*self.length, -bs2)])
         S = ShapeRoundAdiabaticSplineGeneric(original_shape = S,
                                              radii = [self.bend_radius for i in range(len(S))],
                                              adiabatic_angles_list = [(self.adiabatic_angle_in_access, self.adiabatic_angle_in_access),
@@ -71,7 +71,7 @@ class SplineDirectionalCoupler(__RoundedWaveguide__, __DirectionalCoupler__):
                                                                       (self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_access),
                                                                       (self.adiabatic_angle_in_access, self.adiabatic_angle_in_access)]
                                              )
-        S.move((0.0,-0.5*self.spacing))
+        S.move((0.0, -0.5*self.spacing))
         S2 = S.transform_copy(VMirror())
         waveguides = [self.wg_definition1(shape = S),
                       self.wg_definition2(shape = S2)

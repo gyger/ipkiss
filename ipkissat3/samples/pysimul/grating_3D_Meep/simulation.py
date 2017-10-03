@@ -66,16 +66,16 @@ if not os.path.exists(source_output_directory):
     os.makedirs(source_output_directory)
     
 for f in files_to_copy :
-    new_file = '%s/%s'%(source_output_directory,f)
-    copy_command = 'cp %s %s'%(f,new_file)
+    new_file = '%s/%s'%(source_output_directory, f)
+    copy_command = 'cp %s %s'%(f, new_file)
     print('Executing:')
     print(copy_command)
     os.system(copy_command)
 
 
 
-wg_def_cavity = WgElDefinition(wg_width = 0.45,trench_width = 1.0)
-wg_def_access = WgElDefinition(wg_width = 0.45,trench_width = 1.0)
+wg_def_cavity = WgElDefinition(wg_width = 0.45, trench_width = 1.0)
+wg_def_access = WgElDefinition(wg_width = 0.45, trench_width = 1.0)
 
 
 np_r = 15
@@ -107,8 +107,8 @@ reference_component  = GratingCavityWithModeFilter(wg_definition = wg_def_cavity
 
 #create new ports that will act as input/output ports for the simulation
 act_port_offset = 2.5
-p_e = reference_component.east_ports[0].transform_copy(Translation(translation=(-section_len,0)))
-p_w = reference_component.west_ports[0].transform_copy(Translation(translation=(+section_len,0)))
+p_e = reference_component.east_ports[0].transform_copy(Translation(translation=(-section_len, 0)))
+p_w = reference_component.west_ports[0].transform_copy(Translation(translation=(+section_len, 0)))
 
 reference_component.write_gdsii('comp_for_3d_simulation.gds')
 
@@ -119,7 +119,7 @@ reference_component.visualize_2d()
 print('Creating reference component simulator')
 reference_component_simulator = StructureMeep3DSimulator(component = reference_component,
                                                                 input_port = p_w,
-                                                                output_ports = [p_w,p_e],
+                                                                output_ports = [p_w, p_e],
                                                                 resolution = 30,
                                                                 growth = 0.0,
                                                                 wavelength = 1.55,
@@ -133,8 +133,8 @@ print('Done creating reference component simulator')
 
 
 reference_component_simulator.pulse_width = 0.4
-reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'y',filename = '%s/Ey_y_ref'%output_directory)) #slice orthogonal to the Y-axis at y=0
-reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'z',cut_value = 0.810,filename = '%s/Ey_z1_ref'%output_directory)) #slice orthogonal to the Z-axis at z=0.81 (700nm SiOx + half of 220nm Si = 700+110 = 810 => 0.81)
+reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'y', filename = '%s/Ey_y_ref'%output_directory)) #slice orthogonal to the Y-axis at y=0
+reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'z', cut_value = 0.810, filename = '%s/Ey_z1_ref'%output_directory)) #slice orthogonal to the Z-axis at z=0.81 (700nm SiOx + half of 220nm Si = 700+110 = 810 => 0.81)
 reference_component_simulator.save_reversed_flux_to_file_ID = 0
 reference_component_simulator.save_reversed_flux_to_file_filename = filename
 reference_component_simulator.stop_time_multiplier = 2.0 #stop after 2 times the pulse length (pulse length calculated by Meep)
@@ -188,11 +188,11 @@ component  = GratingCavityWithModeFilter(wg_definition = wg_def_cavity,
 
 reference_component_simulator.component = component
 reference_component_simulator.input_port = p_w
-reference_component_simulator.output_ports = [p_w,p_e]
+reference_component_simulator.output_ports = [p_w, p_e]
 
 reference_component_simulator.clear_output_cut_list()
-reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'y',filename = '%s/Ey_y'%output_directory))
-reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'z',cut_value = 0.81,filename = '%s/Ey_z1'%output_directory))
+reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'y', filename = '%s/Ey_y'%output_directory))
+reference_component_simulator.add_output_cut(OutputCut(normal_vector = 'z', cut_value = 0.81, filename = '%s/Ey_z1'%output_directory))
 
 
 reference_component_simulator.save_reversed_flux_to_file_ID = -1 #don't save a flux, but initiliaze the flux from file_ID = 0 (see below)
@@ -226,4 +226,4 @@ transmission = array(data_e) / array(data_ref_w)
 output_data.append(WL_ref)
 output_data.append(reflection)
 output_data.append(transmission)
-savetxt(output_filename,matrix(output_data).transpose(),delimiter = '\t')
+savetxt(output_filename, matrix(output_data).transpose(), delimiter = '\t')

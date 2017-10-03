@@ -23,10 +23,10 @@ import sys, os
 
 class PovrayFile:
   def __init__(self,fnam="out.pov",*items):
-    self.file = open(fnam,"w")
+    self.file = open(fnam, "w")
     self.__indent = 0
     self.write(*items)
-  def include(self,name):
+  def include(self, name):
     self.writeln( '#include "%s"'%name )
     self.writeln()
   def indent(self):
@@ -45,7 +45,7 @@ class PovrayFile:
       self.writeln( )
   def write(self,*items):
     for item in items:
-      if type(item) == str:
+      if isinstance(item, str):
         self.include(item)
       elif isinstance(item, list):
         for e in item:
@@ -66,9 +66,9 @@ class Vector:
     return "<%s>"%(", ".join([str(x)for x in self.v]))
   def __repr__(self):
     return "Vector(%s)"%self.v
-  def __mul__(self,other):
+  def __mul__(self, other):
     return Vector( [r*other for r in self.v] )
-  def __rmul__(self,other):
+  def __rmul__(self, other):
     return Vector( [r*other for r in self.v] )
 
 class Vector_List:
@@ -82,7 +82,7 @@ class Item:
     self.name = name
     args=list(args)
     for i in range(len(args)):
-      if type(args[i]) == tuple or type(args[i]) == list:
+      if isinstance(args[i], tuple) or isinstance(args[i], list):
         args[i] = Vector(args[i])
     self.args = args
     self.opts = opts
@@ -96,30 +96,30 @@ class Item:
     if self.args:
       file.writeln( ", ".join([str(arg) for arg in self.args]) )
     for opt in self.opts:
-      if hasattr(opt,"write"):
+      if hasattr(opt, "write"):
         opt.write(file)
       else:
         file.writeln( str(opt) )
-    for key,val in list(self.kwargs.items()):
-      if type(val)==tuple or type(val)==list:
+    for key, val in list(self.kwargs.items()):
+      if isinstance(val, tuple) or isinstance(val, list):
         val = Vector(*val)
-        file.writeln( "%s %s"%(key,val) )
+        file.writeln( "%s %s"%(key, val) )
       else:
-        file.writeln( "%s %s"%(key,val) )
+        file.writeln( "%s %s"%(key, val) )
     if self.name != "":
       file.block_end()
-  def __setattr__(self,name,val):
+  def __setattr__(self, name, val):
     self.__dict__[name]=val
-    if name not in ["kwargs","args","opts","name"]:
+    if name not in ["kwargs", "args", "opts", "name"]:
       self.__dict__["kwargs"][name]=val
-  def __setitem__(self,i,val):
+  def __setitem__(self, i, val):
     if i < len(self.args):
       self.args[i] = val
     else:
       i += len(args)
       if i < len(self.opts):
         self.opts[i] = val
-  def __getitem__(self,i,val):
+  def __getitem__(self, i, val):
     if i < len(self.args):
       return self.args[i]
     else:
@@ -130,69 +130,69 @@ class Item:
 
 class Interior(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"interior",(),opts,**kwargs)
+    Item.__init__(self, "interior", (), opts, **kwargs)
 
 class Texture(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"texture",(),opts,**kwargs)
+    Item.__init__(self, "texture", (), opts, **kwargs)
 
 
 class Pigment(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"pigment",(),opts,**kwargs)
+    Item.__init__(self, "pigment", (), opts, **kwargs)
 
 class Finish(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"finish",(),opts,**kwargs)
+    Item.__init__(self, "finish", (), opts, **kwargs)
 
 class Normal(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"normal",(),opts,**kwargs)
+    Item.__init__(self, "normal", (), opts, **kwargs)
 
 class Camera(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"camera",(),opts,**kwargs)
+    Item.__init__(self, "camera", (), opts, **kwargs)
 
 class LightSource(Item):
   def __init__(self,v,*opts,**kwargs):
-    Item.__init__(self,"light_source",(Vector(v),),opts,**kwargs)
+    Item.__init__(self, "light_source", (Vector(v),), opts, **kwargs)
 
 class Background(Item):
   def __init__(self,*opts,**kwargs):
-    Item.__init__(self,"background",(),opts,**kwargs)
+    Item.__init__(self, "background", (), opts, **kwargs)
 
 class Box(Item):
   def __init__(self,v1,v2,*opts,**kwargs):
     #self.v1 = Vector(v1)
     #self.v2 = Vector(v2)
-    Item.__init__(self,"box",(v1,v2),opts,**kwargs)
+    Item.__init__(self, "box", (v1, v2), opts, **kwargs)
 
 class Cylinder(Item):
   def __init__(self,v1,v2,r,*opts,**kwargs):
     " opts: open "
-    Item.__init__(self,"cylinder",(v1,v2,r),opts,**kwargs)
+    Item.__init__(self, "cylinder", (v1, v2, r), opts, **kwargs)
 
 class Plane(Item):
   def __init__(self,v,r,*opts,**kwargs):
-    Item.__init__(self,"plane",(v,r),opts,**kwargs)
+    Item.__init__(self, "plane", (v, r), opts, **kwargs)
 
 class Torus(Item):
   def __init__(self,r1,r2,*opts,**kwargs):
-    Item.__init__(self,"torus",(r1,r2),opts,**kwargs)
+    Item.__init__(self, "torus", (r1, r2), opts, **kwargs)
 
 class Cone(Item):
   def __init__(self,v1,r1,v2,r2,*opts,**kwargs):
     " opts: open "
-    Item.__init__(self,"cone", (v1,r1,v2,r2),*opts,**kwargs)
+    Item.__init__(self, "cone", (v1, r1, v2, r2), *opts, **kwargs)
 
 class Sphere(Item):
   def __init__(self,v,r,*opts,**kwargs):
-    Item.__init__(self,"sphere",(v,r),*opts,**kwargs)
+    Item.__init__(self, "sphere", (v, r), *opts, **kwargs)
 
 
 class Prism(Item):
   def __init__(self,point_list , heights = (0, 1), prism_item = "linear_spline linear_sweep", opts = [],**kwargs):
     options = [heights[0], heights[1], len(point_list), Vector_List(point_list)]
     options.extend(opts)
-    Item.__init__(self,"prism", [prism_item], options,**kwargs)
+    Item.__init__(self, "prism", [prism_item], options, **kwargs)
 

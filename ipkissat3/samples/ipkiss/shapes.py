@@ -36,7 +36,7 @@ class ShapesExample(Structure):
     
     def define_elements(self, elems):
         #define a shape: a list of coordinates
-        s = Shape([(10.0, 0.0), (15.0, 10.0), (0.0, 10.0), (0.0,5.0), (-15.0, 5.0), (-5.0, 0.0),
+        s = Shape([(10.0, 0.0), (15.0, 10.0), (0.0, 10.0), (0.0, 5.0), (-15.0, 5.0), (-5.0, 0.0),
                        (-10.0, -10.0), (-5.0, -15.0), (10.0, -15.0), (5.0, -10.0), (5.0, -5.0)],
                        closed = True)
         

@@ -32,14 +32,14 @@ class WgElTaperLinear(__WgElTaper__):
         angle = angle_deg(end_position, start_position)
         dist = distance(start_position, end_position)
         
-        var_poly = Shape([(start_position[0],start_window.start_offset+start_position[1]), 
-                    (start_position[0]-straight_extension[0],start_window.start_offset+start_position[1]),
-                    (start_position[0]-straight_extension[0],start_window.end_offset+start_position[1]), 
-                    (start_position[0],start_window.end_offset+start_position[1]), 
-                    (start_position[0]+dist,end_window.end_offset+start_position[1]), 
-                    (start_position[0]+dist+straight_extension[1],end_window.end_offset+start_position[1]), 
-                    (start_position[0]+dist+straight_extension[1],end_window.start_offset+start_position[1]),
-                    (start_position[0]+dist,end_window.start_offset+start_position[1])])
+        var_poly = Shape([(start_position[0], start_window.start_offset+start_position[1]), 
+                    (start_position[0]-straight_extension[0], start_window.start_offset+start_position[1]),
+                    (start_position[0]-straight_extension[0], start_window.end_offset+start_position[1]), 
+                    (start_position[0], start_window.end_offset+start_position[1]), 
+                    (start_position[0]+dist, end_window.end_offset+start_position[1]), 
+                    (start_position[0]+dist+straight_extension[1], end_window.end_offset+start_position[1]), 
+                    (start_position[0]+dist+straight_extension[1], end_window.start_offset+start_position[1]),
+                    (start_position[0]+dist, end_window.start_offset+start_position[1])])
         var_poly_trans = var_poly.rotate(start_position, angle)
         return var_poly_trans
     

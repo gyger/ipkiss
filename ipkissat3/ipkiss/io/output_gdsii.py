@@ -49,7 +49,7 @@ import copy
 
 TECH = get_technology()
 
-__all__ = ["OutputGdsii","FileOutputGdsii", "MemoryOutputGdsii", "FileOutputXmlWithGDSFilters"]
+__all__ = ["OutputGdsii", "FileOutputGdsii", "MemoryOutputGdsii", "FileOutputXmlWithGDSFilters"]
 
 class OutputGdsii(OutputBasic):
         """ Writes GDS output to a stream """
@@ -58,7 +58,7 @@ class OutputGdsii(OutputBasic):
         
         def __init__(self, o_stream = sys.stdout, **kwargs):
                 kwargs["allow_unmatched_kwargs"] = True
-                super(OutputGdsii, self).__init__(o_stream = o_stream,**kwargs)
+                super(OutputGdsii, self).__init__(o_stream = o_stream, **kwargs)
                 if 'flatten_structure_container' in kwargs:
                         self.flatten_structure_container = kwargs.get('flatten_structure_container')
                 elif hasattr(TECH.GDSII, 'FLATTEN_STRUCTURE_CONTAINER'):
@@ -166,7 +166,7 @@ class OutputGdsii(OutputBasic):
                 p = Coord2(item.period).snap_to_grid()
                 corner1 = Coord2(item.n_o_periods[0] * p[0], 0.0)
                 corner2 = Coord2(0.0, item.n_o_periods[1] * p[1])
-                coordinates = Shape([(0.0, 0.0), corner1,corner2]).transform(T)
+                coordinates = Shape([(0.0, 0.0), corner1, corner2]).transform(T)
                 sname = self.name_filter(item.reference.name)[0]
                 self.collector += [__str_record__(gds_records.ARef),
                                    __str_record__(gds_records.SName, __hex_text__(sname))]
@@ -220,7 +220,7 @@ class OutputGdsii(OutputBasic):
                 # FIXME. Containers are PICAZZO classes. This method should be converted to a Filter or a mixin
                 from picazzo.container.container import __StructureContainer__
                 from ipkiss.primitives.elements.reference import __RefElement__
-                if isinstance(item, __StructureContainer__) and isinstance(item.elements[0],__RefElement__):                        
+                if isinstance(item, __StructureContainer__) and isinstance(item.elements[0], __RefElement__):                        
                         sref = item.elements[0]  
                         sref_elements = sref.reference.elements
                         sref_transformation = sref.transformation + Translation(translation = sref.position)
@@ -242,7 +242,7 @@ class OutputGdsii(OutputBasic):
         def collect___StructureContainer__(self, item):
                 # FIXME. Containers are PICAZZO classes. This method should be converted to a Filter or a mixin
                 from ipkiss.primitives.elements.reference import __RefElement__
-                if self.flatten_structure_container and isinstance(item.elements[0],__RefElement__):
+                if self.flatten_structure_container and isinstance(item.elements[0], __RefElement__):
                         sref = item.elements[0]
                         (new_elements, sref_levels) = self.__collect_container_elements__(item = item, sref_level_counter = 1)   
                         sref_transformation = sref.transformation + Translation(translation = sref.position)
@@ -271,9 +271,9 @@ class OutputGdsii(OutputBasic):
         def __str_coordinatelist__ (self, coords):                
                 if isinstance(coords, Shape):
                         db_value_coordinates = self.__db_value_array__(coords.points)                        
-                        ret_data = ["%s%s" % (__hex_int4__(c0) , __hex_int4__(c1)) for c0,c1 in db_value_coordinates]
+                        ret_data = ["%s%s" % (__hex_int4__(c0), __hex_int4__(c1)) for c0, c1 in db_value_coordinates]
                 else: 
-                        ret_data = ["%s%s" % (__hex_int4__(self.__db_value__(c[0])) , __hex_int4__(self.__db_value__(c[1]))) for c in coords]
+                        ret_data = ["%s%s" % (__hex_int4__(self.__db_value__(c[0])), __hex_int4__(self.__db_value__(c[1]))) for c in coords]
                 return __str_record__(gds_records.XY, "".join(ret_data))
                         
                 
@@ -354,10 +354,10 @@ def __str_record__(record_type, hex_data=""):
         return ''.join([__hex_int2__(length), __hex_int2__(record_type), hex_data]) #fastest string concatenation
 
 def __hex_int2__ (number):
-        return __hex_text__(pack(">H",number))
+        return __hex_text__(pack(">H", number))
 
 def __hex_int4__ (number):
-        return b2a_hex(pack(">l",number))
+        return b2a_hex(pack(">l", number))
 
 def __hex_float__(number):
         B1 = 0
@@ -377,7 +377,7 @@ def __hex_float__(number):
                         B1 += 1
                 S3 = (inumber%281474976710656)/4294967296
                 L4 = inumber%4294967296
-        return __hex_text__(pack(">BBHL",B1, B2, S3, L4))
+        return __hex_text__(pack(">BBHL", B1, B2, S3, L4))
 
 def __hex_text__ (text):
         t = b2a_hex(text)

@@ -89,7 +89,7 @@ class IoFibcoupGeneric(IoBlockAdapter):
         for ypos in self.y_west:
             fc = self.west_fibcoups[i%len(self.west_fibcoups)]
             west_fibcoup_position = (self.west_fibcoup_offsets[i%len(self.west_fibcoup_offsets)], ypos - fc.east_ports[0].y)
-            west_fibcoup_and_position.append((fc,west_fibcoup_position,IdentityTransform()))
+            west_fibcoup_and_position.append((fc, west_fibcoup_position, IdentityTransform()))
             i += 1
         return west_fibcoup_and_position
     
@@ -99,17 +99,17 @@ class IoFibcoupGeneric(IoBlockAdapter):
         for ypos in self.y_east:
             fc = self.east_fibcoups[i%len(self.east_fibcoups)]
             east_fibcoup_position = (self.width - self.east_fibcoup_offsets[i%len(self.east_fibcoup_offsets)], ypos - fc.east_ports[0].y)
-            east_fibcoup_and_position.append((fc,east_fibcoup_position,HMirror()))
+            east_fibcoup_and_position.append((fc, east_fibcoup_position, HMirror()))
             i += 1
         return east_fibcoup_and_position
                 
     def define_elements(self, elems):
         super(IoFibcoupGeneric, self).define_elements(elems)    
         T = HMirror() # for east couplers
-        for fc,pos,tf in self.west_fibcoups_transforms_and_positions:
-            elems += SRef(fc,pos,tf)
-        for fc,pos,tf in self.east_fibcoups_transforms_and_positions:
-            elems += SRef(fc,pos,tf)
+        for fc, pos, tf in self.west_fibcoups_transforms_and_positions:
+            elems += SRef(fc, pos, tf)
+        for fc, pos, tf in self.east_fibcoups_transforms_and_positions:
+            elems += SRef(fc, pos, tf)
             
         #i = 0
         
@@ -161,7 +161,7 @@ class IoFibcoupGeneric(IoBlockAdapter):
             t_pos = (west - west_connect_length-TECH.WG.SHORT_STRAIGHT, self.y_west[i])
             #small piece of waveguide at the end
             wg_def = WgElDefinition(wg_width = ip.wg_definition.wg_width, trench_width = ip.wg_definition.trench_width, process = west_process)            
-            W = wg_def([t_pos, (t_pos[0] +TECH.WG.SHORT_STRAIGHT , t_pos[1])])
+            W = wg_def([t_pos, (t_pos[0] +TECH.WG.SHORT_STRAIGHT, t_pos[1])])
             elems += W
             # taper to the cleave waveguide            
             start_wg_def1 = WgElDefinition(wg_width = ip.wg_definition.wg_width, trench_width = ip.wg_definition.trench_width, process = west_process)            
@@ -253,7 +253,7 @@ class IoFibcoupGeneric(IoBlockAdapter):
             # position taper
             t_pos = (east + east_connect_length+TECH.WG.SHORT_STRAIGHT, self.y_east[i])
             wg_def = WgElDefinition(wg_width = op.wg_definition.wg_width, trench_width = op.wg_definition.trench_width, process = east_process)
-            W = wg_def([t_pos, (t_pos[0] -TECH.WG.SHORT_STRAIGHT , t_pos[1])])
+            W = wg_def([t_pos, (t_pos[0] -TECH.WG.SHORT_STRAIGHT, t_pos[1])])
             elems += W
             start_wg_def3 = WgElDefinition(wg_width = op.wg_definition.wg_width, trench_width = op.wg_definition.trench_width, process = east_process) 
             end_wg_def3 = WgElDefinition(wg_width = east_wg_width, trench_width = east_trench_width, process = east_process) 
@@ -321,27 +321,27 @@ class IoFibcoupGeneric(IoBlockAdapter):
         cntwest = 0
         cnteast = 0
         for i in range(len(self.y_west)):
-            fc,pos,tf = self.west_fibcoups_transforms_and_positions[i]
+            fc, pos, tf = self.west_fibcoups_transforms_and_positions[i]
             for p in fc.ports:
-                if isinstance(p,VerticalOpticalPort):
+                if isinstance(p, VerticalOpticalPort):
                     vop = p.transform_copy(tf).move_copy(pos)
-                    vop.name = "%s_W%d"%(self.name,cntwest)
+                    vop.name = "%s_W%d"%(self.name, cntwest)
                     pl += vop
                     cntwest += 1
         for i in range(len(self.y_east)):
-            fc,pos,tf = self.east_fibcoups_transforms_and_positions[i]
+            fc, pos, tf = self.east_fibcoups_transforms_and_positions[i]
             for p in fc.ports:
-                if isinstance(p,VerticalOpticalPort):
+                if isinstance(p, VerticalOpticalPort):
                     vop = p.transform_copy(tf).move_copy(pos)
-                    vop.name = "%s_E%d"%(self.name,cnteast)
+                    vop.name = "%s_E%d"%(self.name, cnteast)
                     pl += vop
                     cnteast += 1
         (struct_position, struct_west_ports, struct_east_ports) = self.position_west_east_ports
         cnt_c = 0
         for p in self.struct.ports:
-            if isinstance(p,VerticalOpticalPort):
+            if isinstance(p, VerticalOpticalPort):
                 vop = p.transform_copy(self.struct_transformation).move_copy(struct_position)
-                vop.name = "%s_C%d"%(self.name,cnt_c)
+                vop.name = "%s_C%d"%(self.name, cnt_c)
                 pl += vop
                 cnt_c += 1
         return pl

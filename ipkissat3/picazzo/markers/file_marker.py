@@ -36,7 +36,7 @@ class FileMarker(Structure):
     prefix = StringProperty(default="")
 
     def define_name(self):
-        return "%s_%s%s" % (self.__name_prefix__,self.prefix, 
+        return "%s_%s%s" % (self.__name_prefix__, self.prefix, 
                              os.path.splitext(os.path.split(self.filename)[1])[0])
 
     @cache()
@@ -45,7 +45,7 @@ class FileMarker(Structure):
         filesize = os.path.getsize(self.filename)
         LOG.info("size: %d KB"%(filesize/1024))
         if os.path.exists(self.filename):
-            F = open(self.filename,"rb")
+            F = open(self.filename, "rb")
             input = InputGdsii(F, stop_on_unknown_gds_layer=False, log_bufsize = filesize)
             input.layer_map = self.layer_map
             L = input.read()
@@ -78,7 +78,7 @@ class SingleProcessFileMarker(FileMarker):
         return "%s_%s" % (super(SingleProcessFileMarker, self).define_name(), self.process.extension)
 
     def define_elements(self, elems):
-        f = open(self.filename,"rb")
+        f = open(self.filename, "rb")
         I = InputGdsii(f, stop_on_unknown_gds_layer = False)
         I.prefix = "%s_"%(self.process.extension)
         if self.layer_map != None:

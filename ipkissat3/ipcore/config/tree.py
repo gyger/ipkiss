@@ -69,7 +69,7 @@ class ConfigTree(object):
         items = []
         for k in self.__config_tree_keys__:
             if k in self.__dict__:
-                items.append((k,self.__dict__[k]))
+                items.append((k, self.__dict__[k]))
         return items
     
     def find_item_key(self, item):

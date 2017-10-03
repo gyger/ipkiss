@@ -24,8 +24,8 @@ from ipkiss.all import *
 
 # First create 2 ShapeCircle's and corresponding boundaries to start from...
 
-sc1 = ShapeCircle(center = (0.0,0.0), radius = 10.0)
-sc2 = ShapeCircle(center = (12.0,0.0), radius = 7.0)
+sc1 = ShapeCircle(center = (0.0, 0.0), radius = 10.0)
+sc2 = ShapeCircle(center = (12.0, 0.0), radius = 7.0)
 
 cp1 = Boundary(layer = Layer(1), shape = sc1)
 cp2 = Boundary(layer = Layer(1), shape = sc2)

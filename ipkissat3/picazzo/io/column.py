@@ -102,12 +102,12 @@ class __IoColumn__(__IoCompoundBlockGroup__):
     def is_full(self):
         return (self.count_west >= self.n_o_lines[0]) or (self.count_east>= self.n_o_lines[1])
 
-    def get_block_and_pos_by_name(self,name):
+    def get_block_and_pos_by_name(self, name):
         for i in range(len(self.blocks)):
             B = self.blocks[i]
             p = self.blocks_pos[i]
-            if hasattr(B,'name') and B.name == name:
-                return [B,p]
+            if hasattr(B, 'name') and B.name == name:
+                return [B, p]
         return None
     
 
@@ -117,7 +117,7 @@ class IoColumn (IoCompoundBlockStructure, __IoColumn__):
         for i in range(len(self.blocks)):
             B = self.blocks[i]
             pos = self.blocks_pos[i]
-            if hasattr(B,'vertical_optical_ports'):
+            if hasattr(B, 'vertical_optical_ports'):
                 for p in B.vertical_optical_ports:
                     ports += p.move_copy(pos)
         return ports

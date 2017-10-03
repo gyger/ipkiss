@@ -42,7 +42,7 @@ class DisplayStyle(StrongPropertyInitializer):
     visible = BoolProperty(default = True)
     
     def __str__(self):
-        return "DisplayStyle : color: %s - edgecolor: %s - stipple: %s - alpha: %f - edgewidth: %f - visible: %s" %(str(self.color),str(self.edgecolor),str(self.stipple), self.alpha,self.edgewidth,self.visible)
+        return "DisplayStyle : color: %s - edgecolor: %s - stipple: %s - alpha: %f - edgewidth: %f - visible: %s" %(str(self.color), str(self.edgecolor), str(self.stipple), self.alpha, self.edgewidth, self.visible)
 
     def blend(self, other, fraction_first_color = 0.33):
         result_color_red = fraction_first_color * self.color.red + (1.0-fraction_first_color) * other.color.red 

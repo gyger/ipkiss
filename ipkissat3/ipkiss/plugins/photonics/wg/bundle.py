@@ -64,11 +64,11 @@ class WgElBundleWaveguides(Group):
             D0 = distance(S1[0], S2[0])
             D1 = distance(S1[-1], S2[-1])
             w1 = wg1.in_ports[0].wg_definition.wg_width
-            if hasattr(wg1.in_ports[0].wg_definition,'trench_width'):
+            if hasattr(wg1.in_ports[0].wg_definition, 'trench_width'):
                 t1 = wg1.in_ports[0].wg_definition.trench_width
             else: t1 = 0.0
             w2 = Wg2.in_ports[0].wg_definition.wg_width
-            if hasattr(Wg2.in_ports[0].wg_definition,'trench_width'):
+            if hasattr(Wg2.in_ports[0].wg_definition, 'trench_width'):
                 t2 = Wg2.in_ports[0].wg_definition.trench_width
             else: t2 = 0.0
             D_ref = t1 + t2 + 0.5*(w1 + w2)
@@ -128,14 +128,14 @@ class WgElBundleGeneric(WgElBundleWaveguides):
     trench_widths = RestrictedProperty(restriction = RestrictList(RESTRICT_POSITIVE), required = True)
     
     def __make_wg_element__(shape, wg_width, trench_width, process):
-        wg_def = WgElDefinition(wg_width = wg_width , trench_width = trench_width, process = process)    
+        wg_def = WgElDefinition(wg_width = wg_width, trench_width = trench_width, process = process)    
         return wg_def(shape = shape)
 
     def define_waveguides(self):
         if (len(self.shapes) != len(self.wg_widths) or
             len(self.wg_widths) != len(self.trench_widths)):
             raise AttributeError("Length of shapes, wg_widths and trench_widths should be identical in WgElBundleGeneric")
-        waveguides = [self.__make_wg_element__(S, w, t, self.process) for (S,w,t) in zip(self.shapes, self.wg_widths, self.trench_widths)]
+        waveguides = [self.__make_wg_element__(S, w, t, self.process) for (S, w, t) in zip(self.shapes, self.wg_widths, self.trench_widths)]
         return waveguides
 
 
@@ -151,7 +151,7 @@ class WgElBundleConnectRoundedGeneric(__RoundedWaveguide__, WgElBundleGeneric):
     
     def define_waveguides(self):
         waveguides = []
-        for (S,w,t, r) in zip(self.shapes, self.wg_widths, self.trench_widths, self.bend_radii):
+        for (S, w, t, r) in zip(self.shapes, self.wg_widths, self.trench_widths, self.bend_radii):
             wg_def = WgElDefinition(wg_width = w, trench_width = t, process = self.process)
             connector_wg_def = WaveguidePointRoundedConnectElementDefinition(wg_definition = wg_def,
                                                                              bend_radius = r,

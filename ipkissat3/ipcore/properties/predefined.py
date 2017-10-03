@@ -176,8 +176,8 @@ def Tuple2Property(internal_member_name=None, restriction=None, **kwargs):
 
 def NumpyMasked2DArrayProperty(internal_member_name = None, restriction = None, **kwargs):
     R = RESTRICT_NUMPY_MASKED2DARRAY & restriction
-    return RestrictedProperty(internal_member_name, restriction = R,**kwargs)
+    return RestrictedProperty(internal_member_name, restriction = R, **kwargs)
 
 def NumpyMasked3DArrayProperty(internal_member_name = None, restriction = None, **kwargs):
     R = RESTRICT_NUMPY_MASKED3DARRAY & restriction
-    return RestrictedProperty(internal_member_name, restriction = R,**kwargs)
+    return RestrictedProperty(internal_member_name, restriction = R, **kwargs)

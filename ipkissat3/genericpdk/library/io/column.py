@@ -32,7 +32,7 @@ class StdIoColumn(IoColumn):
 
 class Std1mmColumn(StdIoColumnGroup):
     def define_south_east(self):
-        return Coord2(1000.0-constants.STD_IOCOLUMN_MARGIN,0.0)
+        return Coord2(1000.0-constants.STD_IOCOLUMN_MARGIN, 0.0)
 
 class Std3mmColumn(StdIoColumnGroup):
     def define_south_east(self):

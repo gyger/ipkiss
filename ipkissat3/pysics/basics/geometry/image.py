@@ -47,7 +47,7 @@ class __ImageMaterialGeometry2D__(__ImageGeometry2D__):
     def define_material_grid(self):
         """ equivalent size of one image pixel """
         i = self.material_image
-        return coord2(self.size[0]/i.size[0],self.size[1]/i.size[1])
+        return coord2(self.size[0]/i.size[0], self.size[1]/i.size[1])
     
     def get_material(self, coordinate):
         pixel_coord = (int(self.coordinate[0]/self.grid.x + 0.5), int(self.coordinate[1]/self.grid.y + 0.5))
@@ -105,7 +105,7 @@ class __LayerSuperpositionMaterialGeometry2D__(__ImageGeometry2D__):
                 Y = self.len_1 - 1
             else:
                 Y = pixel_coord[1]                
-            layers_at_coordinate = self.layer_superposition_array[X,Y]
+            layers_at_coordinate = self.layer_superposition_array[X, Y]
         mat = self.__layers_to_material(layers_at_coordinate)
         return mat
     
@@ -158,7 +158,7 @@ class __ProcessSuperpositionMaterialGeometry2D__(__ImageGeometry2D__):
                 Y = self.len_1 - 1
             else:
                 Y = pixel_coord[1]                
-            processes_at_coordinate = self.__processes_at_coordinate(Coord2(X,Y))                    
+            processes_at_coordinate = self.__processes_at_coordinate(Coord2(X, Y))                    
         mat = self.__processes_to_material(processes_at_coordinate)
         return mat
         

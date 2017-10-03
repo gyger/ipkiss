@@ -22,7 +22,7 @@
 from ipkiss.all import *
 from math import cos, sin, pi
 from ipkiss.log import IPKISS_LOG as LOG
-from ipkiss.aspects.port.port import __InPort__, __OutPort__, __OrientedPort__,__OutOfPlanePort__
+from ipkiss.aspects.port.port import __InPort__, __OutPort__, __OrientedPort__, __OutOfPlanePort__
 from ipkiss.plugins.photonics.wg.definition import WaveguideDefCrossSectionProperty 
 from pysics.basics.domain import DomainProperty
 from pysics.optics import OpticalDomain
@@ -38,7 +38,7 @@ class __OpticalPort__:
     domain = DomainProperty(default=OpticalDomain, locked=True)
     
 
-class OpticalPort(__OpticalPort__,__OrientedPort__):
+class OpticalPort(__OpticalPort__, __OrientedPort__):
     wg_definition = WaveguideDefCrossSectionProperty(default = TECH.WGDEF.DEFAULT, doc = "Waveguide definition for the waveguide connecting to this port")
     corner1 = FunctionNameProperty(fget_name = "get_corner1")
     corner2 = FunctionNameProperty(fget_name = "get_corner2")
@@ -135,7 +135,7 @@ def OpticalPortProperty(internal_member_name= None, restriction = None,  **kwarg
     return RestrictedProperty(internal_member_name, restriction = R, **kwargs)
 
 
-class VerticalOpticalPort(__OpticalPort__,__OutOfPlanePort__):
+class VerticalOpticalPort(__OpticalPort__, __OutOfPlanePort__):
     """ Optical port in 3D, for optical I/O 
         Specific optical features to be added in the future? 
            - wavelength-dependent angle

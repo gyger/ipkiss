@@ -22,7 +22,7 @@
 
 from .container import __StructureContainerWithPortLabels__
 from picazzo.wg.wgdefs.wg_fc.tapers import WgElPortTaperLinear, WgElPortTaperFromShallow
-from ipkiss.plugins.photonics.port.port import InOpticalPort,OutOpticalPort
+from ipkiss.plugins.photonics.port.port import InOpticalPort, OutOpticalPort
 from ipkiss.plugins.photonics.port.port_list import OpticalPortList
 from ipkiss.plugins.photonics.wg.definition import WaveguideDefProperty
 from ipkiss.plugins.photonics.wg.basic import WgElDefinition
@@ -39,7 +39,7 @@ class __TaperPorts__(__StructureContainerWithPortLabels__):
     tapers = DefinitionProperty(fdef_name = "define_tapers")    
     
     def define_elements(self, elems):
-        super(__TaperPorts__,self).define_elements(elems)
+        super(__TaperPorts__, self).define_elements(elems)
         elems += self.tapers
         return elems
         

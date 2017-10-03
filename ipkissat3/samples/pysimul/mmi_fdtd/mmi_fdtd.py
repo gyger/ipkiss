@@ -34,7 +34,7 @@ W_wg = 0.45 #no tapers
 offset = 0.5*D_wg + 0.5*W_wg
 L_taper = 8.0
 mmi = ShallowMmi1x2Tapered(width=W_mmi, length=L_mmi, wg_offset=offset, 
-                                taper_width=W_wg, taper_length=L_taper, straight_extension=[0.12,0.2])
+                                taper_width=W_wg, taper_length=L_taper, straight_extension=[0.12, 0.2])
 
 #export the component to GDS, just for our own reference
 mmi.write_gdsii("simul_mmi.gds")
@@ -58,7 +58,7 @@ center_wavelength = 1550.0
 fluxplane_width = 30.0
 simul_params["sources"] = [ModeProfileContinuousSourceAtPort(center_wavelength = center_wavelength, 
                                                        smoothing_width = 60.0, 
-                                                       port = mmi.west_ports[0].transform_copy(transformation = Translation(translation=(-1.0,0.0))), 
+                                                       port = mmi.west_ports[0].transform_copy(transformation = Translation(translation=(-1.0, 0.0))), 
                                                        polarization = TE,
                                                        stop_time = 120.0)]
 
@@ -82,7 +82,7 @@ simul_params["datacollectors"] = [FluxplaneAtPort(center_wavelength = center_wav
                                                                         port = mmi.east_ports[1],
                                                                         overlap_trench = False,
                                                                         name = "flux lower output"),                            
-                            ProbingpointAtPort(port = mmi.east_ports[0].transform_copy(transformation = Translation(translation=(0.25,0.0))))]
+                            ProbingpointAtPort(port = mmi.east_ports[0].transform_copy(transformation = Translation(translation=(0.25, 0.0))))]
 
 #specify a step_processor : this processor will be called at every step of the FDTD simulatioN.
 #In our case, save the Hz component to file every 100 steps
@@ -113,8 +113,8 @@ from dependencies.matplotlib_wrapper import *
 #this could be done without reading the fluxes from file (since we can retrieve them from memory), 
 #but we do it here as an illustration of the technique, in case you want to process the fluxes after the simulation in a seperate script
 file_flux_output_north = open("fluxplane_fluxupperoutput", 'r')
-file_flux_output_south = open("fluxplane_fluxloweroutput",'r')
-file_flux_input = open("fluxplane_fluxinput",'r')
+file_flux_output_south = open("fluxplane_fluxloweroutput", 'r')
+file_flux_input = open("fluxplane_fluxinput", 'r')
 #load the files with flux data, which were saved by the post_processor 'PersistFluxplanes' (see above)
 import pickle
 flux_input = pickle.load(file_flux_input)
@@ -135,16 +135,16 @@ ref_max = max(F_in)
 
 Fi = [f / ref_max for f in F_in]
 
-Fo1 = [fo / fi  for fo,fi in zip(F_out_south, F_in)]
+Fo1 = [fo / fi  for fo, fi in zip(F_out_south, F_in)]
 Fo2 = [fo / fi  for fo, fi in zip(F_out_north, F_in)]
-Fo = [f1+f2 for f1,f2 in zip(Fo1,Fo2)]
+Fo = [f1+f2 for f1, f2 in zip(Fo1, Fo2)]
 
 known_efficiency = [0.95] #we know from earlier simualtions that the efficiency of the MMI is 95%
 
 #initiate the plotting
 pyplot.clf()
 p1, = pyplot.plot(frequencies, Fi, 'yo')
-p2, = pyplot.plot([1550],known_efficiency, 'co')
+p2, = pyplot.plot([1550], known_efficiency, 'co')
 p3, = pyplot.plot(frequencies, Fo, 'bo')
 p4, = pyplot.plot(frequencies, Fo1, 'ro', )
 p5, = pyplot.plot(frequencies, Fo2, 'go' )

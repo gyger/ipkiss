@@ -50,7 +50,7 @@ class BasicOutput(StrongPropertyInitializer):
     name_filter = RestrictedProperty(default = Filter(), restriction = RestrictType(Filter), doc = "filter class which is applied to all names")
     
     def __init__(self, o_stream = sys.stdout, **kwargs):
-        super(BasicOutput, self).__init__(o_stream = o_stream,**kwargs)
+        super(BasicOutput, self).__init__(o_stream = o_stream, **kwargs)
         self.__init_collector__()
 
     def __init_collector__(self):
@@ -147,7 +147,7 @@ class OutputBasic(__OutputBasic__):
         if (self.library == None):
                 self.library = get_current_library()
     
-        super(OutputBasic,self).do_collect(item,**kwargs)
+        super(OutputBasic, self).do_collect(item, **kwargs)
         
         return     
     
@@ -230,7 +230,7 @@ class OutputBasic(__OutputBasic__):
         
         self.collect_path_element(layer = item.layer, 
                                coordinates = coordinates, 
-                               line_width = item.line_width , 
+                               line_width = item.line_width, 
                                path_type = item.path_type)
         return
 

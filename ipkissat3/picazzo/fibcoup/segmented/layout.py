@@ -81,5 +81,5 @@ def equal_segmented_trench_grating(name, period, fill_factors, n_o_segments, gra
     c_x = 0.5 * n_o_periods * period
     segmentations = []
     for i in range(n_o_periods):
-        segmentations.append(equal_segmentation((0.0 - c_x + i * period, 0.0),grating_width, n_o_segments, fill_factors[i], line_width))
+        segmentations.append(equal_segmentation((0.0 - c_x + i * period, 0.0), grating_width, n_o_segments, fill_factors[i], line_width))
     return segmented_trench_grating(name, segmentations)

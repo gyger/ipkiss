@@ -29,7 +29,7 @@ from ipkiss.plugins.simulation import *
 from pysimul.runtime.processor import *
 from ipkiss.all import LOG
 
-ring = RingRect180DropFilter(bend_radius = 5.00, straights = (0.0, 0.0), coupler_spacings=[0.67,0.67])
+ring = RingRect180DropFilter(bend_radius = 5.00, straights = (0.0, 0.0), coupler_spacings=[0.67, 0.67])
 
 from ipkiss.plugins.vfabrication import *
 ring.write_gdsii_vfabrication("ring_vfab.gds")
@@ -61,12 +61,12 @@ params["include_growth"] = 0.0
 params["sources"] = [GaussianVolumeSourceAtPort(field_component = compHz, 
                                                         center_wavelength = wavelength, 
                                                         pulse_width = pulse_width, 
-                                                        port = ring.west_ports[0].transform_copy(transformation = Translation(translation=(2.0,0.0))))]
+                                                        port = ring.west_ports[0].transform_copy(transformation = Translation(translation=(2.0, 0.0))))]
 
 params["datacollectors"] = [FluxplaneAtPort(center_wavelength = wavelength, 
                                             pulse_width = pulse_width,
                                             number_of_sampling_freq = 2000,
-                                            port = ring.east_ports[0].transform_copy(transformation = Translation(translation=(-2.0,0.0))),
+                                            port = ring.east_ports[0].transform_copy(transformation = Translation(translation=(-2.0, 0.0))),
                                             overlap_trench = False)
                                             ]
 

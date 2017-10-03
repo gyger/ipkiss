@@ -70,13 +70,13 @@ class __AutoGrating__(__Grating__):
         (grating, grating_transform) = self.__get_grating__()
         return  grating
 
-class FiberCouplerGrating(__Socket__ , __Grating__, FiberCoupler):
+class FiberCouplerGrating(__Socket__, __Grating__, FiberCoupler):
     """ fiber coupler grating base class, which combines a grating on top of a socket """
     __name_prefix__ = "FIBCOUPG"
         
     def define_elements(self, elems):
         elems += SRef(self.socket, self.socket_position)
-        E = SRef(self.grating, position = (0.0, 0.0) , transformation = self.grating_transform)
+        E = SRef(self.grating, position = (0.0, 0.0), transformation = self.grating_transform)
         if self.grating_transform is None or self.grating_transform.is_orthogonal():
             elems  += E
         else:
@@ -85,10 +85,10 @@ class FiberCouplerGrating(__Socket__ , __Grating__, FiberCoupler):
 
     def define_ports(self, ports):
         ports = self.socket.ports.move_copy(self.socket_position)
-        fibcoup_pos = Coord2(0.0,0.0)
+        fibcoup_pos = Coord2(0.0, 0.0)
         if self.grating_transform:
             fibcoup_pos.transform(self.grating_transform)
-        ports.append(VerticalOpticalPort(position=(fibcoup_pos.x,fibcoup_pos.y,0.0),inclination=0.0, angle=0.0)) # FIXME: use port given by the grating
+        ports.append(VerticalOpticalPort(position=(fibcoup_pos.x, fibcoup_pos.y, 0.0), inclination=0.0, angle=0.0)) # FIXME: use port given by the grating
         return ports
 
     

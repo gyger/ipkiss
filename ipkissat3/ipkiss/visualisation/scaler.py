@@ -28,7 +28,7 @@ class Scaler(object):
         self.canvas_size = canvas_size        
         self.scale = float(self.canvas_size[0]) / float(self.box[1] - self.box[0])
         self.box_center = (0.5 * box[0] + 0.5 * box[1], 0.5 * box[2]  + 0.5 * box[3])
-        self.box_south_west = (self.box[0],self.box[2]) 
+        self.box_south_west = (self.box[0], self.box[2]) 
         self.origin_offset = self.__calculate_origin_offset()
         
     def __get_scaled_points(self, shape):
@@ -41,10 +41,10 @@ class Scaler(object):
         return origin_offset    
     
     def map_shape(self, shape):
-        return Shape(numpy.asarray(self.__get_scaled_points(shape) , dtype = numpy.integer))
+        return Shape(numpy.asarray(self.__get_scaled_points(shape), dtype = numpy.integer))
     
     def map_shape_to_list(self, shape):
-        return list(numpy.asarray(numpy.reshape(self.__get_scaled_points(shape) , numpy.size(shape.points)), dtype=numpy.integer))
+        return list(numpy.asarray(numpy.reshape(self.__get_scaled_points(shape), numpy.size(shape.points)), dtype=numpy.integer))
 
     def map_coordinate(self, coordinate):  
         s = Shape(points = [coordinate])

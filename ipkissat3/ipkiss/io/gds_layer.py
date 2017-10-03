@@ -29,7 +29,7 @@ from ipkiss.exceptions.exc import IpkissException
 
 GDSII_LAYER_CONVERSION_RADIX = 256
 
-__all__ = ["GdsiiLayer","GdsiiLayerInputMap","GdsiiLayerOutputMap","AutoGdsiiLayerOutputMap","AutoGdsiiLayerInputMap"]
+__all__ = ["GdsiiLayer", "GdsiiLayerInputMap", "GdsiiLayerOutputMap", "AutoGdsiiLayerOutputMap", "AutoGdsiiLayerInputMap"]
 
 class GdsiiLayer(StrongPropertyInitializer):
     number = IntProperty(required = True, restriction = RESTRICT_NONNEGATIVE)
@@ -90,7 +90,7 @@ class AutoGdsiiLayerInputMap(StrongPropertyInitializer):
         name = "L%d_%d" % (L.number, L.datatype)
         return name
     
-    def __getitem__(self,key):
+    def __getitem__(self, key):
         return Layer(name = self.__make_layer_name__(key),
                          number = key.number + GDSII_LAYER_CONVERSION_RADIX * key.datatype)
     
@@ -113,30 +113,30 @@ class GdsiiLayerInputMap(StrongPropertyInitializer):
         # check if the input map doesn't contain any duplicates on the "source side" (duplicates may exist on the target size)
         ln = []
         for L in list(self.layer_map.keys()):
-            ln.append((L.number,L.datatype))
+            ln.append((L.number, L.datatype))
         if len(ln) != len(list(set(ln))):
             raise IpkissException("layer_map may not contain duplicate layer number on the source-side.")                                    
 
-    def __getitem__(self,key):
+    def __getitem__(self, key):
         for L in list(self.layer_map.keys()):
             if L.number == key.number and L.datatype == key.datatype:
                 return self.layer_map[L]
         return self.default
     
-    def get(self,key,default):
+    def get(self, key, default):
         return self[key]
 
 def make_layer_input_map(layermap, default = None):
     lm = {}
     for k in list(layermap.keys()):
-        if isinstance(k,int):
+        if isinstance(k, int):
             datatype = 0
             number = k
-        elif isinstance(k,tuple):
+        elif isinstance(k, tuple):
             datatype = k[1]
             number = k[0]
         else:
             raise TypeError("Wrong input in make_GdsiiLayerInputMap")
-        lm[GdsiiLayer(number=number,datatype=datatype)]=layermap[k]
+        lm[GdsiiLayer(number=number, datatype=datatype)]=layermap[k]
     L = GdsiiLayerInputMap(layer_map = lm, default = default)
     return L

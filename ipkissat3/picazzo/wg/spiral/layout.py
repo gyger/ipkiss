@@ -254,7 +254,7 @@ class WaveguideDoubleSpiralWithIncoupling(WaveguideDoubleSpiral):
             #L_out = self.spacing + bs2
         else:
             L_out = self.spacing + bs2
-        sh = Shape([(0.0,0.0), 
+        sh = Shape([(0.0, 0.0), 
                         (self.inc_length + OS - S, 0.0),
                         (self.inc_length + OS - S, self.spiral_center.y  - 0.5 * OLS[1] - S + bs1)
                     ])
@@ -287,7 +287,7 @@ class WaveguideDoubleSpiralWithIncoupling(WaveguideDoubleSpiral):
     def n_o_bends(self):
         return super(WaveguideDoubleSpiralWithIncoupling, self).n_o_bends() + 2
 
-    def define_ports(self,prts):
+    def define_ports(self, prts):
         prts += self.waveguides[-2].in_ports 
         #prts += self.waveguides[-1].in_ports.invert_copy()
         prts += self.waveguides[-1].out_ports

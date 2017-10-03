@@ -122,7 +122,7 @@ class RingCrossingBendGeneric(RingCrossingGeneric):
     
     def define_elements(self, elems):
         elems = super(RingCrossingBendGeneric, self).define_elements(self, elems)
-        elems += Boundary(PPLayer(self.process,TECH.PURPOSE.LF_AREA), self.wg_h.size_info().bounding_box)
+        elems += Boundary(PPLayer(self.process, TECH.PURPOSE.LF_AREA), self.wg_h.size_info().bounding_box)
         elems += Boundary(PPLayer(self.process, TECH.PURPOSE.LF_AREA), self.wg_v.size_info().bounding_box)
         return elems
         

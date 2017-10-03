@@ -27,7 +27,7 @@ class __Waveguide__(StrongPropertyInitializer):
 
 def WaveguideProperty(internal_member_name= None, restriction = None,**kwargs):
     R = RestrictType(__Waveguide__) & restriction
-    return RestrictedProperty(internal_member_name, restriction = R,**kwargs)
+    return RestrictedProperty(internal_member_name, restriction = R, **kwargs)
 
 class __Mode__(StrongPropertyInitializer):
     """ Abstract base class for waveguide mode """
@@ -38,17 +38,17 @@ class ModeList(TypedList):
     __item_type__ = __Mode__
     
     def __init__(self, modes = [], **kwargs):
-        super(TypedList,self).__init__(**kwargs)
+        super(TypedList, self).__init__(**kwargs)
         self.namedict = dict()
         if isinstance(modes, dict):
             for m in modes:
-                self.append(modes[m],m)
+                self.append(modes[m], m)
         else:
             for m in modes:
                 self += m
     
     def append(self, item, name=None):
-        super(ModeList,self).append(item)
+        super(ModeList, self).append(item)
         self.namedict[name] = item
     
     def get_mode_by_name(self, name):
@@ -62,7 +62,7 @@ class ModeList(TypedList):
             return
         if not item in self:
             raise ValueError("Mode %s is not in list"%str(item))
-        for (key,it) in self.namedict.items():
+        for (key, it) in self.namedict.items():
             if it == item:
                 it = self.namedict.pop(key)
                 self.namedict[name] = it
@@ -76,7 +76,7 @@ class Waveguide(__Waveguide__):
     """ Abstract base class for waveguide keeping a list of modes """
     modes = ModeListProperty(fdef_name='define_modes')
     
-    def define_modes(self,modes):
+    def define_modes(self, modes):
         return modes
     
     

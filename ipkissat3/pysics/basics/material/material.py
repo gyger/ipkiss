@@ -48,10 +48,10 @@ class Material(__Material__):
     
     def __eq__(self, other):
         # simple comparison based on name. Subclasses can make it more complex
-        return isinstance(other,Material) and self.name == other.name
+        return isinstance(other, Material) and self.name == other.name
     
     def __neq__(self, other):
-        return (not isinstance(other,Material)) or self.name != other.name
+        return (not isinstance(other, Material)) or self.name != other.name
     
 class MaterialFactory(object):
     id_counter = 1
@@ -60,8 +60,8 @@ class MaterialFactory(object):
     def get_number_of_materials_in_store(self):
         return len(list(self.store_id.keys()))
     
-    def __getitem__(self,key):
-        if isinstance(key,int):
+    def __getitem__(self, key):
+        if isinstance(key, int):
             return self.store_id[key]
         else:
             raise Exception("Invalid type of key for accessing an item in MaterialFactory::__get_item__ expects an integer key and got: %s" %str(key))         
@@ -79,8 +79,8 @@ class MaterialFactory(object):
         return iter(self.store_id.items())        
         
     def find_item_key(self, item):
-        for k,v in list(self.__dict__.items()):
-            if isinstance(v,Material) and v == item:
+        for k, v in list(self.__dict__.items()):
+            if isinstance(v, Material) and v == item:
                 return k
                 
 RESTRICT_MATERIAL = RestrictType(Material)

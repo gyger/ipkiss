@@ -225,16 +225,16 @@ class TechDisplayTree(DelayedInitTechnologyTree):
                   ]
     
         for process in process_display_order:
-            style_set += [(PPLayer(process, TECH.PURPOSE.LF_AREA),DISPLAY_INVERSION),
-                          (PPLayer(process, TECH.PURPOSE.DF_AREA) , DISPLAY_INVERSION),
-                          (PPLayer(process, TECH.PURPOSE.DF.MARKER) , DISPLAY_ALIGNMENT),
-                          (PPLayer(process, TECH.PURPOSE.LF.MARKER) , DISPLAY_ALIGNMENT),
-                          (PPLayer(process, TECH.PURPOSE.LF.LINE) , DISPLAY_DF),
-                          (PPLayer(process, TECH.PURPOSE.LF.ISLAND) , DISPLAY_DF),
-                          (PPLayer(process, TECH.PURPOSE.DF.TEXT) , DISPLAY_TEXT),
-                          (PPLayer(process, TECH.PURPOSE.DF.HOLE) , DISPLAY_HOLE),
+            style_set += [(PPLayer(process, TECH.PURPOSE.LF_AREA), DISPLAY_INVERSION),
+                          (PPLayer(process, TECH.PURPOSE.DF_AREA), DISPLAY_INVERSION),
+                          (PPLayer(process, TECH.PURPOSE.DF.MARKER), DISPLAY_ALIGNMENT),
+                          (PPLayer(process, TECH.PURPOSE.LF.MARKER), DISPLAY_ALIGNMENT),
+                          (PPLayer(process, TECH.PURPOSE.LF.LINE), DISPLAY_DF),
+                          (PPLayer(process, TECH.PURPOSE.LF.ISLAND), DISPLAY_DF),
+                          (PPLayer(process, TECH.PURPOSE.DF.TEXT), DISPLAY_TEXT),
+                          (PPLayer(process, TECH.PURPOSE.DF.HOLE), DISPLAY_HOLE),
                           (PPLayer(process, TECH.PURPOSE.DF.TRENCH), DISPLAY_LF),
-                          (PPLayer(process, TECH.PURPOSE.DF.SQUARE) , DISPLAY_HOLE),
+                          (PPLayer(process, TECH.PURPOSE.DF.SQUARE), DISPLAY_HOLE),
                           ]
         
         self.PREDEFINED_STYLE_SETS.PURPOSE_HIGHLIGHT  = style_set

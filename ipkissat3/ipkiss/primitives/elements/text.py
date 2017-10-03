@@ -74,7 +74,7 @@ class __TextElement__(__LayerElement__):
     def __init__(self, 
                  layer,  
                  text, 
-                 coordinate = (0.0,0.0), 
+                 coordinate = (0.0, 0.0), 
                  alignment = (constants.TEXT_ALIGN_CENTER, constants.TEXT_ALIGN_TOP) , 
                  font = TEXT_FONT_DEFAULT, 
                  height = 20.0, 
@@ -108,13 +108,13 @@ class PolygonText(Group, __TextElement__):
     def __init__(self, 
                  layer,  
                  text, 
-                 coordinate = (0.0,0.0), 
+                 coordinate = (0.0, 0.0), 
                  alignment = (constants.TEXT_ALIGN_CENTER, constants.TEXT_ALIGN_TOP) , 
                  font = TEXT_FONT_DEFAULT, 
                  height = 20.0, 
                  transformation = None, 
                  **kwargs):
-            super(PolygonText,self).__init__(layer = layer,  
+            super(PolygonText, self).__init__(layer = layer,  
                                                     text = text, 
                                                     coordinate = coordinate, 
                                                     alignment = alignment, 
@@ -167,13 +167,13 @@ class Label(__TextElement__):
     def __init__(self,
                  layer ,  
                  text , 
-                 coordinate = (0.0,0.0), 
+                 coordinate = (0.0, 0.0), 
                  alignment = (constants.TEXT_ALIGN_CENTER, constants.TEXT_ALIGN_TOP) , 
                  font = TEXT_FONT_DEFAULT, 
                  height = 20.0, 
                  transformation = None,
                  **kwargs):
-            super(Label,self).__init__(
+            super(Label, self).__init__(
                                          layer = layer, 
                                          text = text, 
                                          coordinate = coordinate, 
@@ -201,7 +201,7 @@ class Label(__TextElement__):
         else:
             B = self.coordinate[1] - self.height
         T = B + self.height
-        return size_info.size_info_from_numpyarray((Shape([(L,B), (L,T), (R, B), (R,T)], True).transform(self.transformation)).points)
+        return size_info.size_info_from_numpyarray((Shape([(L, B), (L, T), (R, B), (R, T)], True).transform(self.transformation)).points)
 
     def flat_copy(self, level = -1):
         return self.__copy__()

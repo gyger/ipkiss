@@ -31,10 +31,10 @@ class __RoundHole__(Structure):
     purpose = PurposeProperty(default = TECH.PURPOSE.DF.HOLE)
     
     def define_name(self):
-        return "%s_%d_C%d_%d_A%d_P%s_PP%s" % (self.__name_prefix__ , 
+        return "%s_%d_C%d_%d_A%d_P%s_PP%s" % (self.__name_prefix__, 
                                      self.radius * 1000, 
                                      self.center.x * 1000, self.center.y * 1000,
-                                     self.angle*1000,self.process.extension,self.purpose.extension)
+                                     self.angle*1000, self.process.extension, self.purpose.extension)
 
 class HexHole(__RoundHole__):
     __name_prefix__ = "HEX"

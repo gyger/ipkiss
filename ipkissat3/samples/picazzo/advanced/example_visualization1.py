@@ -32,7 +32,7 @@ my_component = ThreePortToEast(width = 5.0, height = 2.0)
 my_component.visualize_2d()
 
 #render a 3d-visualisation with POVRAY : create a POVRAY-file
-my_component.visualize_3d_povray(camera_pos = (10,0,10)) 
+my_component.visualize_3d_povray(camera_pos = (10, 0, 10)) 
 # This generates a file '3PORT_R_W5000_H2000_W450_T2000_2D_R10_GR0.000000.pov' which should then be rendered
 # with the software Povray : http://www.povray.org/download/
 

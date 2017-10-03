@@ -49,7 +49,7 @@ class RingResonator(Structure):
 
 
     def define_elements(self, elems):
-        shape_ring = ShapeCircle(center = (0,0), radius = self.ring_radius)
+        shape_ring = ShapeCircle(center = (0, 0), radius = self.ring_radius)
         shape_bus =  [(-self.ring_radius, -self.ring_radius - self.coupler_spacing), 
                       (self.ring_radius, -self.ring_radius - self.coupler_spacing)]
         

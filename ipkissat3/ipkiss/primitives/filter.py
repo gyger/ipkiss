@@ -45,7 +45,7 @@ class Filter(StrongPropertyInitializer):
             for M in inspect.getmro(T):
                 N = "__filter_%s__" % M.__name__
                 if hasattr(self, N):
-                    LOG.debug("Applying method %s of %s to %s" %(N,self,item))
+                    LOG.debug("Applying method %s of %s to %s" %(N, self, item))
                     return getattr(self, N)(item)
             return self.__filter_default__(item)
         else:
@@ -79,7 +79,7 @@ class Filter(StrongPropertyInitializer):
 class __CompoundFilter__(Filter):
     """ compound property processor class """
     def __init__(self, filters = [], **kwargs):
-        super(__CompoundFilter__,self).__init__(**kwargs)
+        super(__CompoundFilter__, self).__init__(**kwargs)
         self._sub_filters = filters
 
     def __add__(self, other):
@@ -126,19 +126,19 @@ class ToggledCompoundFilter(__CompoundFilter__):
         Only for named filters!
     """
     def __init__(self, filters = [], **kwargs):
-        super(ToggledCompoundFilter,self).__init__(filters = filters,**kwargs)
+        super(ToggledCompoundFilter, self).__init__(filters = filters, **kwargs)
         self.__filter_status = dict()
         
     def __setitem__(self, key, item):
         """ dict behaviour: enable or disable a filter based on it's name """
-        if not isinstance(key,str):
+        if not isinstance(key, str):
             raise KeyError("__ToggledCompoundFilter__: key must be of type str, is type %s"%(type(key)))
         if not isinstance(item, bool):
             raise KeyError("__ToggledCompoundFilter__: item must be of type bool, is type %s"%(type(item)))
         self.__filter_status[key]=item
     
-    def __getitem__(self,key):
-        if not isinstance(key,str):
+    def __getitem__(self, key):
+        if not isinstance(key, str):
             raise KeyError("__ToggledCompoundFilter__: key must be of type str, is type %s"%(type(key)))
         if not key in list(self.__filter_status.keys()):
             return True

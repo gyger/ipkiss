@@ -93,7 +93,7 @@ class __LayerElement__(__Element__, MixinBowl):
                     return False
             return True
     
-    def __ne__(self,other):
+    def __ne__(self, other):
             return not self.__eq__(other)                 
                 
 
@@ -170,7 +170,7 @@ class ElementList(TypedList, transformable.NoDistortTransformable):
 ##########################################################
 
 class ElementListProperty(DefinitionProperty):
-    __allowed_keyword_arguments__ = ["required","restriction","default","fdef_name"]
+    __allowed_keyword_arguments__ = ["required", "restriction", "default", "fdef_name"]
     
     def __init__(self, **kwargs):        
         super(ElementListProperty, self).__init__(**kwargs)    

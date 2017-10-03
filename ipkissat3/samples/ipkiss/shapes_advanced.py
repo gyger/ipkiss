@@ -51,7 +51,7 @@ class AdvancedShapesExample(Structure):
             end_coord = (40.0, i * 5 - 20.0)
             ala += Path(Layer(0), ShapeArcLineArc(start_coord, start_angle, radius, end_coord, end_angle, radius), 0.2)        
         #define a shape: a list of coordinates        
-        elems += [ SRef(ala,(0.0, 0.0)) ]
+        elems += [ SRef(ala, (0.0, 0.0)) ]
         return elems
         
 

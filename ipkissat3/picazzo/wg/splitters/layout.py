@@ -79,7 +79,7 @@ class WgY90Splitter(__WgYSplitter__):
         a1 = RAD2DEG * acos((self.bend_radius-0.07+ 0.5*wg_width)/(self.bend_radius+0.5 * wg_width + trench_width))
         shape_inv = ShapeArc(center = (0.0, 0.5 * wg_width + self.bend_radius), 
                                radius = self.bend_radius + 0.5 * wg_width + trench_width, 
-                               start_angle = -90.0+a1 , 
+                               start_angle = -90.0+a1, 
                                end_angle = 0, 
                                clockwise = False)
 

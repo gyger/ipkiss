@@ -36,7 +36,7 @@ class ReferencesExample(Structure):
     
     def define_elements(self, elems):
         #define a shape: a list of coordinates
-        s = Shape([(10.0, 0.0), (15.0, 10.0), (0.0, 10.0), (0.0,5.0), (-15.0, 5.0), (-5.0, 0.0),
+        s = Shape([(10.0, 0.0), (15.0, 10.0), (0.0, 10.0), (0.0, 5.0), (-15.0, 5.0), (-5.0, 0.0),
              (-10.0, -10.0), (-5.0, -15.0), (10.0, -15.0), (5.0, -10.0), (5.0, -5.0), (10.0, 0.0)])        
         
         #create an element and then a structure from the shape
@@ -75,9 +75,9 @@ class ReferencesExample(Structure):
         
         
         #create a reference axis
-        axis = Structure("axis", Path(Layer(2), [(0.0, 300.0), (0.0,0.0), (300.0, 0.0)], 1))
+        axis = Structure("axis", Path(Layer(2), [(0.0, 300.0), (0.0, 0.0), (300.0, 0.0)], 1))
         
-        elems += SRef(shapes_3_ref2,(0.0, 0.0))
+        elems += SRef(shapes_3_ref2, (0.0, 0.0))
         elems += SRef(axis, (0.0, 0.0))
         return elems
     

@@ -86,11 +86,11 @@ class ShallowMmiTaperPorts(TaperShallowPorts):
             if y_excess > 0:
                 average = 0.5*(y1 + y2)
                 L = y_excess * TL  / (self.deep_only_width - self.end_wg_def.wg_width) + E
-                elems += Line(PPLayer(self.deep_process,TECH.PURPOSE.LF.LINE), (x_i, average), (x_i-L, average), TECH.TECH.MINIMUM_SPACE + 0.14)
+                elems += Line(PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), (x_i, average), (x_i-L, average), TECH.TECH.MINIMUM_SPACE + 0.14)
 
         x_o = self.structure.length + TL - E
         o_y = [p.position.y  for p in self.structure.out_ports.y_sorted()]
-        for (y1,y2) in zip(o_y[:-1], o_y[1:]):
+        for (y1, y2) in zip(o_y[:-1], o_y[1:]):
             y_excess = self.deep_only_width + TECH.TECH.MINIMUM_SPACE - (y2 - y1) 
             if y_excess > 0:
                 average = 0.5*(y1 + y2)
@@ -103,7 +103,7 @@ class ShallowMmiTaperPorts(TaperShallowPorts):
 
 from ..mmi import __MmiTaperPorts__
 
-class ShallowMmiTapered(__MmiTaperPorts__,ShallowMmiTaperPorts):
+class ShallowMmiTapered(__MmiTaperPorts__, ShallowMmiTaperPorts):
     shallow_wg_definition = WaveguideDefProperty(default = TECH.WGDEF.FC_WIRE)
     
     def define_structure(self):        
@@ -118,20 +118,20 @@ class ShallowMmiTapered(__MmiTaperPorts__,ShallowMmiTaperPorts):
 
 from ..mmi import __MmiSymmetric__    
 
-class ShallowMmi1x2Tapered(__MmiSymmetric__,ShallowMmiTapered):    
+class ShallowMmi1x2Tapered(__MmiSymmetric__, ShallowMmiTapered):    
     def define_input_y_positions(self):
         return [0.0]
     def define_output_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     
-class ShallowMmi2x1Tapered(__MmiSymmetric__,ShallowMmiTapered):
+class ShallowMmi2x1Tapered(__MmiSymmetric__, ShallowMmiTapered):
     def define_input_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     def define_output_y_positions(self):
         return [0.0]
     
     
-class ShallowMmi2x2Tapered(__MmiSymmetric__,ShallowMmiTapered):
+class ShallowMmi2x2Tapered(__MmiSymmetric__, ShallowMmiTapered):
     def define_input_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     def define_output_y_positions(self):

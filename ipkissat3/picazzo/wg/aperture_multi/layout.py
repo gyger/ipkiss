@@ -42,7 +42,7 @@ class __WgApertureMulti__(__WgAperture__):
     trans = DefinitionProperty(fdef_name = "define_trans")
 
     def define_name(self):
-        p  = "".join(["%f,%f,%f" %(v.x, v.y,v.angle_deg) for v in self.vectors])
+        p  = "".join(["%f,%f,%f" %(v.x, v.y, v.angle_deg) for v in self.vectors])
         dl = "".join([str(i) for i in self.dummy_list])
         
         return "%s_V%d_%d" % (self.__name_prefix__, 
@@ -66,10 +66,10 @@ class WgApertureMultiFrom1dGeneric(__WgApertureMulti__):
     apertures_1d = RestrictedListProperty(allowed_types = [__WgAperture__], required = True)
     
     def define_name(self):
-        p  = "".join(["%f,%f,%f" %(v.x, v.y,v.angle_deg) for v in self.vectors])
+        p  = "".join(["%f,%f,%f" %(v.x, v.y, v.angle_deg) for v in self.vectors])
         n = "".join([A.name for A in self.apertures_1d])
         dl = "".join([str(i) for i in self.dummy_list])        
-        return "%s_%d_V%d_%d" % (self.__name_prefix__,do_hash(n), do_hash(p) , do_hash(dl))
+        return "%s_%d_V%d_%d" % (self.__name_prefix__, do_hash(n), do_hash(p), do_hash(dl))
 
     def define_elements(self, elems):
         for i in range(len(self.trans)):
@@ -94,7 +94,7 @@ class WgApertureMultiFrom1d(WgApertureMultiFrom1dGeneric):
     
     
     def define_name(self):
-        p  = "".join(["%f,%f,%f" %(v.x, v.y,v.angle_deg) for v in self.vectors])
+        p  = "".join(["%f,%f,%f" %(v.x, v.y, v.angle_deg) for v in self.vectors])
         dl = "".join([str(i) for i in self.dummy_list])
         return "%s_%s_V%d_%d" % (self.__name_prefix__, self.aperture_1d.name, do_hash(p), do_hash(dl))
     
@@ -240,7 +240,7 @@ def hull_inversion_segment(shape0, shape1, trench_width, stub_sharp_angles = Tru
             
     if D < 1.5*TECH.TECH.MINIMUM_SPACE:
         # too close for technology: add correction
-        es = ShapeStub(original_shape = [S1[0], intersection(S1[0], S1[1], S0[0], S0[1]), S0[0]], stub_width = max(D,TECH.TECH.MINIMUM_SPACE)+2*0.015)
+        es = ShapeStub(original_shape = [S1[0], intersection(S1[0], S1[1], S0[0], S0[1]), S0[0]], stub_width = max(D, TECH.TECH.MINIMUM_SPACE)+2*0.015)
         astub = angle_deg(es[1], es[2])
         sh0 = Shape([S0[1], S1[1], es[1].move_polar_copy(0.015, astub+180.0), es[2].move_polar_copy(0.015, astub), es[2].move_polar_copy(TECH.TECH.MINIMUM_SPACE, A0[0]+180.0) ])
         sh1 = Shape([S1[1], S0[1], es[2].move_polar_copy(0.015, astub), es[1].move_polar_copy(0.015, astub+180.0), es[1].move_polar_copy(TECH.TECH.MINIMUM_SPACE, A1[0]+180.0) ])
@@ -372,19 +372,19 @@ def hull_inversion(taper_shapes, in_trench_width, out_trench_width, orientation,
             ##### T1 #####
             shape0 = Shape([S0[2], S0[1], S0[0]])
             shape1 = Shape([S1[-1], S1[0], S1[1]])
-            (T1sh, el, sh0, sh1) = hull_inversion_segment(shape0, shape1, in_trench_width,stub_sharp_angles[0])
+            (T1sh, el, sh0, sh1) = hull_inversion_segment(shape0, shape1, in_trench_width, stub_sharp_angles[0])
             T1 += T1sh
             elements += el
 
             ##### T2 #####
             shape0 = Shape([S0[L0-1], S0[L0], S0[L0+1]])
             shape1 = Shape([S1[(L1+2)%(2*L1)], S1[L1+1], S1[L1]])
-            (T2sh, el, sh2, sh3) = hull_inversion_segment(shape0, shape1, out_trench_width,stub_sharp_angles[1])
+            (T2sh, el, sh2, sh3) = hull_inversion_segment(shape0, shape1, out_trench_width, stub_sharp_angles[1])
             T2 += T2sh
             elements += el
 
             # add local inversion layer (not one monolithic shape to avoid cutting
-            elements += Boundary(PPLayer(process,TECH.PURPOSE.LF_AREA), T1 + T2.reversed())
+            elements += Boundary(PPLayer(process, TECH.PURPOSE.LF_AREA), T1 + T2.reversed())
             T1 = T1sh
             T2 = T2sh
 
@@ -420,7 +420,7 @@ def hull_inversion(taper_shapes, in_trench_width, out_trench_width, orientation,
         p2 = p1.move_polar_copy(in_trench_width, A1[0] )
         shape0 = Shape([S1[2], S1[1], S1[0]])
         shape1 = Shape([p0, p1, p2])
-        (T1sh, el, sh0, sh1) = hull_inversion_segment(shape0, shape1, in_trench_width,stub_sharp_angles[0])
+        (T1sh, el, sh0, sh1) = hull_inversion_segment(shape0, shape1, in_trench_width, stub_sharp_angles[0])
         T1 += T1sh
         T1 += [p0]
                             

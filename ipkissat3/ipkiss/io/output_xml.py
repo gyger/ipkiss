@@ -39,7 +39,7 @@ import xml.etree.ElementTree as etree
 import logging
 from ..technology.settings import TECH
 
-__all__ = ["OutputXml","FileOutputXml","MemoryOutputXml"]
+__all__ = ["OutputXml", "FileOutputXml", "MemoryOutputXml"]
 
 class IpcoreOutputXmlException(IpcoreAttributeException):
     pass
@@ -68,7 +68,7 @@ class OutputXml(OutputBasic):
         self.__collect_library_header__(library)
         attribs = {"name": library.name}
         precision = abs(math.floor(math.log10(library.units_per_grid)))
-        self.coord_format_str = "(%%.%df, %%.%df)"%(precision,precision) 
+        self.coord_format_str = "(%%.%df, %%.%df)"%(precision, precision) 
         self.topElem = self.__makeXMLElement__("IPKISSLIBRARY", attribs)
         self.referedItemsInLibrary = []
         self.collect(library.structures,  **kwargs)
@@ -113,7 +113,7 @@ class OutputXml(OutputBasic):
         xCo = int(p_coordinate[0]*gridsperunit)
         yCo = int(p_coordinate[1]*gridsperunit)
         attrib = {"x": xCo, "y":yCo}
-        el = self.__makeXMLElement__("POINT",attrib,p_parentXMLElement)
+        el = self.__makeXMLElement__("POINT", attrib, p_parentXMLElement)
         return el
 
 
@@ -143,14 +143,14 @@ class OutputXml(OutputBasic):
     def __getLayerPurposeNmbr(self, p_Item):
         '''Derive the layer number and purpose number using the appropriate layer map (i.e. GDS)'''
         try:
-            gdsLayer = self.layer_map.get(p_Item,None)   
+            gdsLayer = self.layer_map.get(p_Item, None)   
             lyr = gdsLayer.number
             pur = gdsLayer.datatype
         except Exception as e:
-            LOG.error("Warning: layer %s not found: %s - forcing layer number to 1." %(p_Item,e))
+            LOG.error("Warning: layer %s not found: %s - forcing layer number to 1." %(p_Item, e))
             lyr = 1
             pur = 100
-        return (lyr,pur)	
+        return (lyr, pur)	
 
     def collect_Label (self, item,  additional_transform = None):
         #resolve the attributes 
@@ -194,7 +194,7 @@ class OutputXml(OutputBasic):
         aname = self.name_filter(item.reference.name)[0]
         #aname = aname.replace("-","_").replace(" ","_").replace(".","_")		
         #self.__makeXMLElement__("AREF", {"referee" : aname, "n_o_periods" : str(item.n_o_periods), "period" : str(item.period), "transformation": str(T)}, self.topElem) 		
-        self.__makeXMLElement__("AREF", {"referee" : aname, "n_o_periods" : str(item.n_o_periods), "period" : self.coord_format_str%(item.period[0],item.period[1]), "transformation": str(T)}, self.topElem) 		
+        self.__makeXMLElement__("AREF", {"referee" : aname, "n_o_periods" : str(item.n_o_periods), "period" : self.coord_format_str%(item.period[0], item.period[1]), "transformation": str(T)}, self.topElem) 		
         self.referedItemsInLibrary.append(item.reference) #collect them add the end and add as top-level XML-elements
         return 
 
@@ -234,7 +234,7 @@ class OutputXml(OutputBasic):
 
     def write(self, item):		
         self.collect(item)
-        self.o_stream.write(etree.tostring(self.topElem).replace('><','>\n<'))
+        self.o_stream.write(etree.tostring(self.topElem).replace('><', '>\n<'))
         self.o_stream.flush()	
 
 

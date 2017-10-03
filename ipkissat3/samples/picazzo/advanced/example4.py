@@ -36,7 +36,7 @@ from picazzo.io.fibcoup import *
 class PicazzoExample4(Structure):
     
     def define_elements(self, elems):            
-        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0))
+        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0))
         layout.y_spacing=250.0
         
         # alignment waveguide

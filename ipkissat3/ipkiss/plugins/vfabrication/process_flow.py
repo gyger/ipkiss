@@ -49,7 +49,7 @@ class VFabricationProcessFlow(StrongPropertyInitializer):
                 result_process_indicators = list(my_process_indicators) + list(other_process_indicators)
                 result_material_stack = my_material_stack + other_material_stack
                 setattr(material_stack_factory, 
-                        "MSTACK_%s_%s" %(str(do_hash(my_material_stack)),str(do_hash(other_material_stack))),
+                        "MSTACK_%s_%s" %(str(do_hash(my_material_stack)), str(do_hash(other_material_stack))),
                         result_material_stack)                        
                 result_process_to_material_stack_map.append((result_process_indicators, result_material_stack))
         #is_lf_fabrication

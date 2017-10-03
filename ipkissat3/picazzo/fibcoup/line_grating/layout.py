@@ -31,7 +31,7 @@ class __GratingLine__(StrongPropertyInitializer):
     line_length = PositiveNumberProperty(required = True)
     purpose = PurposeProperty(default = TECH.PURPOSE.DF.TRENCH)
 
-class GratingLine(__GratingLine__,Structure):
+class GratingLine(__GratingLine__, Structure):
     """ grating with lines, with given widths and positions, and given length.
         line_widths_positions should be a list of tuples:
         [ (w1, x1), (w2, x2), (w3, x3), ...] with w the line width and x the x position
@@ -40,11 +40,11 @@ class GratingLine(__GratingLine__,Structure):
     process = ProcessProperty(default = TECH.PROCESS.FC)
 
     def define_elements(self, elems):
-        for (w,x) in self.line_widths_positions:
+        for (w, x) in self.line_widths_positions:
             elems += Line(PPLayer(self.process, self.purpose), (x, 0.0), (x + w, 0.0), self.line_length)
         return elems
 
-class FiberCouplerGratingLine(FiberCouplerGratingAuto,GratingLine):
+class FiberCouplerGratingLine(FiberCouplerGratingAuto, GratingLine):
     """ grating line on a socket """
     __name_prefix__ = "fc_gratingl_"
         

@@ -58,11 +58,11 @@ LOG.propagate = False
 LOG.addHandler(IPKISS_INPUT_GDSII_LOGGING_HANDLER)
 IPKISS_INPUT_GDSII_LOG = LOG
 
-__all__ = ["InputGdsii", "FileInputGdsii","LOG","InputGdsiiTree"]
+__all__ = ["InputGdsii", "FileInputGdsii", "LOG", "InputGdsiiTree"]
 
 
 class GdsiiRecord(object):
-    def __init__(self,rtype, length):
+    def __init__(self, rtype, length):
         self.rtype = rtype
         self.length = length
 
@@ -78,7 +78,7 @@ class InputGdsiiHeader(InputBasic):
     def __parse_library__ (self):
         self.__istream__ = self.i_stream
         self.__scaling__ = self.scaling
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -129,7 +129,7 @@ class InputGdsiiHeader(InputBasic):
     def __parse_real8__(self):
         #value = (mantissa/(2^56)) * (16^(exponent-64))
         try:
-            data = unpack(">BBHL",self.__istream__.read(8))
+            data = unpack(">BBHL", self.__istream__.read(8))
         except:
             LOG.error("Could not read REAL8")
             raise SystemError
@@ -173,7 +173,7 @@ class InputGdsiiHeader(InputBasic):
 
     def __parse_int2__(self):
         try:
-            return unpack(">h",self.__istream__.read(2))[0]
+            return unpack(">h", self.__istream__.read(2))[0]
         except Exception as e:
             LOG.error("Could not read INT2 : %s" %e)
             raise SystemError
@@ -194,7 +194,7 @@ class InputGdsiiTree(InputGdsiiHeader):
         if self.log_bufsize>0:
             cur_percentile = 0
             percentile = self.log_bufsize/10
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -238,12 +238,12 @@ class InputGdsiiTree(InputGdsiiHeader):
                         continued = dict(continued=True)
                     else:
                         continued = dict(continued=False)
-                    LOG.info('%d%% '%(cur_percentile*10),extra=continued)
+                    LOG.info('%d%% '%(cur_percentile*10), extra=continued)
 
         return self.library
 
     def __parse_structure__(self, created, modified):
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -301,7 +301,7 @@ class InputGdsiiTree(InputGdsiiHeader):
         s = self.__scaling__ / self.library.grids_per_unit
         return (self.__parse_int4__() * s, self.__parse_int4__() * s)
 
-    def __parse_shape__(self,n_o_points):
+    def __parse_shape__(self, n_o_points):
         #return Shape( [ self.__parse_coordinate__() for i in range(n_o_points)])
         s = self.__scaling__ / self.library.grids_per_unit
         #p = self.__parse_int4__
@@ -315,7 +315,7 @@ class InputGdsiiTree(InputGdsiiHeader):
 
     def __parse_boundary_element__(self):
         # Skip: no tree info
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -327,7 +327,7 @@ class InputGdsiiTree(InputGdsiiHeader):
 
     def __parse_path_element__ (self):
         # Skip: no tree info
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -338,7 +338,7 @@ class InputGdsiiTree(InputGdsiiHeader):
 
     def __parse_sref_element__(self):
         name = ""
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -362,7 +362,7 @@ class InputGdsiiTree(InputGdsiiHeader):
             S = Structure(name, [], self.library)
             #S.__make_static__()
         if not S in self.__current_structure__.child_structures:
-            V = SRef(S, (0,0))
+            V = SRef(S, (0, 0))
             self.__current_structure__.child_structures += [S]
         else:
             V = None
@@ -373,7 +373,7 @@ class InputGdsiiTree(InputGdsiiHeader):
 
     def __parse_box_element__(self):
         # Skip: no tree info
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -384,7 +384,7 @@ class InputGdsiiTree(InputGdsiiHeader):
 
     def __parse_label_element__(self):
         # Skip: no tree info
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -412,7 +412,7 @@ class InputGdsiiTree(InputGdsiiHeader):
 
     def __parse_int4__(self):
         try:
-            return unpack(">l",self.__istream__.read(4))[0]
+            return unpack(">l", self.__istream__.read(4))[0]
         except Exception as e:
             LOG.error("Could not read INT4 : %s" %e)
             raise SystemError
@@ -427,7 +427,7 @@ class InputGdsii(InputGdsiiTree):
         layer_number = 0
         datatype = 0
         coords = []
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -453,7 +453,7 @@ class InputGdsii(InputGdsiiTree):
         layer = GdsiiLayer(number = layer_number, datatype = datatype)
         L = self.map_layer(layer)
         if L is None:
-            err_msg = "Could not map GDS layer %d:%d in InputGdsii." %(layer.number,layer.datatype)
+            err_msg = "Could not map GDS layer %d:%d in InputGdsii." %(layer.number, layer.datatype)
             if self.__stop_on_unknown_gds_layer__:
                 raise IpkissException(err_msg)
             else:
@@ -469,7 +469,7 @@ class InputGdsii(InputGdsiiTree):
         pathtype = constants.PATH_TYPE_NORMAL
         width = 0
         coords = []
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -511,7 +511,7 @@ class InputGdsii(InputGdsiiTree):
         name = ""
         coord = (0.0, 0.0)
         transform = NoDistortTransform()
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -565,7 +565,7 @@ class InputGdsii(InputGdsiiTree):
         col = 1
         row = 1
         transform = NoDistortTransform()
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -638,7 +638,7 @@ class InputGdsii(InputGdsiiTree):
         layer_number = 0
         boxtype = 0
         coords = []
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datalength
@@ -694,7 +694,7 @@ class InputGdsii(InputGdsiiTree):
         width = 1.0
         coords = []
         height = 1.0
-        while 1:
+        while True:
             r = self.__parse_record__()
             t = r.rtype #type
             l = r.length #datatype
@@ -746,7 +746,7 @@ class InputGdsii(InputGdsiiTree):
                 else:
                     return LOG.error(err_msg)
             else:
-                return Label (L, text, coord, (hor_alignment, ver_alignment) , font, 1.0, transform)
+                return Label (L, text, coord, (hor_alignment, ver_alignment), font, 1.0, transform)
         else:
             return None
 

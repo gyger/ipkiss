@@ -48,7 +48,7 @@ TECH.METRICS = TechnologyTree()
 TECH.METRICS.GRID = 5E-9
 TECH.METRICS.UNIT = 1E-6
 TECH.METRICS.ANGLE_STEP = 1.0
-TECH.METRICS.overwrite_allowed = ["UNIT","GRID","ANGLE_STEP"]
+TECH.METRICS.overwrite_allowed = ["UNIT", "GRID", "ANGLE_STEP"]
 
 ####################################################################
 # LAYER MAP

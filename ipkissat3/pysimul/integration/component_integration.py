@@ -153,7 +153,7 @@ class StructureSimulationVolume2D(__StructureSimulationVolume__, SimulationVolum
 
     def get_material_dataset_for_subset(self, corner, width, height, angle = 0):
         angle = angle % 360.0
-        H = do_hash("%s-%f-%f-%f"%(str(corner),width,height,angle))
+        H = do_hash("%s-%f-%f-%f"%(str(corner), width, height, angle))
         #cache already requested datasets in a dictionary attribute
         total_resolution = self.get_total_resolution()
         if not (H in self.material_dataset_dict):
@@ -169,19 +169,19 @@ class StructureSimulationVolume2D(__StructureSimulationVolume__, SimulationVolum
                     for h in h_range:
                         delta_h = float(h) / total_resolution
                         point = current_corner.move_polar_copy(delta_h, angle+90)
-                        mat[w,h] = self.geometry.get_material(point)
+                        mat[w, h] = self.geometry.get_material(point)
                 self.material_dataset_dict[H] = mat
             else:
                 #faster implementation for the special case where angle == 0
                 ref_point = corner - self.geometry.size_info.south_west
                 delta_x = int(ref_point[0] * float(total_resolution))
                 delta_y = int(ref_point[1] * float(total_resolution))
-                x_min = max(0,min(w_range) + delta_x)
-                y_min = max(0,min(h_range) + delta_y)
+                x_min = max(0, min(w_range) + delta_x)
+                y_min = max(0, min(h_range) + delta_y)
                 x_max = max(w_range) + delta_x
                 y_max = max(h_range) + delta_y
                 full_material_array = self.geometry.get_material_array()
-                mat = full_material_array[x_min:x_max+1,y_min:y_max+1]
+                mat = full_material_array[x_min:x_max+1, y_min:y_max+1]
                 self.material_dataset_dict[H] = mat
         return self.material_dataset_dict[H]
 
@@ -275,7 +275,7 @@ class ModeProfileContinuousSourceAtPort(AmplitudeShapedContinuousVolumeSource, C
             self.material_dataset = self.get_material_array()
         x = coordinate[0]
         y = coordinate[1]
-        return self.material_dataset[x,y]    
+        return self.material_dataset[x, y]    
 
     def get_size_info(self):	
         L = self.south.distance(self.north)
@@ -445,9 +445,9 @@ class StructureSimulationDefinition(SimulationDefinition):
             #FIXME -- THIS MAY BE REMOVED IN A LATER PHASE...
             simul_params["structure"] = simul_params["component"]
             del simul_params["component"]
-            LOG.deprecation_warning("Please switch the name of simulation parameter 'component' to 'structure'.",-1)
+            LOG.deprecation_warning("Please switch the name of simulation parameter 'component' to 'structure'.", -1)
         struct = simul_params["structure"]
-        simul_params["simulation_id"] = struct.name.replace("<","").replace(">","")
+        simul_params["simulation_id"] = struct.name.replace("<", "").replace(">", "")
         if "vfabrication_process_flow" not in simul_params:
             simul_params["vfabrication_process_flow"] = TECH.VFABRICATION.PROCESS_FLOW
         if "material_stack_factory" not in simul_params:
@@ -484,7 +484,7 @@ class StructureSimulationDefinition(SimulationDefinition):
     def __get_simulation_dimension__(self, simul_params):
         if ("dimensions" in simul_params):
             dim = int(simul_params["dimensions"])
-            if (dim in [2,3]):
+            if (dim in [2, 3]):
                 return dim
             else:
                 raise Exception("Invalid value for simulation parameter 'dimensions': should be 2 or 3.")
@@ -509,7 +509,7 @@ class StructureSimulationDefinition(SimulationDefinition):
         #create the Landscape	
         if not ("datacollectors" in self.simul_params):
             self.simul_params["datacollectors"] = []
-        ls = SimulationLandscape(simulation_volume = simulation_volume , simul_params = self.simul_params)  
+        ls = SimulationLandscape(simulation_volume = simulation_volume, simul_params = self.simul_params)  
         #do initialisation for certain types of processors
         if "step_processor" in self.simul_params:
             p = self.simul_params["step_processor"]
@@ -531,7 +531,7 @@ class StructureSimulationDefinition(SimulationDefinition):
 
     def define_procedure(self):
         cls = self.procedure_class
-        pr = cls(engine = self.simul_params["engine"], landscape = self.landscape,simul_params = self.simul_params)
+        pr = cls(engine = self.simul_params["engine"], landscape = self.landscape, simul_params = self.simul_params)
         return pr
 
 

@@ -63,7 +63,7 @@ class __WgElTaper__(Group):
         return ports    
     
     def validate_properties(self):
-        if type(self.start_wg_def) != type(self.end_wg_def):
+        if not isinstance(self.start_wg_def, type(self.end_wg_def)):
             raise AttributeError("The start and end waveguide definition should be of the same type.")
         return True    
     

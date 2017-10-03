@@ -40,7 +40,7 @@ offset = 0.5*D_wg + 0.5*W_wg
 L_taper = 8.0
 
 mmi = ShallowMmi1x2Tapered(width=W_mmi, length=L_mmi, wg_offset=offset, 
-                                taper_width=W_wg, taper_length=L_taper, straight_extension=[0.12,0.2])
+                                taper_width=W_wg, taper_length=L_taper, straight_extension=[0.12, 0.2])
                   
 mmi.write_gdsii("simul_ShallowMmiSplit3Db_camfr.gds") 
 
@@ -73,7 +73,7 @@ camfr_stack.calc()
 beta = camfr_stack.inc().mode(0).kz()
 
 #extract the field at the input and output position
-x_positions = numpy.arange(0,window_si.height,0.01)
+x_positions = numpy.arange(0, window_si.height, 0.01)
 IHz= numpy.zeros(len(x_positions), dtype=numpy.complex)
 IH1= numpy.zeros(len(x_positions), dtype=numpy.complex)
 IH2= numpy.zeros(len(x_positions), dtype=numpy.complex)
@@ -134,7 +134,7 @@ PO= trapz(numpy.square(OH2))
 
 print("Integral over H2 square at input : ", PI)
 print("Integral over H2 square at output : ", PO)
-print(PO / PI * 100.0,"%")
+print(PO / PI * 100.0, "%")
  
 pyplot.show()
 

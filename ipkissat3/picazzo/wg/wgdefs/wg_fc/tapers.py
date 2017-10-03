@@ -141,20 +141,20 @@ class WgElTaperShallowDeep(WgElTaperDeepShallow) :
     def define_ports(self, ports):
         angle = angle_deg(self.end_position, self.start_position)
         ports += [InOpticalPort(position = self.start_position, wg_definition = self.start_wg_def, angle = (angle + 180.0)%360.0), 
-                 OutOpticalPort(position = self.end_position.move_polar_copy(0.2,angle_deg(self.end_position, self.start_position)), wg_definition = self.end_wg_def, angle = angle)]
+                 OutOpticalPort(position = self.end_position.move_polar_copy(0.2, angle_deg(self.end_position, self.start_position)), wg_definition = self.end_wg_def, angle = angle)]
         return ports
 
     
 class WgElPortTaperFromShallow(WgElTaperShallowDeep, WgElPortTaperLinear):
     """ Linear taper starting from a shallow port converting it to a deep waveguide """
         
-    def define_ports(self,ports):
-        return WgElPortTaperLinear.define_ports(self,ports)
+    def define_ports(self, ports):
+        return WgElPortTaperLinear.define_ports(self, ports)
     
 class WgElPortTaperToShallow(WgElTaperDeepShallow, WgElPortTaperLinear):
     """ Linear taper starting from a deep port converting it to a shallow waveguide """
-    def define_ports(self,ports):
-        return WgElPortTaperLinear.define_ports(self,ports)
+    def define_ports(self, ports):
+        return WgElPortTaperLinear.define_ports(self, ports)
 
 
 class WGFCWgElToWgElPortTaper(__WgElPortTaper__) :

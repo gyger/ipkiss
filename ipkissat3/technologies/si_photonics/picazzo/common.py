@@ -40,17 +40,17 @@ TECH.PROCESS.SLOT = ProcessLayer("Slot waveguides", "SLOT")
 TECH.PROCESS.SK = ProcessLayer("Socket waveguides", "SK")
 
 # implants, silicide, contacts
-TECH.PROCESS.NBODY = ProcessLayer("Body N doping","NBODY")
-TECH.PROCESS.PBODY = ProcessLayer("Body P doping" ,"PBODY")
-TECH.PROCESS.N1 = ProcessLayer("N-type doping 1","N1")
-TECH.PROCESS.NPLUS = ProcessLayer("N++ doping" ,"N2")
-TECH.PROCESS.P1 = ProcessLayer("P-type doping 1","P1")
-TECH.PROCESS.PPLUS = ProcessLayer("P++ doping","PPLUS")
-TECH.PROCESS.PP1 = ProcessLayer("Poly P-type doping 1","PP1")
-TECH.PROCESS.PP2 = ProcessLayer("Poly P-type doping 2","PP2")
+TECH.PROCESS.NBODY = ProcessLayer("Body N doping", "NBODY")
+TECH.PROCESS.PBODY = ProcessLayer("Body P doping", "PBODY")
+TECH.PROCESS.N1 = ProcessLayer("N-type doping 1", "N1")
+TECH.PROCESS.NPLUS = ProcessLayer("N++ doping", "N2")
+TECH.PROCESS.P1 = ProcessLayer("P-type doping 1", "P1")
+TECH.PROCESS.PPLUS = ProcessLayer("P++ doping", "PPLUS")
+TECH.PROCESS.PP1 = ProcessLayer("Poly P-type doping 1", "PP1")
+TECH.PROCESS.PP2 = ProcessLayer("Poly P-type doping 2", "PP2")
 
-TECH.PROCESS.SAL = ProcessLayer("Self-aligned silicide","SAL")
-TECH.PROCESS.PCON = ProcessLayer("Photonic Contact holes","PCON")
+TECH.PROCESS.SAL = ProcessLayer("Self-aligned silicide", "SAL")
+TECH.PROCESS.PCON = ProcessLayer("Photonic Contact holes", "PCON")
 
 # backend
 TECH.PROCESS.POL = ProcessLayer("Polymer backend", "POL")
@@ -58,10 +58,10 @@ TECH.PROCESS.NIT = ProcessLayer("Nitride liner", "NIT")
 TECH.PROCESS.UCUT = ProcessLayer("Undercut", "UCUT")
 TECH.PROCESS.EXPO = ProcessLayer("Exposure windows", "EXPO")
 # metal
-TECH.PROCESS.MH = ProcessLayer("Metal Heaters" ,"MH")
-TECH.PROCESS.M1 = ProcessLayer("Metallization 1" ,"M1")
-TECH.PROCESS.V12 = ProcessLayer("Matel Via 1-2" ,"V12")
-TECH.PROCESS.M2 = ProcessLayer("Metallization 2" ,"M2")
+TECH.PROCESS.MH = ProcessLayer("Metal Heaters", "MH")
+TECH.PROCESS.M1 = ProcessLayer("Metallization 1", "M1")
+TECH.PROCESS.V12 = ProcessLayer("Matel Via 1-2", "V12")
+TECH.PROCESS.M2 = ProcessLayer("Metallization 2", "M2")
 TECH.PROCESS.PASS = ProcessLayer("Passivation", "PASS")
 TECH.PROCESS.METPASS = ProcessLayer("Passivation", "METPASS")
 
@@ -73,10 +73,10 @@ TECH.PROCESS.GCONT = ProcessLayer("Contact holes to Ge", "GCONT")
 TECH.PROCESS.GER = ProcessLayer("Local germanidation", "GER")
 
 # TSV
-TECH.PROCESS.TSV = ProcessLayer("Through Silicon Via","TSV")
+TECH.PROCESS.TSV = ProcessLayer("Through Silicon Via", "TSV")
 TECH.PROCESS.UBUMP = ProcessLayer("Microbumps on Top Wafer for 3D integration", "UBUMP")
 TECH.PROCESS.BBUMP = ProcessLayer("Microbumps on Bottom Wafer for 3D integration", "BBUMP")
-TECH.PROCESS.M2B = ProcessLayer("Metallization 2 Bottom wafer" ,"M2B")
+TECH.PROCESS.M2B = ProcessLayer("Metallization 2 Bottom wafer", "M2B")
 
 # Clearout
 TECH.PROCESS.IPCO = ProcessLayer("IP Clearout windows", "IPCO")
@@ -87,17 +87,17 @@ TECH.PROCESS.EBW = ProcessLayer("E-Beam Windows", "EBW")
 TECH.PROCESS.HFW = ProcessLayer("HF Substrate removal windows", "HFW")
 TECH.PROCESS.VGW = ProcessLayer("V-groove windows", "VGW")
 TECH.PROCESS.CO = ProcessLayer("Clear out windows", "CO")
-TECH.PROCESS.MC1 = ProcessLayer("Lift-off contact holes 1","MC1")
-TECH.PROCESS.MC2 = ProcessLayer("Lift-off contact holes 2","MC2")
-TECH.PROCESS.MP1 = ProcessLayer("Metal Plating 1" ,"MP1")
-TECH.PROCESS.MP2= ProcessLayer("Metal Plating 2" ,"MP2")
+TECH.PROCESS.MC1 = ProcessLayer("Lift-off contact holes 1", "MC1")
+TECH.PROCESS.MC2 = ProcessLayer("Lift-off contact holes 2", "MC2")
+TECH.PROCESS.MP1 = ProcessLayer("Metal Plating 1", "MP1")
+TECH.PROCESS.MP2= ProcessLayer("Metal Plating 2", "MP2")
 TECH.PROCESS.FC2 = ProcessLayer("Fiber Couplers 2", "FC2")
 TECH.PROCESS.WG2 = ProcessLayer("Waveguides 2", "WG2")
 TECH.PROCESS.VO1 = ProcessLayer("Optical via 1", "VO1")
 TECH.PROCESS.GW1 = ProcessLayer("Generic Windows 1", "GW1")
 TECH.PROCESS.GW2 = ProcessLayer("Generic Windows 2", "GW2")
 TECH.PROCESS.GW3 = ProcessLayer("Generic Windows 3", "GW3")
-TECH.PROCESS.XW = ProcessLayer("Various windows, grouping of GW1, FCW, HFW,...","XW")
+TECH.PROCESS.XW = ProcessLayer("Various windows, grouping of GW1, FCW, HFW,...", "XW")
 
 # contact masks
 TECH.PROCESS.CONT1 = ProcessLayer("Contact mask 1", "CONT1")
@@ -113,8 +113,8 @@ TECH.PROCESS.NONE = ProcessLayer("No Specific Process Layer", "NONE")
 TECH.PROCESS.CA = ProcessLayer("Contact Litho Alignment", "CA")
 
 # purposes
-TECH.PURPOSE.VERBBOX = PatternPurpose("VERBBOX","VB")
-TECH.PURPOSE.VERPORT = PatternPurpose("VERPORT","VP")
+TECH.PURPOSE.VERBBOX = PatternPurpose("VERBBOX", "VB")
+TECH.PURPOSE.VERPORT = PatternPurpose("VERPORT", "VP")
 
 ####################################################################
 # MASK LAYER RULES
@@ -182,16 +182,16 @@ class TechDisplayTree(DelayedInitTechnologyTree):
                   ]
     
         for process in process_display_order:
-            style_set += [(PPLayer(process, TECH.PURPOSE.LF_AREA),DISPLAY_INVERSION),
-                          (PPLayer(process, TECH.PURPOSE.DF_AREA) , DISPLAY_INVERSION),
-                          (PPLayer(process, TECH.PURPOSE.DF.MARKER) , DISPLAY_ALIGNMENT),
-                          (PPLayer(process, TECH.PURPOSE.LF.MARKER) , DISPLAY_ALIGNMENT),
-                          (PPLayer(process, TECH.PURPOSE.LF.LINE) , DISPLAY_DF),
-                          (PPLayer(process, TECH.PURPOSE.LF.ISLAND) , DISPLAY_DF),
-                          (PPLayer(process, TECH.PURPOSE.DF.TEXT) , DISPLAY_TEXT),
-                          (PPLayer(process, TECH.PURPOSE.DF.HOLE) , DISPLAY_HOLE),
+            style_set += [(PPLayer(process, TECH.PURPOSE.LF_AREA), DISPLAY_INVERSION),
+                          (PPLayer(process, TECH.PURPOSE.DF_AREA), DISPLAY_INVERSION),
+                          (PPLayer(process, TECH.PURPOSE.DF.MARKER), DISPLAY_ALIGNMENT),
+                          (PPLayer(process, TECH.PURPOSE.LF.MARKER), DISPLAY_ALIGNMENT),
+                          (PPLayer(process, TECH.PURPOSE.LF.LINE), DISPLAY_DF),
+                          (PPLayer(process, TECH.PURPOSE.LF.ISLAND), DISPLAY_DF),
+                          (PPLayer(process, TECH.PURPOSE.DF.TEXT), DISPLAY_TEXT),
+                          (PPLayer(process, TECH.PURPOSE.DF.HOLE), DISPLAY_HOLE),
                           (PPLayer(process, TECH.PURPOSE.DF.TRENCH), DISPLAY_LF),
-                          (PPLayer(process, TECH.PURPOSE.DF.SQUARE) , DISPLAY_HOLE),
+                          (PPLayer(process, TECH.PURPOSE.DF.SQUARE), DISPLAY_HOLE),
                           ]
         
         self.PREDEFINED_STYLE_SETS.PURPOSE_HIGHLIGHT  = style_set

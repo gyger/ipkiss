@@ -76,7 +76,7 @@ class __WgElBend__(__RoundedWaveguide__, Group):
     @cache()
     def get_connect_wg_definition(self):
         return WaveguidePointRoundedConnectElementDefinition(wg_definition = self.wg_definition, 
-                                                             bend_radius = self.bend_radius ,
+                                                             bend_radius = self.bend_radius,
                                                              rounding_algorithm = self.rounding_algorithm,
                                                              manhattan = self.manhattan) 
 
@@ -128,7 +128,7 @@ class Wg90Bend(__RoundedWaveguide__, Structure):
             start_angle = (self.quadrant) * 90
 
         return WgElBend(start_angle = start_angle,
-                        bend_radius = self.bend_radius ,
+                        bend_radius = self.bend_radius,
                         angle = angle,
                         wg_definition = self.wg_definition,
                         rounding_algorithm = self.rounding_algorithm,

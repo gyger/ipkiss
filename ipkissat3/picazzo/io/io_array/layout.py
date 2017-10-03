@@ -42,11 +42,11 @@ class IoArray(Structure):
     
     def define_elements(self, elems):       
         for i in range(len(self.fibcoups)):
-            elems += SRef(self.fibcoups[i],self.positions[i])
+            elems += SRef(self.fibcoups[i], self.positions[i])
         return elems
             
     def define_ports(self, ports):
-        for i in range(0,len(self.fibcoups)):
+        for i in range(0, len(self.fibcoups)):
             ports += self.io_fibcoups[i].ports.move_copy(self.positions[i])
         return ports
 
@@ -63,15 +63,15 @@ class IoRegularArray(IoArray):
             self.spacing)
     
     def define_positions(self):
-        return [(0.0,i * self.spacing) for i in range(len(self.fibcoups))]
+        return [(0.0, i * self.spacing) for i in range(len(self.fibcoups))]
     
     def define_elements(self, elems):       
         for i in range(len(self.fibcoups)):
-            elems += SRef(self.fibcoups[i],self.positions[i])
+            elems += SRef(self.fibcoups[i], self.positions[i])
         return elems
             
     def define_ports(self, ports):
-        for i in range(0,len(self.fibcoups)):
+        for i in range(0, len(self.fibcoups)):
             ports += self.fibcoups[i].ports.move_copy(self.positions[i])
         return ports
 
@@ -94,10 +94,10 @@ class IoPeriodicArray(IoRegularArray):
         return [self.fibcoup for i in range(self.n_o_fibcoup)]
     
     def define_elements(self, elems):       
-        elems += ARefY(self.fibcoup,(0.0,0.0),self.spacing,self.n_o_fibcoup)
+        elems += ARefY(self.fibcoup, (0.0, 0.0), self.spacing, self.n_o_fibcoup)
         return elems
             
     def define_ports(self, ports):
-        for i in range(0,self.n_o_fibcoup):
+        for i in range(0, self.n_o_fibcoup):
             ports += self.fibcoup.ports.move_copy(self.positions[i])
         return ports

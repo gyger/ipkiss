@@ -44,11 +44,11 @@ class LogosExample(Structure):
         # Layout with references to all other structures
         ypos = 200
         xpos = 0
-        elems += SRef(intec, (xpos,ypos))
+        elems += SRef(intec, (xpos, ypos))
         xpos += 250
-        elems += SRef(ugent, (xpos,ypos))
+        elems += SRef(ugent, (xpos, ypos))
         xpos += 250
-        elems += SRef(imec, (xpos,ypos))               
+        elems += SRef(imec, (xpos, ypos))               
         return elems
 
 if __name__ == "__main__":

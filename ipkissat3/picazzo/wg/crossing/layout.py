@@ -86,7 +86,7 @@ class WgParabolicCrossing(__WgCrossing__):
                                 end_width = self.deep_width)
         elems += ParabolicWedge(layer = PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), 
                                 begin_coord = (0.0, 0.0), 
-                                end_coord = (0.5*length , 0.0), 
+                                end_coord = (0.5*length, 0.0), 
                                 begin_width = self.deep_width, 
                                 end_width = wg_width)
         elems += ParabolicWedge(layer = PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), 
@@ -102,7 +102,7 @@ class WgParabolicCrossing(__WgCrossing__):
         if self.straight_stub > 0.0:
             elems += Line(layer = PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), 
                           begin_coord = ( - self.straight_stub -0.5*length, 0.0), 
-                          end_coord = (0.5*self.length,0.0), 
+                          end_coord = (0.5*self.length, 0.0), 
                           line_width = wg_width)
             elems += Line(layer = PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), 
                           begin_coord = (0.0, -0.5 * length - self.straight_stub ), 
@@ -110,7 +110,7 @@ class WgParabolicCrossing(__WgCrossing__):
                           line_width = wg_width)
             elems += Line(layer = PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), 
                           begin_coord = ( 0.5*length, 0.0), 
-                          end_coord = (0.5*length + self.straight_stub,0.0), 
+                          end_coord = (0.5*length + self.straight_stub, 0.0), 
                           line_width = wg_width)
             elems += Line(layer = PPLayer(self.deep_process, TECH.PURPOSE.LF.LINE), 
                           begin_coord = (0.0, 0.5 * length + self.straight_stub), 
@@ -132,24 +132,24 @@ class WgParabolicCrossing(__WgCrossing__):
         
         # FC
         elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (-0.5*length, 0.0), (0.0, 0.0), wg_width, self.shallow_width)
-        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, 0.0), (0.5*length , 0.0), self.shallow_width, wg_width)
+        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, 0.0), (0.5*length, 0.0), self.shallow_width, wg_width)
         elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, 0.5*length), (0.0, 0.0), wg_width, self.shallow_width)
-        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, 0.0), (0.0 , -0.5*length), self.shallow_width, wg_width)
+        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, 0.0), (0.0, -0.5*length), self.shallow_width, wg_width)
         W1 = min(wg_width + 2*self.shallow_trench_width, self.length)
         W2 = min(self.deep_width+ 2*self.shallow_trench_width, self.length)
         elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (-0.5*length, 0.0), (0.0, 0.0), W1, W2)
-        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, 0.0), (0.5*length , 0.0), W2, W1)
+        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, 0.0), (0.5*length, 0.0), W2, W1)
         elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, 0.5*length), (0.0, 0.0), W1, W2)
-        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, 0.0), (0.0 , -0.5*length), W2, W1)
+        elems += ParabolicWedge(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, 0.0), (0.0, -0.5*length), W2, W1)
         
-        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), ( - self.straight_stub -0.5*length, 0.0), (-0.5*self.length,0.0), wg_width)
+        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), ( - self.straight_stub -0.5*length, 0.0), (-0.5*self.length, 0.0), wg_width)
         elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, -0.5 * length - self.straight_stub ), (0.0, -0.5 * length), wg_width)
-        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), ( 0.5*length, 0.0), (0.5*length + self.straight_stub,0.0), wg_width)
+        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), ( 0.5*length, 0.0), (0.5*length + self.straight_stub, 0.0), wg_width)
         elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF.LINE), (0.0, 0.5 * length + self.straight_stub), (0.0*length, 0.5 * length), wg_width)
 
-        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), ( - self.straight_stub -0.5*length, 0.0), (-0.5*self.length,0.0), W1)
+        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), ( - self.straight_stub -0.5*length, 0.0), (-0.5*self.length, 0.0), W1)
         elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, -0.5 * length - self.straight_stub ), (0.0, -0.5 * length), W1)
-        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), ( 0.5*length, 0.0), (0.5*length + self.straight_stub,0.0), W1)
+        elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), ( 0.5*length, 0.0), (0.5*length + self.straight_stub, 0.0), W1)
         elems += Line(PPLayer(self.shallow_process, TECH.PURPOSE.LF_AREA), (0.0, 0.5 * length + self.straight_stub), (0.0*length, 0.5 * length), W1)
         return elems
         

@@ -122,7 +122,7 @@ class PicazzoExampleWindowWaveguide(Structure):
         wire_wg_def = WgElDefinition(wg_width = 0.6, trench_width = 0.9)        
         wire_wg = wire_wg_def(shape = my_path_shape)
         layout += Structure(name ="wire", elements = [wire_wg], ports = wire_wg.ports)        
-        layout.add_blocktitle("REGULAR_WIRE", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("REGULAR_WIRE", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 2:
@@ -140,7 +140,7 @@ class PicazzoExampleWindowWaveguide(Structure):
                             )
         raw_wg = raw_wg_def(shape = my_path_shape)
         layout += Structure(name ="raw", elements = [raw_wg], ports = raw_wg.ports)
-        layout.add_blocktitle("RAW", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("RAW", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
                
        
@@ -153,7 +153,7 @@ class PicazzoExampleWindowWaveguide(Structure):
 
         doped_wg = doped_wg_def(shape = my_path_shape)
         layout += Structure(name="doped", elements=[doped_wg], ports = doped_wg.ports)
-        layout.add_blocktitle("DOP", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("DOP", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
 
         # Example 4:
@@ -168,7 +168,7 @@ class PicazzoExampleWindowWaveguide(Structure):
         win_wg = win_wg_def(shape = my_path_shape)
         layout += Structure(name="window", elements=[win_wg], ports = win_wg.ports)
         
-        layout.add_blocktitle("WIN", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("WIN", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 5:
@@ -176,19 +176,19 @@ class PicazzoExampleWindowWaveguide(Structure):
         mod_wg_def = JunctionWaveguideDefinition()
         mod_wg = mod_wg_def(shape = my_path_shape)
         layout += Structure(name="modulator", elements=[mod_wg], ports = mod_wg.ports)
-        layout.add_blocktitle("MOD", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("MOD", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 6:
         # Use new waveguide in a rounded connector
         from ipkiss.plugins.photonics.wg.connect import WaveguidePointRoundedConnectElementDefinition
         rounded_wg_def = WaveguidePointRoundedConnectElementDefinition(
-                            wg_definition = mod_wg_def , # previous definition, with the junction
+                            wg_definition = mod_wg_def, # previous definition, with the junction
                             bend_radius = 20.0, # needs to be sufficiently large with the broad windows
                             )        
         rounded_wg = rounded_wg_def (shape = my_path_shape)
         layout += Structure(name="rounded", elements=[rounded_wg], ports = rounded_wg.ports)
-        layout.add_blocktitle("ROUND", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("ROUND", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
 
@@ -202,7 +202,7 @@ class PicazzoExampleWindowWaveguide(Structure):
                                                      inner_size = (100.0, 100.0)
                                                      )
         layout += TaperShallowPorts(structure =spiral)                                    
-        layout.add_blocktitle("SPIRAL", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("SPIRAL", center_clearout = (500.0, 0.0))
                 
         elems += SRef(reference = layout)
         return elems

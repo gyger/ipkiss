@@ -19,7 +19,7 @@
 # 
 # Contact: ipkiss@intec.ugent.be
 
-from ipkiss.technology.technology import TechnologyLibrary, TechnologyTree,DelayedInitTechnologyTree
+from ipkiss.technology.technology import TechnologyLibrary, TechnologyTree, DelayedInitTechnologyTree
 from ipkiss.technology import get_technology
 
 __all__ = ["TECH"]

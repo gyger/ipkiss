@@ -73,7 +73,7 @@ class GratingCavity(Structure):
         grating_right = WgGrating(period =self.period_component,
                                   n_o_periods = self.number_of_periods_right)
         shift = self.left_grating.size_info().get_width()
-        c = SRef(grating_right,position = (shift + self.cavity_length,0.))
+        c = SRef(grating_right, position = (shift + self.cavity_length, 0.))
         return c
     
     def define_cavity(self):
@@ -82,9 +82,9 @@ class GratingCavity(Structure):
         c = self.right_grating
         x1 = self.left_grating.west_ports[0].position[0]
         x2 = self.right_grating.east_ports[0].position[0]
-        s = Shape([(x1,0.),(x2,0.)])
+        s = Shape([(x1, 0.), (x2, 0.)])
         b = wg_def1(shape = s)
-        return Structure(elements = [a,b,c])
+        return Structure(elements = [a, b, c])
 
 
     def get_active_port(self):
@@ -100,7 +100,7 @@ class GratingCavity(Structure):
         x1 = self.left_grating.west_ports[0].position[0]-self.ol_wg1_ext
         x2 = self.right_grating.east_ports[0].position[0]+self.ol_wg1_ext_2
         y = 0.0
-        s = Shape([(x1,y),(x2,y)])
+        s = Shape([(x1, y), (x2, y)])
         ol_wg_def = OverlayWgDefinition(wg_width = self.ol_wg1_width)
         return ol_wg_def(shape = s)
     
@@ -108,7 +108,7 @@ class GratingCavity(Structure):
         x1 = self.overlay_taper.west_ports[0].position[0]
         x2 = x1-self.ol_wg2_length
         y = 0.0
-        s = Shape([(x1,y),(x2,y)])
+        s = Shape([(x1, y), (x2, y)])
         ol_wg_def = OverlayWgDefinition(wg_width = self.ol_wg2_width)
         return ol_wg_def(shape = s)
     
@@ -170,8 +170,8 @@ class GratingCavityWithRightTaper(GratingCavity):
                                     length = length)
         return taper
     
-    def define_elements(self,elems):
-        elems += GratingCavity.define_elements(self,elems)
+    def define_elements(self, elems):
+        elems += GratingCavity.define_elements(self, elems)
         elems += self.right_section
         elems += self.right_taper
         port_pos = self.left_grating.west_ports[0].position
@@ -182,8 +182,8 @@ class GratingCavityWithRightTaper(GratingCavity):
                       )
         return elems
     
-    def define_ports(self,ports):
-        ports = [self.left_grating.west_ports[0],self.right_section.east_ports[0]]
+    def define_ports(self, ports):
+        ports = [self.left_grating.west_ports[0], self.right_section.east_ports[0]]
         return ports
     
 class GratingCavityWithTapers(GratingCavity):
@@ -195,27 +195,27 @@ class GratingCavityWithTapers(GratingCavity):
     
     
     def define_left_taper(self):
-        st_port = GratingCavity.define_ports(self,0)[0]
+        st_port = GratingCavity.define_ports(self, 0)[0]
         length = self.taper_length
         taper = WgElPortTaperLinear(start_port = st_port,
                                     end_wg_def = self.end_wg_def,
                                     length = length)
         return taper
     def define_right_taper(self):
-        st_port = GratingCavity.define_ports(self,0)[1]
+        st_port = GratingCavity.define_ports(self, 0)[1]
         length = self.taper_length
         taper = WgElPortTaperLinear(start_port = st_port,
                                     end_wg_def = self.end_wg_def,
                                     length = length)
         return taper
-    def define_elements(self,elems):
-        elems += GratingCavity.define_elements(self,elems)
+    def define_elements(self, elems):
+        elems += GratingCavity.define_elements(self, elems)
         elems += self.left_taper
         elems += self.right_taper
         return elems
     
-    def define_ports(self,ports):
-        ports = [self.left_taper.west_ports[0],self.right_taper.east_ports[0]]
+    def define_ports(self, ports):
+        ports = [self.left_taper.west_ports[0], self.right_taper.east_ports[0]]
         return ports
     
 class GratingCavityWithModeFilter(GratingCavityWithTapers):
@@ -227,9 +227,9 @@ class GratingCavityWithModeFilter(GratingCavityWithTapers):
     right_mode_filter = DefinitionProperty(fdef_name  = 'define_right_mode_filter')
     
     def define_right_mode_filter(self):
-        st_port = GratingCavityWithTapers.define_ports(self,0)[1]
+        st_port = GratingCavityWithTapers.define_ports(self, 0)[1]
         wg_def = st_port.wg_definition
-        s = Shape([st_port.position,(st_port.position[0]+self.section_length,
+        s = Shape([st_port.position, (st_port.position[0]+self.section_length,
                                      st_port.position[1])])
         
         wg = wg_def(shape = s)
@@ -239,12 +239,12 @@ class GratingCavityWithModeFilter(GratingCavityWithTapers):
                                     end_wg_def = self.end_wg_def2,
                                     length = self.taper2_length)
         
-        return [wg,taper]
+        return [wg, taper]
     
     def define_left_mode_filter(self):
-        st_port = GratingCavityWithTapers.define_ports(self,0)[0]
+        st_port = GratingCavityWithTapers.define_ports(self, 0)[0]
         wg_def = st_port.wg_definition
-        s = Shape([st_port.position,(st_port.position[0]-self.section_length,
+        s = Shape([st_port.position, (st_port.position[0]-self.section_length,
                                      st_port.position[1])])
         
         wg = wg_def(shape = s)
@@ -254,10 +254,10 @@ class GratingCavityWithModeFilter(GratingCavityWithTapers):
                                     end_wg_def = self.end_wg_def2,
                                     length = self.taper2_length)
         
-        return [wg,taper]
+        return [wg, taper]
     
-    def define_elements(self,elems):
-        elems += GratingCavityWithTapers.define_elements(self,elems)
+    def define_elements(self, elems):
+        elems += GratingCavityWithTapers.define_elements(self, elems)
         lmf = self.left_mode_filter
         rmf = self.right_mode_filter
         elems += lmf[0]
@@ -266,28 +266,28 @@ class GratingCavityWithModeFilter(GratingCavityWithTapers):
         elems += rmf[1]
         return elems
     
-    def define_ports(self,ports):
-        ports = [self.left_mode_filter[1].west_ports[0],self.right_mode_filter[1].east_ports[0]]
+    def define_ports(self, ports):
+        ports = [self.left_mode_filter[1].west_ports[0], self.right_mode_filter[1].east_ports[0]]
         return ports
 class GratingCavityWithAccessWaveguides(GratingCavity):
     offset = NumberProperty(default = 1.0)
     bend_1 = DefinitionProperty(fdef_name = "define_bend_1")
     bend_2 = DefinitionProperty(fdef_name = "define_bend_2")
     def define_bend_1(self):      
-        route = RouteToWestAtY(GratingCavity.define_ports(self,0)[0],y_position= -self.offset,min_straight=0.1)
+        route = RouteToWestAtY(GratingCavity.define_ports(self, 0)[0], y_position= -self.offset, min_straight=0.1)
         connecting_wg_el_left = RouteConnectorRounded(route)
         return connecting_wg_el_left
     def define_bend_2(self):
-        route = RouteToEastAtY(GratingCavity.define_ports(self,0)[1],y_position= -self.offset,min_straight=0.1)
+        route = RouteToEastAtY(GratingCavity.define_ports(self, 0)[1], y_position= -self.offset, min_straight=0.1)
         connecting_wg_el_right = RouteConnectorRounded(route)
         return connecting_wg_el_right
-    def define_elements(self,elems):
-        elems += GratingCavity.define_elements(self,elems)
+    def define_elements(self, elems):
+        elems += GratingCavity.define_elements(self, elems)
         elems += self.bend_1
         elems += self.bend_2
         return elems
-    def define_ports(self,ports):
-        ports = [self.bend_1.west_ports[0],self.bend_2.east_ports[0]]
+    def define_ports(self, ports):
+        ports = [self.bend_1.west_ports[0], self.bend_2.east_ports[0]]
         return ports
     
 class GratingCavityFilter(GratingCavity):
@@ -297,19 +297,19 @@ class GratingCavityFilter(GratingCavity):
         
         length = self.get_length()
         height = self.wg_definition.wg_width / 2.0 + self.gap_space + self.wg_definition_access.wg_width / 2.
-        s = Shape([(0,height),(length,height)])
+        s = Shape([(0, height), (length, height)])
         wg = self.wg_definition_access(shape = s)
-        elems += GratingCavity.define_elements(self,elems)
+        elems += GratingCavity.define_elements(self, elems)
         elems += wg
         return elems
 
     def define_ports(self, ports):
         height = self.wg_definition.wg_width / 2.0 + self.gap_space + self.wg_definition_access.wg_width / 2.
-        pts = GratingCavity.define_ports(self,0)
+        pts = GratingCavity.define_ports(self, 0)
         x1 = pts[0].position[0]
         x2 = pts[1].position[0]
-        ports = [pts[0],pts[1],OpticalPort(position = (x1, height), angle = -180.0, wg_definition = self.wg_definition_access),
-                 OpticalPort(position = (x2,height),
+        ports = [pts[0], pts[1], OpticalPort(position = (x1, height), angle = -180.0, wg_definition = self.wg_definition_access),
+                 OpticalPort(position = (x2, height),
                              angle = 0.0, wg_definition = self.wg_definition_access)]
     
         return ports
@@ -326,40 +326,40 @@ class GratingCavityFilterWithAccessWaveguides(GratingCavityFilter):
     
 
     def define_bend_up_l(self):
-        pts = GratingCavityFilter.define_ports(self,0)
+        pts = GratingCavityFilter.define_ports(self, 0)
         route = RouteToWestAtY(pts[2], y_position=pts[2].position[1]+self.offset, min_straight=0.1)
         connecting_wg_el = RouteConnectorRounded(route)
         return connecting_wg_el
     def define_bend_up_r(self):
-        pts = GratingCavityFilter.define_ports(self,0)
-        route = RouteToEastAtY(pts[3],y_position= pts[3].position[1]+self.offset, min_straight=0.1)
+        pts = GratingCavityFilter.define_ports(self, 0)
+        route = RouteToEastAtY(pts[3], y_position= pts[3].position[1]+self.offset, min_straight=0.1)
         connecting_wg_el = RouteConnectorRounded(route)
         return connecting_wg_el
     def define_bend_down_l(self):
-        pts = GratingCavityFilter.define_ports(self,0)
+        pts = GratingCavityFilter.define_ports(self, 0)
         route = RouteToWestAtY(pts[0], y_position=pts[0].position[1]-self.offset, min_straight=0.1)
         connecting_wg_el = RouteConnectorRounded(route)
         return connecting_wg_el
     def define_bend_down_r(self):
-        pts = GratingCavityFilter.define_ports(self,0)
-        route = RouteToEastAtY(pts[1],y_position= pts[1].position[1]-self.offset, min_straight=0.1)
+        pts = GratingCavityFilter.define_ports(self, 0)
+        route = RouteToEastAtY(pts[1], y_position= pts[1].position[1]-self.offset, min_straight=0.1)
         connecting_wg_el = RouteConnectorRounded(route)
         return connecting_wg_el
     
-    def define_elements(self,elems):
-        elems = GratingCavityFilter.define_elements(self,elems)
+    def define_elements(self, elems):
+        elems = GratingCavityFilter.define_elements(self, elems)
         elems += self.bend_down_l
         elems += self.bend_down_r
         elems += self.bend_up_l
         elems += self.bend_up_r
         return elems
     
-    def define_ports(self,ports):
+    def define_ports(self, ports):
         p1 = self.bend_down_l.west_ports[0]
         p2 = self.bend_up_l.west_ports[0]
         p3 = self.bend_down_r.east_ports[0]
         p4 = self.bend_up_r.east_ports[0]
-        ports = [p1,p2,p3,p4]
+        ports = [p1, p2, p3, p4]
         return ports
     
  

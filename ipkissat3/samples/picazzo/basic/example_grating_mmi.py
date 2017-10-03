@@ -70,7 +70,7 @@ class MyDesign(Structure):
         from picazzo.filters.ring import RingRectSBend180DropFilter
         from picazzo.io.fibcoup import IoFibcoup
         from picazzo.fibcoup.uniform import UniformLineGrating
-        ring = RingRectSBend180DropFilter(straights=(TECH.WG.SHORT_STRAIGHT,TECH.WG.SHORT_STRAIGHT+3.0),
+        ring = RingRectSBend180DropFilter(straights=(TECH.WG.SHORT_STRAIGHT, TECH.WG.SHORT_STRAIGHT+3.0),
                                           coupler_angles = [30.0, 10.0],
                                           coupler_spacings = [1.0, 0.8],
                                           coupler_lengths = [6.0, 2.0],
@@ -81,10 +81,10 @@ class MyDesign(Structure):
                              grating_pitch = 0.6, 
                              grating_trench_width = 0.3)
         ring_with_fibcoup = IoFibcoup(struct = ring, 
-                                      offset = (0.0,0.0), 
+                                      offset = (0.0, 0.0), 
                                       y_spacing = ring.size_info().height,
-                                      south_west = (0.0,0.0), 
-                                      south_east = (1500.0,0.0),
+                                      south_west = (0.0, 0.0), 
+                                      south_east = (1500.0, 0.0),
                                       fibcoup = grating)    
         elems += SRef(reference = ring_with_fibcoup)
         return elems

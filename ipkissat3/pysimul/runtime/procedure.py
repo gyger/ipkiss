@@ -99,10 +99,10 @@ class FDTDFieldCalculationProcedure(__FieldCalculationProcedure__):
                         wavelengths = 1000.0 / flx.flux_per_freq[0] 
                         fluxes = flx.flux_per_freq[1]
                         for wl, flux in zip(wavelengths, fluxes):
-                            print('flux',flxcntr, ': (step', stepCount,  '), ', wl, flux)
+                            print('flux', flxcntr, ': (step', stepCount,  '), ', wl, flux)
                         #double enter so gnuplot can interpret this correctly as new data.
-                        print('flux',flxcntr, ': ')
-                        print('flux',flxcntr, ': ')
+                        print('flux', flxcntr, ': ')
+                        print('flux', flxcntr, ': ')
                         flxcntr += 1
 
 
@@ -155,7 +155,7 @@ class FDTDFieldCalculationProcedure(__FieldCalculationProcedure__):
             if ((not (filename is None)) and (self.interactive_mode)):
                 try:
                     from dependencies.pil_wrapper import Image
-                    png_file = filename.replace(".h5",".png")
+                    png_file = filename.replace(".h5", ".png")
                     im = Image.open(png_file)
                     im.show()				
                 except Exception as e:
@@ -295,13 +295,13 @@ class SlabCalculationProcedure(__FieldCalculationProcedure__):
         y11 = input_vector.position.y
         x21 = 10.0 * np.cos(input_vector.angle_rad)
         y21 = 10.0 * np.sin(input_vector.angle_rad)
-        fig.axes[0].arrow(x11,y11,x21, y21, width=1.0)
+        fig.axes[0].arrow(x11, y11, x21, y21, width=1.0)
 
         x12 = output_vector.position.x
         y12 = output_vector.position.y
         x22 = 10.0 * np.cos(output_vector.angle_rad)
         y22 = 10.0 * np.sin(output_vector.angle_rad)
-        fig.axes[0].arrow(x12,y12,x22, y22, width=1.0)
+        fig.axes[0].arrow(x12, y12, x22, y22, width=1.0)
         fig.axes[0].set_aspect('equal')	
         #from ipkiss.visualisation.show import  
         from dependencies.matplotlib_wrapper import Tk, FigureCanvasTkAgg

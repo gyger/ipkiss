@@ -115,9 +115,9 @@ class SplitterTreeLeftToRight(SplitterTreeBasic):
                 c2i = c2.in_ports[0]
                 c1o = c1.out_ports[0]
                 c2o = c2.out_ports[0]
-                xl = min(c1i.position.x,c2i.position.x)+0.5*c1.shape.start_straight
+                xl = min(c1i.position.x, c2i.position.x)+0.5*c1.shape.start_straight
                 yl = 0.5*(c1i.position.y+c2i.position.y)
-                xr = max(c1o.position.x,c2o.position.x)-0.5*c1.shape.end_straight
+                xr = max(c1o.position.x, c2o.position.x)-0.5*c1.shape.end_straight
                 wp = abs(c2o.position.y-c1o.position.y)+0.5*(c1o.wg_definition.wg_width+c2o.wg_definition.wg_width)+c1o.wg_definition.trench_width+c2o.wg_definition.trench_width
                 ## patches necessary??? probably depends on the splitter you take
                 #P += [Line(layer=PPLayer(self.splitter.wg_definition.process, TECH.PURPOSE.LF_AREA),begin_coord=(xl,yl),end_coord=(xr,yl),line_width=wp)]
@@ -129,7 +129,7 @@ class SplitterTreeLeftToRight(SplitterTreeBasic):
             patches += [P]
             splitter_transforms += T2
             T = T2
-        return (patches,connectors,splitter_transforms)
+        return (patches, connectors, splitter_transforms)
         
     def define_patches(self):        
         return self.patches_connectors_splitter_transforms[0]

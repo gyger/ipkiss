@@ -35,8 +35,8 @@ my_dircoup_2 = BentDirectionalCoupler(coupler_length = 8.0,
 
 # create a dumb structure to collect our different directional couplers
 my_group = Structure(name = "Group")
-my_group += SRef(reference = my_dircoup_1, position = (0,0))
-my_group += SRef(reference = my_dircoup_2, position = (0,15))
+my_group += SRef(reference = my_dircoup_1, position = (0, 0))
+my_group += SRef(reference = my_dircoup_2, position = (0, 15))
 
 
 my_group.write_gdsii("dircoups.gds")

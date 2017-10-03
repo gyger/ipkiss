@@ -59,7 +59,7 @@ class WgElPortTaperAuto(__WgElPortTaper__) :
     def define_taper(self) :
         tc = self.taper_class
         if tc is None:
-            raise Exception("No taper could be generated between between waveguide types %s and %s." %(self.start_port.wg_definition,self.end_wg_def))
+            raise Exception("No taper could be generated between between waveguide types %s and %s." %(self.start_port.wg_definition, self.end_wg_def))
         swapped = self.swapped
         
         if swapped:

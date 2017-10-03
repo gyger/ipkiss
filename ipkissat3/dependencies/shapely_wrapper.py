@@ -63,7 +63,7 @@ def shapely_polygon_to_image(polygon, filename, show=False):
     from dependencies.matplotlib_wrapper import pyplot
     fig = pyplot.gcf()
     fig.clear()
-    ax = fig.add_subplot(1,1,1)
+    ax = fig.add_subplot(1, 1, 1)
     if (not polygon.is_empty):
         if isinstance(polygon, Polygon):
             patch = PolygonPatch(polygon, fc='b')
@@ -167,7 +167,7 @@ class ShapelyPolygonCollection(StrongPropertyInitializer):
             else:
                 self.georep = self.georep.union(polygon)
         else:
-            LOG.warning("Tried to add a polygon with %i points to the PolygonCollection: %s\nThe polygon is ignored." %(len(pts),str(pts)))    
+            LOG.warning("Tried to add a polygon with %i points to the PolygonCollection: %s\nThe polygon is ignored." %(len(pts), str(pts)))    
 
     def get_georep_list(self):
         """Return a list with all elements in the geometrical representation """	
@@ -189,7 +189,7 @@ class ShapelyPolygonCollection(StrongPropertyInitializer):
         ne = list(self.size_info.north_east)
         se = list(self.size_info.south_east)
         sw = list(self.size_info.south_west)	    
-        p = Polygon([nw,ne,se,sw,nw])
+        p = Polygon([nw, ne, se, sw, nw])
         return p
 
     def is_empty(self):

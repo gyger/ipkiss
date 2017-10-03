@@ -27,7 +27,7 @@ from ipkiss.plugins.photonics.wg.window import PathWindow
 from ipkiss.technology import get_technology
 TECH = get_technology()
 
-if hasattr(TECH.PROCESS,'RFC'):  # FIXME: dirty - need modular imports
+if hasattr(TECH.PROCESS, 'RFC'):  # FIXME: dirty - need modular imports
     from ..wgdefs.raised import RaisedWgElDefinition, RaisedFCWgElDefinition, RaisedWGFCWgElDefinition
 
 #Naming convention:

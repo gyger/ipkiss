@@ -130,7 +130,7 @@ def MultiRingWithSpacings(rings, spacings, flip_last = False, **kwargs):
                               #ring_transformations = ring_transformations
                               #)
 class MultiRingIdenticalWithSpacings(MultiRingIdentical):
-    spacings = ListDefinitionProperty(allowed_types = [int,float], restriction = RESTRICT_POSITIVE)
+    spacings = ListDefinitionProperty(allowed_types = [int, float], restriction = RESTRICT_POSITIVE)
     ring_transformations = DefinitionProperty(fdef_name="define_ring_transformations")
     def define_ring_transformations(self):
         ring_transformations = [IdentityTransform()]

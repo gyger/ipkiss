@@ -29,7 +29,7 @@ __all__ = ["read_library_from_file",
 ## Read
 def read_library_from_file(filename, input_type):
     """ reads a library from a file using the input processor """
-    f = open(filename,"rb")
+    f = open(filename, "rb")
     i = InputGdsii(f)
     L = i.read()
     f.close()
@@ -39,7 +39,7 @@ def read_library_from_file(filename, input_type):
 ## Write
 def write_library_to_file(library, filename, output_type):
     """ writes a library to a file using the given output processor """
-    f = open(filename,"wb")
+    f = open(filename, "wb")
     o = OutputGdsii(f)
     o.write(library)
     f.close()

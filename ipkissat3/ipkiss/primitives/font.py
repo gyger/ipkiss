@@ -43,7 +43,7 @@ class Font(StrongPropertyInitializer):
         super(Font, self).__init__(
             **kwargs)
 
-    def shapes_character (self, character, letter_height = 1.0, south_west_coord = (0.0,0.0), angle = 0.0):
+    def shapes_character (self, character, letter_height = 1.0, south_west_coord = (0.0, 0.0), angle = 0.0):
         #returns a list of shapes!!!
         if character in self.coords:
             shapes = self.coords[character]
@@ -66,14 +66,14 @@ class Font(StrongPropertyInitializer):
         return self.cell_size[1]
        
 class BoundaryFont(Font):
-    def elements_character(self, layer, character, letter_height = 1.0, south_west_coord = (0.0,0.0), angle = 0.0):
+    def elements_character(self, layer, character, letter_height = 1.0, south_west_coord = (0.0, 0.0), angle = 0.0):
         EL = ElementList()
-        for s in self.shapes_character(character, letter_height , south_west_coord , angle):
+        for s in self.shapes_character(character, letter_height, south_west_coord, angle):
             EL += Boundary(layer, s)
         return EL
     
-    def shapes_character (self, character, letter_height = 1.0, south_west_coord = (0.0,0.0), angle = 0.0):
-        S = Font.shapes_character(self, character, letter_height , south_west_coord , angle)
+    def shapes_character (self, character, letter_height = 1.0, south_west_coord = (0.0, 0.0), angle = 0.0):
+        S = Font.shapes_character(self, character, letter_height, south_west_coord, angle)
         for s in S:
             s.close()
         return S
@@ -86,10 +86,10 @@ class PathFont(Font):
     def letter_height(self):
         return self.cell_size[1] + self.line_width
 
-    def elements_character(self, layer, character, letter_height = 1.0, south_west_coord = (0.0,0.0), angle = 0.0):
+    def elements_character(self, layer, character, letter_height = 1.0, south_west_coord = (0.0, 0.0), angle = 0.0):
         EL = ElementList()
         lw = self.line_width * letter_height * self.letter_height()
-        for s in self.shapes_character(character, letter_height , south_west_coord , angle):
+        for s in self.shapes_character(character, letter_height, south_west_coord, angle):
             EL += Path(layer, s, lw)
         return EL
     

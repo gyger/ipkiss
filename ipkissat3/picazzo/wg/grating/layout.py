@@ -54,7 +54,7 @@ class __WgGratingPeriod__(Structure):
     
     def define_ports(self, prts):
         prts += [OpticalPort(position = (0.0, 0.0), angle = -180.0, wg_definition = self.wg_definition),
-                OpticalPort(position = (self.length,0.0), angle = 0.0, wg_definition = self.wg_definition)]
+                OpticalPort(position = (self.length, 0.0), angle = 0.0, wg_definition = self.wg_definition)]
         return prts
         
     
@@ -88,7 +88,7 @@ class WgGratingPeriodBlocks(__WgGratingPeriod__):
         
 def wg_grating_period_rect(length, wg_width, wide_width, narrow_width, fill_factor = 0.5, trench_width=2.0, process = TECH.PROCESS.WG):
     """ a waveguide grating period with a rectagular tooth """
-    return WgGratingPeriodBlocks(wg_width, [Coord2(narrow_width, 0.5*length * (1-fill_factor)), Coord2(wide_width, length * fill_factor), Coord2(narrow_width, 0.5*length * (1-fill_factor))], trench_width, process , library)
+    return WgGratingPeriodBlocks(wg_width, [Coord2(narrow_width, 0.5*length * (1-fill_factor)), Coord2(wide_width, length * fill_factor), Coord2(narrow_width, 0.5*length * (1-fill_factor))], trench_width, process, library)
 
 
 class WgGratingPeriodShallow(__WgGratingPeriod__):
@@ -100,7 +100,7 @@ class WgGratingPeriodShallow(__WgGratingPeriod__):
         
     def define_elements(self, elems):
         elems += self.wg_definition(shape = [(0.0, 0.0), (self.length, 0.0) ])
-        elems += Rectangle(PPLayer(self.shallow_process, TECH.PURPOSE.DF.TRENCH),(0.5*self.length, 0.0), (self.fill_factor * self.length, 2* self.wg_definition.wg_width))
+        elems += Rectangle(PPLayer(self.shallow_process, TECH.PURPOSE.DF.TRENCH), (0.5*self.length, 0.0), (self.fill_factor * self.length, 2* self.wg_definition.wg_width))
         return elems
 
     def define_ports(self, prts):
@@ -116,8 +116,8 @@ class WgGratingPeriodSideblock(__WgGratingPeriod__):
         
     def define_elements(self, elems):
         elems += self.wg_definition(shape = [(0.0, 0.0), (self.length, 0.0) ])
-        elems += Rectangle(PPLayer(self.process, TECH.PURPOSE.LF.LINE),(0.5*self.length, 0.5* self.wg_definition.wg_width + self.block_spacing + 0.5 * self.block_size[1]), self.block_size)
-        elems += Rectangle(PPLayer(self.process, TECH.PURPOSE.LF.LINE),(0.5*self.length, -0.5* self.wg_definition.wg_width - self.block_spacing - 0.5 * self.block_size[1]), self.block_size)
+        elems += Rectangle(PPLayer(self.process, TECH.PURPOSE.LF.LINE), (0.5*self.length, 0.5* self.wg_definition.wg_width + self.block_spacing + 0.5 * self.block_size[1]), self.block_size)
+        elems += Rectangle(PPLayer(self.process, TECH.PURPOSE.LF.LINE), (0.5*self.length, -0.5* self.wg_definition.wg_width - self.block_spacing - 0.5 * self.block_size[1]), self.block_size)
         return elems
 
     def define_ports(self, prts):

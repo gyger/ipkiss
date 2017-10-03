@@ -25,7 +25,7 @@ from ..material.material import MaterialProperty, Material
 from ..environment import EnvironmentProperty, DEFAULT_ENVIRONMENT
 from ipkiss.geometry.size_info import SizeInfoProperty
 
-__all__ = ["GeometryProperty","CartesianGeometry1D","CartesianGeometry2D","CartesianGeometry3D"]
+__all__ = ["GeometryProperty", "CartesianGeometry1D", "CartesianGeometry2D", "CartesianGeometry3D"]
 
 # Geometry Classes
 # This should come in a generic framework

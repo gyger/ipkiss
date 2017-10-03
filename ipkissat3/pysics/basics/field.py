@@ -36,7 +36,7 @@ import math
 
 class __Field__(Transformable, StrongPropertyInitializer):
     """ abstract base class for a field """
-    def transform(self,transformation):
+    def transform(self, transformation):
         """ transforms a field in a coordinate system: this basically just reverses the rotation """
         R = Rotation(rotation = -transformation.rotation)
         self.value.transform(R) 
@@ -76,7 +76,7 @@ class __Vectorial3Field__(__Field__):
 
 class __CompoundField__(__Field__):
     value = RestrictedProperty(required = True, restriction = RestrictList(RestrictType(__Field__)))
-    def transform(self,transformation):
+    def transform(self, transformation):
         """ transforms a field in a coordinate system: this basically just reverses the rotation """
         for v in self.value:
             v.transform(transformation)

@@ -27,11 +27,11 @@ from picazzo.filters.ring.layout import __RingStraightCouplers__, __RingCouplerT
 
 import functools
 
-__all__ = ["RingAdiabaticSpline","RingSplineNotchFilter","RingSpline180DropFilter","RingSpline90DropFilter"]
+__all__ = ["RingAdiabaticSpline", "RingSplineNotchFilter", "RingSpline180DropFilter", "RingSpline90DropFilter"]
 
 def PartialProperty(internal_member_name= None, restriction = None,**kwargs):    
     R = restrictions.RestrictType(functools.partial) & restriction
-    P = RestrictedProperty(internal_member_name, restriction = R,**kwargs)   
+    P = RestrictedProperty(internal_member_name, restriction = R, **kwargs)   
     P.__get_default__ = lambda : P.default
     return P
 
@@ -66,25 +66,25 @@ class RingAdiabaticSpline(RingRoundedShape):
         return (bend_size[0]+0.01, bend_size[1]+0.01)
     
     def define_straights(self):
-        (bs1,bs2) = self.get_bend90_size()
+        (bs1, bs2) = self.get_bend90_size()
         rect_size = (2 * bs1, 2 * bs2)
         S = ShapeRectangle(center = (0.0, 0.0), box_size = rect_size)
         S = ShapeRoundAdiabaticSplineGeneric(original_shape = S,
                                              radii = [self.bend_radius, self.bend_radius, self.bend_radius, self.bend_radius],
-                                             adiabatic_angles_list = [(self.adiabatic_angle_in_ring, self.adiabatic_angle_in_coupler),(self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_ring),
+                                             adiabatic_angles_list = [(self.adiabatic_angle_in_ring, self.adiabatic_angle_in_coupler), (self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_ring),
                                                                       (self.adiabatic_angle_in_ring, self.adiabatic_angle_in_coupler), (self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_ring)]
                                              )
         L = S.length()
         straight1 = 0.5*(self.length-L) - self.straight
-        return (self.straight,straight1)
+        return (self.straight, straight1)
         
     def define_shape(self):
-        (bs1,bs2) = self.get_bend90_size()
+        (bs1, bs2) = self.get_bend90_size()
         rect_size = (2*bs1+self.straights[0], 2*bs2+self.straights[1])
         S = ShapeRectangle(center = (0.0, 0.0), box_size = rect_size)
         S = ShapeRoundAdiabaticSplineGeneric(original_shape = S,
                                              radii = [self.bend_radius, self.bend_radius, self.bend_radius, self.bend_radius],
-                                             adiabatic_angles_list = [(self.adiabatic_angle_in_ring, self.adiabatic_angle_in_coupler),(self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_ring),
+                                             adiabatic_angles_list = [(self.adiabatic_angle_in_ring, self.adiabatic_angle_in_coupler), (self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_ring),
                                                                       (self.adiabatic_angle_in_ring, self.adiabatic_angle_in_coupler), (self.adiabatic_angle_in_coupler, self.adiabatic_angle_in_ring)]
                                              )
 

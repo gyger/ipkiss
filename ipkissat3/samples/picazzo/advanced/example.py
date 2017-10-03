@@ -34,15 +34,15 @@ class PicazzoExample1(Structure):
     
     def define_elements(self, elems):
         # alignment waveguide      
-        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0))
+        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0))
         
-        wg_def2 = WgElDefinition(wg_width=0.5,trench_width=7.0)
-        align2_wg = wg_def2(shape = [(0.0,0.0), (100.0,0.0)])
+        wg_def2 = WgElDefinition(wg_width=0.5, trench_width=7.0)
+        align2_wg = wg_def2(shape = [(0.0, 0.0), (100.0, 0.0)])
         align2 = Structure(name="align2", elements=[align2_wg], ports=align2_wg.ports)
         layout += align2
         
-        wg_def3 = WgElDefinition(wg_width=2.0,trench_width=7.0)
-        align3_wg = wg_def3(shape = [(0.0,0.0), (200.0,0.0)])
+        wg_def3 = WgElDefinition(wg_width=2.0, trench_width=7.0)
+        align3_wg = wg_def3(shape = [(0.0, 0.0), (200.0, 0.0)])
         align3 = Structure(name="align3", elements=[align3_wg], ports=align3_wg.ports)
         layout += align3
         

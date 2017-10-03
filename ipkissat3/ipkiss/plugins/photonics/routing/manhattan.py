@@ -47,7 +47,7 @@ class RouteManhattanBasic(__RouteBasic__):
         a = I.angle_deg
         s= self.start_straight
         count = 0
-        while 1:
+        while True:
             count += 1
             if count > 40:
                 LOG.error("Exceeds allowed steps in RouteManhattanBasic: \nInput:%s\nOutput:%s\nShape:%s" %
@@ -93,7 +93,7 @@ class RouteManhattanBasic(__RouteBasic__):
                     a = -sigp * 90.0
                 else:
                     # more complex turn
-                    p = (min(p[0] - s - bs1, -self.end_straight - self.min_straight - 2 * bs1 - bs2) , p[1])
+                    p = (min(p[0] - s - bs1, -self.end_straight - self.min_straight - 2 * bs1 - bs2), p[1])
                     a = -sigp * 90.0
             elif a % 180.0 == 90.0:
                 siga = -sign((a % 360.0) - 180.0)
@@ -115,7 +115,7 @@ class RouteManhattanBasic(__RouteBasic__):
                 elif -p[0] - ( self.end_straight + bs2) > - threshold:
                     # make vertical S-bend to get sufficient room for movement
                     S += (p[0], p[1] + siga * (bs2 + s))
-                    p = (min(p[0] - bs1 + bs2 + self.min_straight, - 2 * bs1 -bs2 - self.end_straight - self.min_straight),p[1] + siga * (bs2 + s))
+                    p = (min(p[0] - bs1 + bs2 + self.min_straight, - 2 * bs1 -bs2 - self.end_straight - self.min_straight), p[1] + siga * (bs2 + s))
                     # a remains the same
                 else:
                     # tricky case, because there is no valable solution for this

@@ -45,16 +45,16 @@ class Library(UnitGridContainer, MixinBowl):
         self.structures = StructureList()
         self.__referenced_structures = set()
         
-    def snap_value(self,value):
+    def snap_value(self, value):
         return settings.snap_value(value, self.grids_per_unit)
 
-    def snap_coordinate(self,coordinate):
+    def snap_coordinate(self, coordinate):
         return settings.snap_coordinate(coordinate, self.grids_per_unit)
 
-    def snap_shape(self,coordinates):
+    def snap_shape(self, coordinates):
         return settings.snap_shape(coordinates, self.grids_per_unit)
 
-    def add(self,structure):
+    def add(self, structure):
         if isinstance(structure, Structure) or isinstance(structure, StructureList):
             self.structures.add(structure)
         else:
@@ -68,7 +68,7 @@ class Library(UnitGridContainer, MixinBowl):
                 self.structures.add(i)
         return self
 
-    def structure_exists(self,structure):
+    def structure_exists(self, structure):
         return structure in self.structures
 
     def clean_up(self):
@@ -84,7 +84,7 @@ class Library(UnitGridContainer, MixinBowl):
 
         # remove empty structures
         empty_s = []
-        for s in range(0,len(self.structures)):
+        for s in range(0, len(self.structures)):
             if self.structures[s].is_empty(): empty_s.append(s)
         del self.structures[empty_s]
 
@@ -207,7 +207,7 @@ class Library(UnitGridContainer, MixinBowl):
             return False
         if len(self.structures) != len(other.structures):
             return False
-        for struct1, struct2 in zip(self.structures,other.structures):            
+        for struct1, struct2 in zip(self.structures, other.structures):            
             if (struct1.name != struct2.name):  # check that all structure elements have identical names (this is not required by the __eq__ operator in Structure
                 return False
             if (struct1 != struct2):

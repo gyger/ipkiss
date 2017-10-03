@@ -41,24 +41,24 @@ class __RoundedShape__(StrongPropertyInitializer):
 
     @cache()
     def get_bend90_size(self):
-        s = Shape([(-100*self.bend_radius,0), (0,0), (0.0, 100*self.bend_radius)])
+        s = Shape([(-100*self.bend_radius, 0), (0, 0), (0.0, 100*self.bend_radius)])
         RA = self.rounding_algorithm
         s = RA(original_shape = s, radius = self.bend_radius)
         if len(s)>1:
             return abs(s[1].x), abs(s[-2].y)
         else:
-            return 0,0
+            return 0, 0
     
     def get_bend_size(self, angle):
-        if angle == 0.0: return 0,0
-        s = Shape([(-100*self.bend_radius,0), (0,0), (100*self.bend_radius*math.cos(angle * DEG2RAD), 100*self.bend_radius*math.sin(angle * DEG2RAD))])
+        if angle == 0.0: return 0, 0
+        s = Shape([(-100*self.bend_radius, 0), (0, 0), (100*self.bend_radius*math.cos(angle * DEG2RAD), 100*self.bend_radius*math.sin(angle * DEG2RAD))])
         RA = self.rounding_algorithm
 
         s = RA(original_shape = s, radius = self.bend_radius)
         if len(s)>1:
             return distance(s[1]), distance(s[-2]) #L1,L2
         else:
-            return 0,0
+            return 0, 0
 
 class __RoundedWaveguide__(__RoundedShape__):
     manhattan = BoolProperty(default = False)
@@ -252,7 +252,7 @@ class WaveguidePointRoundedConnectElementDefinition(__RoundedWaveguide__, __Wave
         return "WGPRCEDEF:br=%f-mh=%s-wd=%s"%(self.bend_radius, str(self.manhattan), str(self.wg_definition))
     
     def define_name(self):
-        return "WGPRCEDEF_R%d_M%s_W%s"%(self.bend_radius*1000,str(self.manhattan),self.wg_definition.name)
+        return "WGPRCEDEF_R%d_M%s_W%s"%(self.bend_radius*1000, str(self.manhattan), self.wg_definition.name)
     
 __WaveguidePointRoundedConnectElementDefinitionPathDefinition__ = WaveguidePointRoundedConnectElementDefinition.__WaveguidePointRoundedConnectElementDefinitionPathDefinition__
 
@@ -358,15 +358,15 @@ class __WaveguideExpandedConnect__(__WaveguideExpandedConnectGeneric__):
     expanded_positions = DefinitionProperty(fdef_name = "define_expanded_positions")
 
     def define_expanded_lengths(self):
-        (l,w,p) = self.__get_expanded_lengths_widths_positions__()
+        (l, w, p) = self.__get_expanded_lengths_widths_positions__()
         return l
     
     def define_expanded_widths(self):
-        (l,w,p) = self.__get_expanded_lengths_widths_positions__()
+        (l, w, p) = self.__get_expanded_lengths_widths_positions__()
         return w
                
     def define_expanded_positions(self):
-        (l,w,p) = self.__get_expanded_lengths_widths_positions__()
+        (l, w, p) = self.__get_expanded_lengths_widths_positions__()
         return p
     
     @cache()

@@ -119,8 +119,8 @@ class WgElPortTaperSlotted(WgElTaperSlotted, __WgElPortTaper__):
             
     length = NonNegativeNumberProperty(default = 12.0)
     
-    def define_ports(self,ports):
-        return __WgElPortTaper__.define_ports(self,ports)
+    def define_ports(self, ports):
+        return __WgElPortTaper__.define_ports(self, ports)
 
     
 ##################################

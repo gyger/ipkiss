@@ -39,4 +39,4 @@ class ElectroMagneticFieldProfile2D(FieldProfile2D):
                                             f.E.value.z.real, f.E.value.z.imag, 
                                             f.H.value.x.real, f.H.value.x.imag, 
                                             f.H.value.y.real, f.H.value.y.imag, 
-                                            f.H.value.z.real, f.H.value.z.imag] for p,f in zip(self.positions,self.fields)])         
+                                            f.H.value.z.real, f.H.value.z.imag] for p, f in zip(self.positions, self.fields)])         

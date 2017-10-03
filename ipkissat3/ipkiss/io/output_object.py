@@ -35,7 +35,7 @@ class OutputObject(OutputBasic):
             s.append("NAME: " + str(item.name))
         d = set(dir(item)) - DO
         for i in d:
-            I = getattr(item,i)
+            I = getattr(item, i)
             if ismethod(I): continue
             try:
                 s.append("---" + str(i) + " = " + str(I))
@@ -70,7 +70,7 @@ class OutputObject(OutputBasic):
         return "\n".join(["   PATHSHAPE = " + str(type(shape)),
                            self.__str_object__(coordinates)])
 
-    def str_boundary_element (self, layer,coordinates):
+    def str_boundary_element (self, layer, coordinates):
         return "\n".join(["   BOUNDARYSHAPE = " + self.__str_object__(coordinates)])
 
     def str_label_element (self, item):

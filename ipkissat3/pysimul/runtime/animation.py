@@ -27,7 +27,7 @@ def create_animated_gif_from_hdf5(field_filename, eps_filename, remove_png = Tru
 	ds = list(f.items())[0][1]
 	max_time = ds.shape[2]-1
 	print("Creating animated gif from files %s and %s (time steps : %i)." %(field_filename, eps_filename, max_time))
-	png_filename_template = field_filename.replace(".h5",".t*.png")
+	png_filename_template = field_filename.replace(".h5", ".t*.png")
 	print("Removing old png files : %s" %png_filename_template)
 	os.system("rm %s" %png_filename_template)
 	print("Creating png files ....")	
@@ -38,7 +38,7 @@ def create_animated_gif_from_hdf5(field_filename, eps_filename, remove_png = Tru
 	cmd = "h5topng %s -t 0:%i -Zc dkbluered %s -a gray -A %s" %(params, max_time, field_filename, eps_filename)
 	os.system(cmd)
 	print("Converting png files to animated gif....")
-	gif_filename = field_filename.replace(".h5",".gif")
+	gif_filename = field_filename.replace(".h5", ".gif")
 	os.system("convert %s %s" %(png_filename_template, gif_filename))
 	if (remove_png):
 		print("Removing png files...") 

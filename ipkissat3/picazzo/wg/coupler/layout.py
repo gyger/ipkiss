@@ -64,8 +64,8 @@ class StraightDirectionalCoupler(__DirectionalCoupler__):
 
     def define_waveguides(self):
         waveguides = [
-            self.wg_definition1([(0.0, -0.5*self.spacing ),(self.length, -0.5*self.spacing )]),
-            self.wg_definition2([(0.0, +0.5*self.spacing ),(self.length, 0.5*self.spacing )])
+            self.wg_definition1([(0.0, -0.5*self.spacing ), (self.length, -0.5*self.spacing )]),
+            self.wg_definition2([(0.0, +0.5*self.spacing ), (self.length, 0.5*self.spacing )])
             ]
         return waveguides 
         

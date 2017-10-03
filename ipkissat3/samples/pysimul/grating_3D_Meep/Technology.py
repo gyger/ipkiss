@@ -32,11 +32,11 @@ from pysics.electromagnetics import *
 from pysics.basics.material.material import Material, MaterialFactory
 from ipkiss.visualisation.display_style import DisplayStyle
 
-TECH.overwrite_allowed=["MATERIALS","MATERIAL_STACKS","VFABRICATION","PPLAYER","PROCESS_LAYER_MAP"]
+TECH.overwrite_allowed=["MATERIALS", "MATERIAL_STACKS", "VFABRICATION", "PPLAYER", "PROCESS_LAYER_MAP"]
 TECH.MATERIALS = MaterialFactory()
 
-TECH.MATERIALS.AIR = Material(name = "air",display_style = DisplayStyle(color = COLOR_GREEN))
-TECH.MATERIALS.SILICON = Material(name = "silicon",display_style = DisplayStyle(color = COLOR_CYAN))
+TECH.MATERIALS.AIR = Material(name = "air", display_style = DisplayStyle(color = COLOR_GREEN))
+TECH.MATERIALS.SILICON = Material(name = "silicon", display_style = DisplayStyle(color = COLOR_CYAN))
 TECH.MATERIALS.SILICON_OXIDE = Material(name = "silicon oxide", display_style = DisplayStyle(color = COLOR_BLUE))
 TECH.MATERIALS.GERMANIUM = Material(name = "germanium", display_style = DisplayStyle(color = COLOR_DARK_GREEN))
 
@@ -49,30 +49,30 @@ TECH.MATERIAL_STACKS = MaterialStackFactory()
 MSTACK_SOI_SILICON_OXIDE_HEIGHT = 0.700
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_AIR = MaterialStack(name = "Air", 
-                                                    materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                        (TECH.MATERIALS.AIR,0.220)], 
+                                                    materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                        (TECH.MATERIALS.AIR, 0.220)], 
                                                     display_style = DisplayStyle(color = COLOR_BLUE))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_80nm = MaterialStack(name = "80nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.080),
-                                                                            (TECH.MATERIALS.AIR,0.300-0.160)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.080),
+                                                                            (TECH.MATERIALS.AIR, 0.300-0.160)], 
                                                         display_style = DisplayStyle(color = COLOR_GREEN))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_150nm = MaterialStack(name = "150nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.150),
-                                                                            (TECH.MATERIALS.AIR,0.07)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.150),
+                                                                            (TECH.MATERIALS.AIR, 0.07)], 
                                                         display_style = DisplayStyle(color = COLOR_YELLOW))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_220nm = MaterialStack(name = "220nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.220)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.220)], 
                                                         display_style = DisplayStyle(color = COLOR_RED))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_380nm = MaterialStack(name = "380nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.220)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.220)], 
                                                         display_style = DisplayStyle(color = COLOR_WHITE))   
 
 TECH.MATERIALS.SILICON.epsilon = 12.08
@@ -156,16 +156,16 @@ from ipkiss.all import *
 TECH.PROCESS.ACL = ProcessLayer("Active Cladding", "ACL")
 TECH.PROCESS.ACO = ProcessLayer("Active Core", "ACO")
 
-TECH.PURPOSE.ACTIVE = PatternPurpose("Active material","ACT")
+TECH.PURPOSE.ACTIVE = PatternPurpose("Active material", "ACT")
 
 TECH.PPLAYER.ACL = TechnologyTree()
 TECH.PPLAYER.ACO = TechnologyTree()
 
-TECH.PPLAYER.ACL.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACL,TECH.PURPOSE.ACTIVE,name = "ACL")
+TECH.PPLAYER.ACL.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACL, TECH.PURPOSE.ACTIVE, name = "ACL")
 TECH.PPLAYER.ACL.ALL = TECH.PPLAYER.ACL.DEFAULT
 TECH.PPLAYER.ACL.ALL.NAME = "ACL_ALL"
 
-TECH.PPLAYER.ACO.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACO,TECH.PURPOSE.ACTIVE,name = "ACO")
+TECH.PPLAYER.ACO.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACO, TECH.PURPOSE.ACTIVE, name = "ACO")
 TECH.PPLAYER.ACO.ALL = TECH.PPLAYER.ACO.DEFAULT
 TECH.PPLAYER.ACO.ALL.NAME = "ACO_ALL"
 
@@ -181,7 +181,7 @@ from pysics.materials.all import *
 TECH.MATERIALS.InP = Material(name = "InP", display_style = DisplayStyle(color = COLOR_ORANGE))
 TECH.MATERIALS.InGaAsP1p55 = Material(name = "InGaAsP - Q=1.55", display_style = DisplayStyle(color = COLOR_BLUE))
 TECH.MATERIALS.InGaAsP1p2 = Material(name = "InGaAsP - Q=1.2", display_style = DisplayStyle(color = COLOR_BLACK))
-TECH.MATERIALS.BCB = Material(name = "BCB",display_style = DisplayStyle(color = COLOR_GREEN))
+TECH.MATERIALS.BCB = Material(name = "BCB", display_style = DisplayStyle(color = COLOR_GREEN))
 
 nInP = 3.1649
 nBCB = 1.544
@@ -220,26 +220,26 @@ HEIGHT_ABOVE_SILICON = MESA_CORE_HEIGHT+BONDING_HEIGHT+AIR_CLADDING_HEIGHT
 #MSTACK_SOI_SILICON_OXIDE_HEIGHT = 0.500
 
 TECH.MATERIAL_STACKS.MSTACK_BCB = MaterialStack(name = "BCB",
-                                                        materials_heights = [(TECH.MATERIALS.BCB,BONDING_HEIGHT),
-                                                                             (TECH.MATERIALS.AIR,AIR_CLADDING_HEIGHT+MESA_CORE_HEIGHT)],
+                                                        materials_heights = [(TECH.MATERIALS.BCB, BONDING_HEIGHT),
+                                                                             (TECH.MATERIALS.AIR, AIR_CLADDING_HEIGHT+MESA_CORE_HEIGHT)],
                                                         display_style = DisplayStyle(color = COLOR_WHITE))
 
 
 TECH.MATERIAL_STACKS.MSTACK_ACLAD = MaterialStack(name = "ACTIVE CLADDING",
-                                                           materials_heights = [(TECH.MATERIALS.BCB,BONDING_HEIGHT),
-                                                                                (TECH.MATERIALS.InP,MESA_CLADDING_HEIGHT),
-                                                                                (TECH.MATERIALS.AIR,AIR_CLADDING_HEIGHT+MESA_CORE_HEIGHT-MESA_CLADDING_HEIGHT)],
+                                                           materials_heights = [(TECH.MATERIALS.BCB, BONDING_HEIGHT),
+                                                                                (TECH.MATERIALS.InP, MESA_CLADDING_HEIGHT),
+                                                                                (TECH.MATERIALS.AIR, AIR_CLADDING_HEIGHT+MESA_CORE_HEIGHT-MESA_CLADDING_HEIGHT)],
                                                            display_style = DisplayStyle(color = COLOR_BLACK))
 
-heights = [(TECH.MATERIALS.BCB,BONDING_HEIGHT),
-           (TECH.MATERIALS.InP,LowerCladdingHeight),
-           (TECH.MATERIALS.InGaAsP1p55,ActiveLayerHeight),
-           (TECH.MATERIALS.InP,UpperCladdingHeight)]
+heights = [(TECH.MATERIALS.BCB, BONDING_HEIGHT),
+           (TECH.MATERIALS.InP, LowerCladdingHeight),
+           (TECH.MATERIALS.InGaAsP1p55, ActiveLayerHeight),
+           (TECH.MATERIALS.InP, UpperCladdingHeight)]
 
 for i in range(Number_of_compensation_stacks):
-    heights.append((TECH.MATERIALS.InGaAsP1p2,CompensationLayer1Height))
-    heights.append((TECH.MATERIALS.InP,CompensationLayer2Height))
-heights.append((TECH.MATERIALS.AIR,AIR_CLADDING_HEIGHT+MESA_CORE_HEIGHT))
+    heights.append((TECH.MATERIALS.InGaAsP1p2, CompensationLayer1Height))
+    heights.append((TECH.MATERIALS.InP, CompensationLayer2Height))
+heights.append((TECH.MATERIALS.AIR, AIR_CLADDING_HEIGHT+MESA_CORE_HEIGHT))
 TECH.MATERIAL_STACKS.MSTACK_ACORE = MaterialStack(name = "ACTIVE CORE",
                                                   materials_heights = heights,
                                                   display_style = DisplayStyle(color = COLOR_ORANGE))

@@ -32,7 +32,7 @@ class ElementsExample(Structure):
         #start with an empty list of elements and append
         for i in range (5, 50, 5):
             #horizontal line
-            L = Line(layer = Layer(0), begin_coord = (0, i), end_coord = (2 * i,i), line_width = 1.0)
+            L = Line(layer = Layer(0), begin_coord = (0, i), end_coord = (2 * i, i), line_width = 1.0)
             lines += L
             #diagonal line
             lines += Line(Layer(0), (10+i, 0), (10+2*i, i), 1.0)
@@ -48,7 +48,7 @@ class ElementsExample(Structure):
         tapers = Structure("tapers")
         for i in range (10, 60, 10):
             #horizontal taper
-            tapers += Wedge(layer = Layer(0), begin_coord = (0, i), end_coord = (100,i), begin_width = 1.0, end_width = i/10.0)
+            tapers += Wedge(layer = Layer(0), begin_coord = (0, i), end_coord = (100, i), begin_width = 1.0, end_width = i/10.0)
             #diagonal taper
             tapers += ParabolicWedge(Layer(0), (150+i, 0), (210+i, 60), 1.0, i/10.0)
             
@@ -59,9 +59,9 @@ class ElementsExample(Structure):
         xpos = 0
         for i in range (5, 30, 5):
             #circle
-            circles += Circle(layer = Layer(0), center = (xpos,0), radius = i)
+            circles += Circle(layer = Layer(0), center = (xpos, 0), radius = i)
             #concentric ring
-            circles += CirclePath(Layer(0), (xpos,0), i+10, 2.0)
+            circles += CirclePath(Layer(0), (xpos, 0), i+10, 2.0)
             xpos += 80
         
         
@@ -71,9 +71,9 @@ class ElementsExample(Structure):
         xpos = 0
         for i in range (5, 30, 5):
             #filled ellipse
-            ellipses += Ellipse(layer = Layer(0), center = (xpos,0), box_size = (2 * i, 60))
+            ellipses += Ellipse(layer = Layer(0), center = (xpos, 0), box_size = (2 * i, 60))
             #elliptic ring
-            ellipses += EllipsePath( Layer(0), (xpos,0), (60, 2*i), 2.0)
+            ellipses += EllipsePath( Layer(0), (xpos, 0), (60, 2*i), 2.0)
             xpos += 80
         
         ##------------------------
@@ -81,16 +81,16 @@ class ElementsExample(Structure):
         arcs = Structure("arcs")
         for i in range (5, 50, 5):
             #circular arc
-            arcs += ArcPath(layer = Layer(0), center = (0,0), radius  = i, start_angle = 0, end_angle = 120, line_width = 1.0)
+            arcs += ArcPath(layer = Layer(0), center = (0, 0), radius  = i, start_angle = 0, end_angle = 120, line_width = 1.0)
             #elliptical_arc
-            arcs += EllipseArcPath(layer = Layer(0), center = (120,0), box_size = (2 * i, i) , start_angle = 45, end_angle = 270, line_width = 1.0)
+            arcs += EllipseArcPath(layer = Layer(0), center = (120, 0), box_size = (2 * i, i), start_angle = 45, end_angle = 270, line_width = 1.0)
             
         ##------------------------
         ##Bend and relativebend
         bends = Structure("bends")
         for i in range (5, 50, 5):
-            bends += BendPath(layer = Layer(0), start_point = (0,0), radius = i, line_width = 1.5, input_angle=60.0, output_angle = 90.0+i*2.0)
-            bends += RelativeBendPath(layer = Layer(0), start_point = (100,0), radius = i, line_width = 1.5, input_angle=60.0, angle_amount = 30.0+i*2.0)        
+            bends += BendPath(layer = Layer(0), start_point = (0, 0), radius = i, line_width = 1.5, input_angle=60.0, output_angle = 90.0+i*2.0)
+            bends += RelativeBendPath(layer = Layer(0), start_point = (100, 0), radius = i, line_width = 1.5, input_angle=60.0, angle_amount = 30.0+i*2.0)        
         
         ##---------------------------------
         ##rectangles and rounded rectangles
@@ -98,17 +98,17 @@ class ElementsExample(Structure):
         xpos = 0
         for i in range (5, 30, 5):
             #filled rectangle using Rectangle
-            rectangles += Rectangle(layer = Layer(0), center = (xpos,0), box_size = (2 * i, 50))
+            rectangles += Rectangle(layer = Layer(0), center = (xpos, 0), box_size = (2 * i, 50))
             #rectangular line 
-            rectangles += RectanglePath( Layer(0), (xpos,0), (2*i + 10, 60), line_width = 2.0)
+            rectangles += RectanglePath( Layer(0), (xpos, 0), (2*i + 10, 60), line_width = 2.0)
             #filled slightly round rectangle using RoundedRectangle
-            rectangles += RoundedRectangle( layer = Layer(0), center = (xpos,-100), box_size = (2 * i, 50), radius = 1)
+            rectangles += RoundedRectangle( layer = Layer(0), center = (xpos, -100), box_size = (2 * i, 50), radius = 1)
             #slightly rounded rectangular line 
-            rectangles += RoundedRectanglePath(Layer(0), (xpos,-100), (2*i+10, 60), 1, 2.0)
+            rectangles += RoundedRectanglePath(Layer(0), (xpos, -100), (2*i+10, 60), 1, 2.0)
             #very slightly round rectangle using RoundedRectangle
-            rectangles += RoundedRectangle( Layer(0), (xpos,-200), (2 * i, 50), i)
+            rectangles += RoundedRectangle( Layer(0), (xpos, -200), (2 * i, 50), i)
             #very rounded rectangular line 
-            rectangles += RoundedRectanglePath(Layer(0), (xpos,-200), (2*i+10, 60), i, 2.0)
+            rectangles += RoundedRectanglePath(Layer(0), (xpos, -200), (2*i+10, 60), i, 2.0)
             xpos += 80
         
         #------------------------------------------------------------------
@@ -118,7 +118,7 @@ class ElementsExample(Structure):
         xpos = 0
         for i in range (5, 30, 5):
             #filled rectangle using Box
-            boxes += Box(layer = Layer(0), center = (xpos + i,25), box_size = (2 * i, 50))
+            boxes += Box(layer = Layer(0), center = (xpos + i, 25), box_size = (2 * i, 50))
             xpos += 80
         
         
@@ -128,9 +128,9 @@ class ElementsExample(Structure):
         xpos = 0
         for i in range (5, 10):
             #filled regular_polygon
-            polygons += RegularPolygon(layer = Layer(0), center = (xpos,0), radius = 20, n_o_sides = i )
+            polygons += RegularPolygon(layer = Layer(0), center = (xpos, 0), radius = 20, n_o_sides = i )
             #regular_polygon line
-            polygons += RegularPolygonPath(layer = Layer(0), center = (xpos,0), radius = 30, n_o_sides = i, line_width = 2.0 )
+            polygons += RegularPolygonPath(layer = Layer(0), center = (xpos, 0), radius = 30, n_o_sides = i, line_width = 2.0 )
             xpos += 80
         
         ##-------------------------------------------------------------------
@@ -138,7 +138,7 @@ class ElementsExample(Structure):
         markers = Structure("markers")
         xpos = 0
         for i in range (5, 25, 5):
-            markers += Cross (layer = Layer(0), center = (xpos,0), box_size = 40, thickness = i)
+            markers += Cross (layer = Layer(0), center = (xpos, 0), box_size = 40, thickness = i)
             xpos += 60
         
         #------------------------------------------------------------------
@@ -147,44 +147,44 @@ class ElementsExample(Structure):
         lattice_constant = 5.0
         
         # 1 hexagon structure
-        hexagon = Structure("hexagon", Hexagon (layer = Layer(0), center = (0.0,0.0), radius = hexagon_radius))
+        hexagon = Structure("hexagon", Hexagon (layer = Layer(0), center = (0.0, 0.0), radius = hexagon_radius))
         
         # Now make a unit cell of a triangular lattice, consisting of 2 hexagons
         # because we already have a hexagon, we use a reference to the existing hexagon
         unit_cell = Structure("lattice_unit_cell")
         
         translation_vector = (lattice_constant/2.0, sqrt(3) * lattice_constant / 2.0)
-        unit_cell += SRef (hexagon, position = (0.0,0.0))
+        unit_cell += SRef (hexagon, position = (0.0, 0.0))
         unit_cell += SRef (hexagon, position = translation_vector)
         
         # Now we will take this unit cell, and make an array reference (aref) of it
         lattice = Structure("lattice")
         n_o_periods = (40, 10) #in X and Y-direction
         lattice_vector = (lattice_constant, sqrt(3) * lattice_constant) #translation in X and Y
-        lattice += ARef (unit_cell, origin = (0.0,0.0), period = lattice_vector, n_o_periods = n_o_periods)
+        lattice += ARef (unit_cell, origin = (0.0, 0.0), period = lattice_vector, n_o_periods = n_o_periods)
         
         #-------------------------------------------------------------------
         #Noughts and crosses
         
         # a nought
-        nought = Structure("nought", CirclePath (Layer(0), (0,0), 15, 6))
+        nought = Structure("nought", CirclePath (Layer(0), (0, 0), 15, 6))
         # a cross
-        cross = Structure("cross", [Line(Layer(0), (-15,-15), (15,15),6) , Line(Layer(0), (-15,15), (15,-15),6)])
+        cross = Structure("cross", [Line(Layer(0), (-15, -15), (15, 15), 6), Line(Layer(0), (-15, 15), (15, -15), 6)])
         # noughts and crosses
         tic_tac_toe = Structure("tic_tac_toe")
-        tic_tac_toe += Line (Layer(0),(50,0),(50,-150),3) + Line (Layer(0),(100,0),(100,-150),3) #vertical lines
-        tic_tac_toe += Line (Layer(0),(0,-50),(150,-50),3) + Line (Layer(0),(0,-100),(150,-100),3) #vertical lines
+        tic_tac_toe += Line (Layer(0), (50, 0), (50, -150), 3) + Line (Layer(0), (100, 0), (100, -150), 3) #vertical lines
+        tic_tac_toe += Line (Layer(0), (0, -50), (150, -50), 3) + Line (Layer(0), (0, -100), (150, -100), 3) #vertical lines
         
-        tic_tac_toe += (SRef(nought, (25,-25))
-                   + SRef(nought, (75,-25))
-                   + SRef(nought, (125,-75))
-                   + SRef(nought, (25,-125))
-                   + SRef(nought, (75,-125)))
+        tic_tac_toe += (SRef(nought, (25, -25))
+                   + SRef(nought, (75, -25))
+                   + SRef(nought, (125, -75))
+                   + SRef(nought, (25, -125))
+                   + SRef(nought, (75, -125)))
                    #references to noughts
-        tic_tac_toe += (SRef(cross, (125,-25))
-                   + SRef(cross, (25,-75))
-                   + SRef(cross, (75,-75))
-                   + SRef(cross, (125,-125)))
+        tic_tac_toe += (SRef(cross, (125, -25))
+                   + SRef(cross, (25, -75))
+                   + SRef(cross, (75, -75))
+                   + SRef(cross, (125, -125)))
                    #references to crosses
         
         #-------------------------------------------------------------------
@@ -202,13 +202,13 @@ class ElementsExample(Structure):
         #-------------------------------------------------------------------
         #construct a polygon from scratch
         enterprise = Structure("enterprise")
-        coordinates = Shape([(-179,54), (101,54), (101,149), (59,149), (-11,172), (-39,209), (-11,246),
-                                 (59,268), (696,268), (768,246), (795,209), (768,172), (696,149), (147,149),
-                                 (147,54), (186,54), (238,31), (258,-5), (238,-42), (186,-65), (147,-65),
-                                 (147,-139), (696,-139), (768,-161), (795,-198), (768,-235), (696,-258), (59,-258),
-                                 (-11,-235), (-39,-198), (-11,-161), (59,-139), (101,-139), (101,-65), (-179,-65),
-                                 (-179,-100), (-297,-262), (-487,-323), (-678,-262), (-795,-100), (-795,100),
-                                 (-678,262), (-487,323), (-297,262), (-179,100)],
+        coordinates = Shape([(-179, 54), (101, 54), (101, 149), (59, 149), (-11, 172), (-39, 209), (-11, 246),
+                                 (59, 268), (696, 268), (768, 246), (795, 209), (768, 172), (696, 149), (147, 149),
+                                 (147, 54), (186, 54), (238, 31), (258, -5), (238, -42), (186, -65), (147, -65),
+                                 (147, -139), (696, -139), (768, -161), (795, -198), (768, -235), (696, -258), (59, -258),
+                                 (-11, -235), (-39, -198), (-11, -161), (59, -139), (101, -139), (101, -65), (-179, -65),
+                                 (-179, -100), (-297, -262), (-487, -323), (-678, -262), (-795, -100), (-795, 100),
+                                 (-678, 262), (-487, 323), (-297, 262), (-179, 100)],
                                  closed = True
                                  )
         coordinates.magnify((0.0, 0.0), 0.1)

@@ -64,7 +64,7 @@ class WgElDefinition(WindowWaveguideDefinition):
                                               self.trench_width,
                                               self.process.extension)    
     def define_name(self):
-        return "%s_WIRE_W%d_T%d"%(self.process.extension,self.wg_width*1000,self.trench_width*1000)
+        return "%s_WIRE_W%d_T%d"%(self.process.extension, self.wg_width*1000, self.trench_width*1000)
 
 class WgLFElDefinition(WgElDefinition):
     """wire-like waveguide definition with a single shape but without trench"""

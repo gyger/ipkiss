@@ -47,7 +47,7 @@ class __ElementsForVFabricationAspect__(__Aspect__):
         mapping = dict()
         elems = ElementList()
         for process in processes:	    
-            if hasattr(TECH.PPLAYER,process.extension) and hasattr(TECH.PPLAYER.__getattribute__(process.extension),"ALL"):
+            if hasattr(TECH.PPLAYER, process.extension) and hasattr(TECH.PPLAYER.__getattribute__(process.extension), "ALL"):
                 pplayer = TECH.PPLAYER.__getattribute__(process.extension).__getattribute__("TEXT")
                 mapping[TECH.PPLAYER.__getattribute__(process.extension).ALL] = pplayer
         elems += get_elements_for_generated_layers(self.elements, mapping = mapping)

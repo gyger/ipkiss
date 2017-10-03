@@ -134,8 +134,7 @@ class __WindowDefinition__(StrongPropertyInitializer):
             for o in w.get_offsets():
                 offsets.add(o)
             
-        offsets = list(offsets)
-        offsets.sort()
+        offsets = sorted(offsets)
         return offsets
     
     def transform(self, transformation):

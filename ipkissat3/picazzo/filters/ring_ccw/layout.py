@@ -33,7 +33,7 @@ from ..multi_ring.multi_ring_base import MultiRingIdenticalWithChangedInAndOutWi
 from ipkiss.all import *
 from ipkiss.plugins.photonics.wg.basic import WgDefProperty
 
-__all__ = ["CoupledRingRectSymm","CoupledRingGeneric"]
+__all__ = ["CoupledRingRectSymm", "CoupledRingGeneric"]
 
 class CoupledRingGeneric(Structure):
     """ CCW of horizontally stacked rings (composed of vertically stacked rings, but rotated -90 degrees """
@@ -70,7 +70,7 @@ class CoupledRingRectSymm(CoupledRingGeneric):
     middle_ring = DefinitionProperty()
     
     def __init__(self, spacings = [TECH.WG.SPACING], **kwargs):
-        super(CoupledRingRectSymm,self).__init__(spacings = spacings[1:-1],**kwargs)     
+        super(CoupledRingRectSymm, self).__init__(spacings = spacings[1:-1], **kwargs)     
         self._first_spacing = spacings[0]
         self._last_spacing = spacings[-1]
 

@@ -107,7 +107,7 @@ class DopedWaveguideDefinition(WindowsOnWaveguideDefinition):
 class PicazzoExampleWindowWaveguide(Structure):
     
     def define_elements(self, elems):
-        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0))
+        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0))
 
         # define a shape
         my_path_shape = Shape([(0.0, 0.0), (50.0, 0.0), (100.0, 30.0), (150.0, 5.0)])
@@ -116,7 +116,7 @@ class PicazzoExampleWindowWaveguide(Structure):
         # Make a standard wire waveguide by using the well-know regular class 'WgElDefinition'        
         wire_wg_def = WgElDefinition(wg_width = 0.6, trench_width = 0.9)        
         layout += Structure(name ="wire", elements = [wire_wg_def(shape = my_path_shape)])        
-        layout.add_blocktitle("REGULAR_WIRE", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("REGULAR_WIRE", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 2:
@@ -133,7 +133,7 @@ class PicazzoExampleWindowWaveguide(Structure):
                              ]
                             )
         layout += Structure(name ="raw", elements = [raw_wg_def(shape = my_path_shape)])
-        layout.add_blocktitle("RAW", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("RAW", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
                
 
@@ -144,7 +144,7 @@ class PicazzoExampleWindowWaveguide(Structure):
                                                top_process = TECH.PROCESS.FCW,
                                                top_width = 0.4)
         
-        layout.add_blocktitle("TWO STEP", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("TWO STEP", center_clearout = (500.0, 0.0))
         layout += Structure(name ="two_step", elements = [ts_wg_def(shape = Shape([(0.0, 0.0), (50.0, 0.0)]))])                
         layout.add_emptyline(2)
         
@@ -158,7 +158,7 @@ class PicazzoExampleWindowWaveguide(Structure):
         # taper to deep waveguides
         from picazzo.container.taper_ports import TaperShallowPorts        
         layout += TaperShallowPorts(structure = Structure(name ="doped", elements = [doped_wg_def(shape = my_path_shape)]))
-        layout.add_blocktitle("DOP", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("DOP", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 5:
@@ -173,21 +173,21 @@ class PicazzoExampleWindowWaveguide(Structure):
         
         layout += Structure(name="window", elements=[win_wg_def(shape = my_path_shape)])
         
-        layout.add_blocktitle("WIN", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("WIN", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 6:
         # Modulator : Shallow Waveguide with Junction which subclasses from the raw base class
         mod_wg_def = JunctionWaveguideDefinition()
         layout += TaperShallowPorts(structure = Structure(name="modulator", elements=[mod_wg_def(shape = my_path_shape)]))
-        layout.add_blocktitle("MOD", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("MOD", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
         
         # Example 7:
         # Use new waveguide in a rounded connector
         from ipkiss.plugins.photonics.wg.connect import WaveguidePointRoundedConnectElementDefinition
         rounded_wg_def = WaveguidePointRoundedConnectElementDefinition(
-                            wg_definition = mod_wg_def , # previous definition, with the junction
+                            wg_definition = mod_wg_def, # previous definition, with the junction
                             bend_radius = 20.0, # needs to be sufficiently large with the broad windows
                             )        
         layout.add_emptyline(2)
@@ -196,7 +196,7 @@ class PicazzoExampleWindowWaveguide(Structure):
         from picazzo.container.taper_ports import TaperShallowPorts        
         layout += TaperShallowPorts(structure = Structure(name="rounded", 
                                                            elements=[rounded_wg_def(shape = my_path_shape)]))
-        layout.add_blocktitle("CON", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("CON", center_clearout = (500.0, 0.0))
         layout.add_emptyline(2)
 
         # Example 8:
@@ -209,7 +209,7 @@ class PicazzoExampleWindowWaveguide(Structure):
                                                      inner_size = (100.0, 100.0)
                                                      )
         layout += TaperShallowPorts(structure =spiral)                                    
-        layout.add_blocktitle("SPIRAL", center_clearout = (500.0,0.0))
+        layout.add_blocktitle("SPIRAL", center_clearout = (500.0, 0.0))
                 
         elems += layout
         return elems

@@ -20,7 +20,7 @@
 # Contact: ipkiss@intec.ugent.be
 
 from ...ipkiss.default import *
-from ipkiss.technology.technology import TechnologyLibrary, TechnologyTree,DelayedInitTechnologyTree
+from ipkiss.technology.technology import TechnologyLibrary, TechnologyTree, DelayedInitTechnologyTree
 from ipkiss.technology import get_technology
 
 

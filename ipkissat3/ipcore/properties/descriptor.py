@@ -120,8 +120,8 @@ class DefinitionProperty(__BasePropertyDescriptor__):
         if self.__value_was_stored__(obj):
             old_value = obj.__store__[self.__name__][0]
             try:
-                clear_cached_values_in_store = (type(old_value) != type(value)) or (old_value != value)
-                if type(clear_cached_values_in_store) == ndarray:
+                clear_cached_values_in_store = (not isinstance(old_value, type(value))) or (old_value != value)
+                if isinstance(clear_cached_values_in_store, ndarray):
                     clear_cached_values_in_store = clear_cached_values_in_store.all()
             except ValueError as e:  # precaution... if exceptionally this would occur because the comparison between old_value and value cannot be done, then clear caches anyway...
                 clear_cached_values_in_store = True
@@ -190,7 +190,7 @@ class DefinitionProperty(__BasePropertyDescriptor__):
                 raise IpcorePropertyDescriptorException("Invalid assignment for Property '%s' of '%s' with value %s: not compatible with restriction %s." % (self.name, obj.__class__.__name__, str(value), str(self.restriction)))
 
     def __cache_property_value_on_object__(self, obj, value):
-        if type(obj) != NoneType: #FIXME: ???
+        if not isinstance(obj, NoneType): #FIXME: ???
             new_value = self.preprocess(value, obj)
             self.__check_restriction__(obj, new_value)
             obj.__store__[self.__name__] = (new_value, CACHED)

@@ -38,14 +38,14 @@ def hpgl_get_shapes(f):
         if s.startswith("PU"):
             if pu and len(shape) > 1:
                 ret_shapes.append(shape)
-            t = s.replace('PU','').replace(';','')
+            t = s.replace('PU', '').replace(';', '')
             t = t.split()
             shape = [(float(t[0]), float(t[1]))]
             pu = True                
         elif s.startswith('PD') and pu:
-            t = s.replace('PD','').replace(';','')
+            t = s.replace('PD', '').replace(';', '')
             t = t.split()
-            shape.append((float(t[0]),float(t[1])))
+            shape.append((float(t[0]), float(t[1])))
         else:
             if pu and len(shape) > 1:
                 ret_shapes.append(shape)
@@ -60,15 +60,15 @@ def hpgl_get_next_shape(f):
     if s == '':
         return ret_shape
     
-    t = s.replace('PU','').replace(';','')
+    t = s.replace('PU', '').replace(';', '')
     t = t.split()
-    ret_shape.append((float(t[0]),float(t[1])))
+    ret_shape.append((float(t[0]), float(t[1])))
     
     s = f.readline()
     while s.startswith('PD'):
-        t = s.replace('PD','').replace(';','')
+        t = s.replace('PD', '').replace(';', '')
         t = t.split()
-        ret_shape.append((float(t[0]),float(t[1])))
+        ret_shape.append((float(t[0]), float(t[1])))
         s = f.readline()
     return ret_shape        
     
@@ -76,7 +76,7 @@ def hpgl_get_next_shape(f):
 
 def hpgl_to_shapes (filename):
     ret_shapes = []
-    f = open(filename,'r')
+    f = open(filename, 'r')
     ret_shapes = hpgl_get_shapes(f)
 ##    s = hpgl_get_next_shape(f)
 ##    while s != []:
@@ -120,7 +120,7 @@ def hpgl_to_structure (name, filename, layer = Layer(0), size = (50.0, 50.0), al
     else:
         return str_shapes_paths(name, layer, final_shapes, line_width)
 
-def hpgl_to_python_coords (name, filename, file_out, size = (50.0,50.0), alignment= (constants.TEXT_ALIGN_CENTER, constants.TEXT_ALIGN_TOP), stub = 0.0):
+def hpgl_to_python_coords (name, filename, file_out, size = (50.0, 50.0), alignment= (constants.TEXT_ALIGN_CENTER, constants.TEXT_ALIGN_TOP), stub = 0.0):
     ret_str = ''
     if alignment[0] == constants.TEXT_ALIGN_RIGHT:
         xpos = - size[0]

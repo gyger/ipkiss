@@ -60,7 +60,7 @@ class MaterialStackGeometry1D(CartesianGeometry1D):
     
     def define_thickness(self):
         z = 0.0
-        for m,h in self.materials_thicknesses:
+        for m, h in self.materials_thicknesses:
             z = z + h
         return z
     
@@ -98,7 +98,7 @@ class MaterialStackGeometry1D(CartesianGeometry1D):
         return "<MaterialStackGeometry1D %s>" % self.name
     
     def __hash__(self):
-        return hash("".join(["%s_%d" % (m.name, round(d*100000)) for m,d in self.materials_thicknesses]))
+        return hash("".join(["%s_%d" % (m.name, round(d*100000)) for m, d in self.materials_thicknesses]))
             
 
     def consolidate(self):
@@ -161,21 +161,21 @@ class MaterialStackGeometry2D(CartesianGeometry2D):
     def size_info(self):
         return SizeInfo(west = self.origin_x, 
                         east = self.origin_x + self.width,
-                        south = min([m.origin_z for m,h in self.stacks_widths]),
-                        north = max([m.origin_z + m.thickness for m,h in self.stacks_widths])
+                        south = min([m.origin_z for m, h in self.stacks_widths]),
+                        north = max([m.origin_z + m.thickness for m, h in self.stacks_widths])
                         )
                         
                         
     
     def define_width(self):
         x = 0.0
-        for m,t in self.stacks_widths:
+        for m, t in self.stacks_widths:
             x = x + t
         return x
 
     def define_thickness(self):
         z = 0.0
-        return max([m.thickness for m,h in self.stacks_widths])
+        return max([m.thickness for m, h in self.stacks_widths])
     
     
     def get_number_of_stacks(self):
@@ -185,7 +185,7 @@ class MaterialStackGeometry2D(CartesianGeometry2D):
         return "<MaterialStackGeometry2D %s>" % self.name
     
     def __hash__(self):
-        return hash("".join(["%s_%d" % (m.name, round(d*100000)) for m,d in self.stacks_widths]))
+        return hash("".join(["%s_%d" % (m.name, round(d*100000)) for m, d in self.stacks_widths]))
             
 
     def consolidate(self):
@@ -255,21 +255,21 @@ class MaterialStackGeometry3D(CartesianGeometry3D):
     def size_info(self):
         return SizeInfo(west = self.origin_x, 
                         east = self.origin_x + self.width,
-                        south = min([m.origin_z for m,h in self.stacks_widths]),
-                        north = max([m.origin_z + m.thickness for m,h in self.stacks_widths])
+                        south = min([m.origin_z for m, h in self.stacks_widths]),
+                        north = max([m.origin_z + m.thickness for m, h in self.stacks_widths])
                         )
                         
                         
     
     def define_width(self):
         x = 0.0
-        for m,t in self.stacks_widths:
+        for m, t in self.stacks_widths:
             x = x + t
         return x
 
     def define_thickness(self):
         z = 0.0
-        return max([m.thickness for m,h in self.shapes_stacks])
+        return max([m.thickness for m, h in self.shapes_stacks])
     
     
     def get_number_of_stacks(self):

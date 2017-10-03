@@ -113,14 +113,14 @@ class __MmiTaperPorts__(object):
     input_y_positions = RestrictedProperty(restriction = RestrictList(RESTRICT_NUMBER), default = [])
     output_y_positions = RestrictedProperty(restriction = RestrictList(RESTRICT_NUMBER), default = [])
     taper_width = NonNegativeNumberProperty(required=True)
-    straight_extension = Size2Property(default = (0.0,TECH.TECH.MINIMUM_LINE))
+    straight_extension = Size2Property(default = (0.0, TECH.TECH.MINIMUM_LINE))
     
 class MmiTaperPorts(TaperDeepPorts):
     """ a deep-etch generic MMI with tapers  """
     pass
 
 
-class MmiTapered(__MmiTaperPorts__,MmiTaperPorts):    
+class MmiTapered(__MmiTaperPorts__, MmiTaperPorts):    
     
     def define_structure(self):        
         twg = WgElDefinition(wg_width = self.taper_width, process = self.end_wg_def.process, 
@@ -135,37 +135,37 @@ class MmiTapered(__MmiTaperPorts__,MmiTaperPorts):
 class __MmiSymmetric__(object):
     wg_offset = NonNegativeNumberProperty(required=True)
     
-class Mmi1x2(__MmiSymmetric__,Mmi):
+class Mmi1x2(__MmiSymmetric__, Mmi):
     def define_input_y_positions(self):
         return [0.0]
     def define_output_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
 
-class Mmi2x1(__MmiSymmetric__,Mmi):
+class Mmi2x1(__MmiSymmetric__, Mmi):
     def define_input_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     def define_output_y_positions(self):
         return [0.0]
 
-class Mmi2x2(__MmiSymmetric__,Mmi):
+class Mmi2x2(__MmiSymmetric__, Mmi):
     def define_input_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     def define_output_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
 
-class Mmi1x2Tapered(__MmiSymmetric__,MmiTapered):    
+class Mmi1x2Tapered(__MmiSymmetric__, MmiTapered):    
     def define_input_y_positions(self):
         return [0.0]
     def define_output_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     
-class Mmi2x1Tapered(__MmiSymmetric__,MmiTapered):    
+class Mmi2x1Tapered(__MmiSymmetric__, MmiTapered):    
     def define_input_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     def define_output_y_positions(self):
         return [0.0]
     
-class Mmi2x2Tapered(__MmiSymmetric__,MmiTapered):
+class Mmi2x2Tapered(__MmiSymmetric__, MmiTapered):
     def define_input_y_positions(self):
         return [-self.wg_offset, self.wg_offset]
     def define_output_y_positions(self):

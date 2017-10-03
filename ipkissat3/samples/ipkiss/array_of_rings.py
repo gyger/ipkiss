@@ -39,7 +39,7 @@ class ArrayOfRings(Structure):
         def define_elements(self, elems):
                 r = Ring(radius = self.ring_radius)
                 delta = 2.0*r.radius + 5.0
-                elems += ARef(reference = r, origin = self.origin, period = (delta,delta), n_o_periods = (self.n_of_rings_width, self.n_of_rings_height))
+                elems += ARef(reference = r, origin = self.origin, period = (delta, delta), n_o_periods = (self.n_of_rings_width, self.n_of_rings_height))
                 return elems
 
 #we now create an instance of such an array and export to GDS

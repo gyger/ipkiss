@@ -45,7 +45,7 @@ class ImportLayout( StoredNoDistortTransformable, __ImportBase__):
 
     def read(self):
         if os.path.exists(self.filename):
-            F = open(self.filename,"rb")
+            F = open(self.filename, "rb")
             input = InputGdsii(F)
             input.layer_map = self.layermap
             input.prefix = self.name + "_"
@@ -71,7 +71,7 @@ class ImportStructure(__ImportBase__, Structure):
                 from gzip import GzipFile
                 F = GzipFile(self.filename, mode = "rb")
             else:
-                F = open(self.filename,"rb")
+                F = open(self.filename, "rb")
             input = InputGdsiiHeader(F)
             input.layer_map = self.layer_map
             input.prefix = self.prefix
@@ -91,7 +91,7 @@ class ImportStructure(__ImportBase__, Structure):
                 from gzip import GzipFile
                 F = GzipFile(self.filename, mode = "rb")
             else:
-                F = open(self.filename,"rb")
+                F = open(self.filename, "rb")
             input = self.input_handler(F, stop_on_unknown_gds_layer=False, log_bufsize = filesize)
             input.layer_map = self.layer_map
             input.prefix = self.prefix
@@ -105,7 +105,7 @@ class ImportStructure(__ImportBase__, Structure):
     def get_library_top_level(self):
         L = self.get_file_library()
         if self.toplevel!="":
-            S = L["%s%s"%(input.prefix,self.toplevel)]
+            S = L["%s%s"%(input.prefix, self.toplevel)]
         else:
             S = L.top_layout()      
         return S

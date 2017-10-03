@@ -34,9 +34,9 @@ class MaterialStack(__MaterialStack__):
     size_z  = FloatProperty()
     
     def __eq__(self, other):
-        if not isinstance(other,MaterialStack):
+        if not isinstance(other, MaterialStack):
             return False
-        for (smh,omh) in zip(self.materials_heights,other.materials_heights):
+        for (smh, omh) in zip(self.materials_heights, other.materials_heights):
             if smh[0]!=omh[0] or abs(smh[1]-omh[1])>1e-6:
                 return False
         return True
@@ -52,7 +52,7 @@ class MaterialStack(__MaterialStack__):
     
     def define_size_z(self):
         z = 0.0
-        for m,h in self.materials_heights:
+        for m, h in self.materials_heights:
             z = z + h
         return z
     
@@ -66,13 +66,13 @@ class MaterialStack(__MaterialStack__):
         TECH = get_technology()
         number_of_heights = self.get_number_of_layers()
         
-        nm = numpy.zeros((number_of_heights,4))
+        nm = numpy.zeros((number_of_heights, 4))
         
         for i in range(number_of_heights):
-            nm[i,3] = number_of_heights
-            nm[i,2] = self.materials_heights[i][0].epsilon
-            nm[i,1] = self.materials_heights[i][1]
-            nm[i,0] = self.get_unique_id()
+            nm[i, 3] = number_of_heights
+            nm[i, 2] = self.materials_heights[i][0].epsilon
+            nm[i, 1] = self.materials_heights[i][1]
+            nm[i, 0] = self.get_unique_id()
             
         return nm
     
@@ -114,7 +114,7 @@ class MaterialStack(__MaterialStack__):
         return "<MaterialStack %s>" % self.name
     
     def __hash__(self):
-        return hash("".join(["%s_%d" % (m.name, round(d*100000)) for m,d in self.materials_heights]))
+        return hash("".join(["%s_%d" % (m.name, round(d*100000)) for m, d in self.materials_heights]))
             
 
     def consolidate(self):
@@ -164,8 +164,8 @@ class MaterialStackFactory(object):
     id_counter = 1
     store_id = dict()
 
-    def __getitem__(self,key):
-        if isinstance(key,int):
+    def __getitem__(self, key):
+        if isinstance(key, int):
             return self.store_id[key]
         else:
             raise Exception("Invalid type of key for accessing an item in MaterialFactory::__get_item__ expects an integer key and got: %s" %str(key))         
@@ -181,8 +181,8 @@ class MaterialStackFactory(object):
         self.__dict__["id_counter"] = self.id_counter + 1       
     
     def get_key_from_material_stack(self, matstack):
-        for (k,v) in list(self.__dict__.items()):
-            if isinstance(v,MaterialStack) and v == matstack:
+        for (k, v) in list(self.__dict__.items()):
+            if isinstance(v, MaterialStack) and v == matstack:
                 return k
         return None
     
@@ -201,7 +201,7 @@ class MaterialStackFactory(object):
             total_number_of_layers += self.store_id[key].get_number_of_layers()
         
         #create numpy matrix
-        nm = numpy.zeros((total_number_of_layers,4))
+        nm = numpy.zeros((total_number_of_layers, 4))
         
         #second iteration: add contributions to final matrix
         current_row_index = 0        
@@ -218,7 +218,7 @@ class MaterialStackFactory(object):
         self.id_counter = 1
         
     def get_material_stack_id(self, material_stack):
-        for (i,mstack) in list(self.store_id.items()):
+        for (i, mstack) in list(self.store_id.items()):
             if mstack == material_stack:
                 return i
         raise Exception("Material stack with id = %i not found." %material_stack)

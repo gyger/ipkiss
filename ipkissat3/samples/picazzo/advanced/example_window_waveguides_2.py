@@ -38,7 +38,7 @@ class LshapeWgDefinition(WindowWaveguideDefinition):
     wg_width = PositiveNumberProperty(default = TECH.WG.WIRE_WIDTH)  
     trench_width = NonNegativeNumberProperty(default = TECH.WG.TRENCH_WIDTH)
     process = LockedProperty()    
-    polarity=  StringProperty(required = True, restriction=RestrictValueList(allowed_values = ["left","right"]))                                            
+    polarity=  StringProperty(required = True, restriction=RestrictValueList(allowed_values = ["left", "right"]))                                            
 
     def define_windows(self):
         windows = []
@@ -77,13 +77,13 @@ class LshapeWgToWgElDefinitionTaper(__WgElPortTaper__):
         taper_elements = Group()
         taper_elem1 = Boundary(layer = wg_lfarea_window.layer,
                                shape = Shape([(wg_lfarea_window.start_offset, 0),
-                                              (sign(wg_lfarea_window.end_offset)*(abs(wg_lfarea_window.end_offset)),0),
+                                              (sign(wg_lfarea_window.end_offset)*(abs(wg_lfarea_window.end_offset)), 0),
                                               (wg_lfarea_window.end_offset, self.length),
                                               (wg_lfarea_window.start_offset, self.length)]))
         taper_elements+= taper_elem1
         taper_elem2 = Boundary(layer = wg_line_window.layer,
                        shape = Shape([(wg_line_window.start_offset, 0),
-                                      (wg_line_window.end_offset,0),
+                                      (wg_line_window.end_offset, 0),
                                       (wg_line_window.end_offset, self.length),
                                       (wg_line_window.start_offset, self.length)])
                        )
@@ -91,14 +91,14 @@ class LshapeWgToWgElDefinitionTaper(__WgElPortTaper__):
         taper_elements+= taper_elem2
         taper_elem3 = Boundary(layer = fc_line_window.layer,
                        shape = Shape([(fc_line_window.start_offset, 0),
-                                      (fc_line_window.end_offset,0),
+                                      (fc_line_window.end_offset, 0),
                                       (fc_line_window.end_offset, self.length),
                                       (fc_line_window.start_offset, self.length)]))
         taper_elements+= taper_elem3        
 
         taper_elem4 = Boundary(layer = fc_lfarea_window.layer,
                        shape = Shape([(fc_lfarea_window.start_offset, 0),
-                                      (fc_lfarea_window.end_offset,0),
+                                      (fc_lfarea_window.end_offset, 0),
                                       (fc_lfarea_window.end_offset, self.length),
                                       (fc_lfarea_window.start_offset, self.length)]))
         taper_elements+= taper_elem4    
@@ -129,7 +129,7 @@ class LshapeWgToWgElDefinitionTaper(__WgElPortTaper__):
            
          
     def validate_properties(self):
-        if not isinstance(self.start_port.wg_definition,LshapeWgDefinition):
+        if not isinstance(self.start_port.wg_definition, LshapeWgDefinition):
             raise Exception("Start port should have a waveguide definition of type 'LshapeWgDefinition'")
         return True
             
@@ -152,7 +152,7 @@ if __name__ == "__main__":
             taper =  LshapeWgToWgElDefinitionTaper(start_port = wg_el.ports[1], length = 20.0)
             taper1 = LshapeWgToWgElDefinitionTaper(start_port = wg_el.ports[0], length = 20.0)
 
-            struct = TaperDeepPorts(structure = Structure(elements=[wg_el,taper,taper1],ports = taper.ports +taper1.ports))                           
+            struct = TaperDeepPorts(structure = Structure(elements=[wg_el, taper, taper1], ports = taper.ports +taper1.ports))                           
             elems += SRef(reference=struct)
             return elems
                       

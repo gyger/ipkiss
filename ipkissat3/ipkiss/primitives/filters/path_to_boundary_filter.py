@@ -31,7 +31,7 @@ class PathToBoundaryFilter(Filter):
         if item.line_width != 0:
             LOG.debug("Converting path %s into boundary." %item)
             resultBoundary = Boundary(item.layer, ShapePath(original_shape = item.shape, 
-                                                            path_width = abs(item.line_width) , 
+                                                            path_width = abs(item.line_width), 
                                                             path_type = item.path_type), transformation = item.transformation)            
             resultBoundaryList = [resultBoundary]
             LOG.debug("Result has %i points" %len(resultBoundary.shape.points))

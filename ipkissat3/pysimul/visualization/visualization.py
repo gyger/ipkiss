@@ -71,7 +71,7 @@ class SimulationVolumeVisualization2D(__SimulationVolumeVisualization__):
         patches_for_legend = [ref[0] for ref in list(references_for_legend.values())]
         labels_for_legend = [ref[1] for ref in list(references_for_legend.values())]
 
-        ax.legend(patches_for_legend, labels_for_legend, loc=(0.5,0.9), prop=prop)
+        ax.legend(patches_for_legend, labels_for_legend, loc=(0.5, 0.9), prop=prop)
 
         ax.autoscale_view()	
 
@@ -81,15 +81,15 @@ class SimulationVolumeVisualization2D(__SimulationVolumeVisualization__):
 
 class SimulationVolumeVisualization3D(SimulationVolumeVisualization2D):
 
-    def make_povray_file(self, camera_pos, look_at=(0,0,1), z_extrusion_factor = 1.0):
+    def make_povray_file(self, camera_pos, look_at=(0, 0, 1), z_extrusion_factor = 1.0):
         #initialize povray	
         file_name = "%s.pov"%(self.simulation_volume.name)
         from dependencies.povray_wrapper import PovrayFile, Background, Camera, LightSource, Prism, Texture, Pigment
-        povray_file=PovrayFile(file_name,"colors.inc","stones.inc")
+        povray_file=PovrayFile(file_name, "colors.inc", "stones.inc")
         bg = Background(color = "White")
         pov_camera_pos = (camera_pos[0], camera_pos[2], camera_pos[1])
-        pov_look_at = (look_at[0],look_at[2],look_at[1])
-        cam = Camera(location=pov_camera_pos,look_at=pov_look_at)
+        pov_look_at = (look_at[0], look_at[2], look_at[1])
+        cam = Camera(location=pov_camera_pos, look_at=pov_look_at)
         light = LightSource(pov_camera_pos, color="White")
         povray_file.write( bg, cam, light)
         #convert virtual fabrication polygons to povray prisms
@@ -102,7 +102,7 @@ class SimulationVolumeVisualization3D(SimulationVolumeVisualization2D):
                 povray_prism = Prism(shape.points, heights= (0, solid_height * z_extrusion_factor), opts = [Texture(Pigment(color=color.capitalize()))])
                 print("Writing prism with %i points for %s (solid height : %f) in %s" %(len(shape.points), geom.material_stack_factory[material_stack_id].name, geom.material_stack_factory[material_stack_id].solid_height, color))
                 povray_file.write(povray_prism)
-        print("Povray file generated : ",file_name)
+        print("Povray file generated : ", file_name)
 
 
 

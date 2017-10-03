@@ -35,7 +35,7 @@ from genericpdk.library.fibcoup import *
 class PicazzoExample5(Structure):
     
     def define_elements(self, elems):            
-        layout = layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0),
+        layout = layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0),
                                         adapter = IoFibcoupGeneric) # Note: default fiber coupler is changed!
         
         # alignment waveguide       

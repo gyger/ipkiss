@@ -65,7 +65,7 @@ class __Ring__(Structure):
     
     
     def define_elements(self, elems):
-        elems += [SRef(reference = c, transformation = t) for (c,t) in zip(self.couplers, self.coupler_transformations)]
+        elems += [SRef(reference = c, transformation = t) for (c, t) in zip(self.couplers, self.coupler_transformations)]
         elems += self.get_ring()
         
         if self.area_layer_on:
@@ -324,7 +324,7 @@ class __RingSymmCouplers__(__RingRoundedWaveguideCouplers__):
                                                length = l,
                                                bend_radius = r,
                                                rounding_algorithm = ra,
-                                               coupler_angles = (ca,ca),
+                                               coupler_angles = (ca, ca),
                                                manhattan = self.manhattan
                                                )
                         ]
@@ -357,7 +357,7 @@ class __RingSBendCouplers__(__RingSymmCouplers__):
                                                length = l,
                                                bend_radius = r,
                                                rounding_algorithm = ra,
-                                               coupler_angles = (ca,ca),
+                                               coupler_angles = (ca, ca),
                                                sbend_straight = cs,
                                                manhattan = self.manhattan
                                                )
@@ -435,7 +435,7 @@ class RingRect180DropFilter(__RingStraightCouplers__, __Ring180CouplerTransforma
     """ rectangular ring filter with one straight access waveguide (notch filter) """
     __name_prefix__ = "RINGRECT_180DROP"
 
-class RingRect90DropFilter(__RingStraightCouplers__, __Ring90CouplerTransformation2__,__RingWaveguideCouplers2__,  RingRect):
+class RingRect90DropFilter(__RingStraightCouplers__, __Ring90CouplerTransformation2__, __RingWaveguideCouplers2__,  RingRect):
     """ rectangular ring filter with two straight access waveguides (drop filter) """
     __name_prefix__ = "RINGRECT_90DROP"
     
@@ -444,11 +444,11 @@ class RingRectSymmNotchFilter(__RingSymmCouplers__, __RingCouplerTransformation1
     __name_prefix__ = "RINGRECTSYMM_NOTCH"
         
     
-class RingRectSymm180DropFilter(__RingSymmCouplers__, __Ring180CouplerTransformation2__,__RingWaveguideCouplers2__,  RingRect):
+class RingRectSymm180DropFilter(__RingSymmCouplers__, __Ring180CouplerTransformation2__, __RingWaveguideCouplers2__,  RingRect):
     """ rectangular ring filter with two access waveguides (drop filter) """
     __name_prefix__ = "RINGRECTSYMM_180DROP"
 
-class RingRectSymm90DropFilter(__RingSymmCouplers__, __Ring90CouplerTransformation2__,__RingWaveguideCouplers2__,  RingRect):
+class RingRectSymm90DropFilter(__RingSymmCouplers__, __Ring90CouplerTransformation2__, __RingWaveguideCouplers2__,  RingRect):
     """ rectangular ring filter with two access waveguides (drop filter) """
     __name_prefix__ = "RINGRECTSYMM_90DROP"
     
@@ -457,7 +457,7 @@ class RingRectBentNotchFilter(__RingBentCouplers__, __RingCouplerTransformation1
     __name_prefix__ = "RINGRECTBENT_NOTCH"
         
     
-class RingRectBent180DropFilter(__RingBentCouplers__, __Ring180CouplerTransformation2__,__RingWaveguideCouplers2__,  RingRect):
+class RingRectBent180DropFilter(__RingBentCouplers__, __Ring180CouplerTransformation2__, __RingWaveguideCouplers2__,  RingRect):
     """ rectangular ring filter with two conformally curved access waveguides (drop filter) """
     __name_prefix__ = "RINGRECTBENT_180DROP"
       
@@ -467,7 +467,7 @@ class RingRectSBendNotchFilter(__RingSBendCouplers__, __RingCouplerTransformatio
     __name_prefix__ = "RINGRECTSBEND_NOTCH"
         
     
-class RingRectSBend180DropFilter(__RingSBendCouplers__, __Ring180CouplerTransformation2__,__RingWaveguideCouplers2__,  RingRect):
+class RingRectSBend180DropFilter(__RingSBendCouplers__, __Ring180CouplerTransformation2__, __RingWaveguideCouplers2__,  RingRect):
     """ rectangular ring filter with two S-curved access waveguides (drop filter) """
     __name_prefix__ = "RINGRECTSBEND_180DROP"
 

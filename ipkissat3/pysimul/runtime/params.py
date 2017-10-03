@@ -32,7 +32,7 @@ class SimulationParameterContainer(StrongPropertyInitializer):
 	def __set_properties__(self, obj, kwargs):
 		props = obj.__unlocked_properties__()
 		kwargs_to_assign = dict()
-		for name,val in list(kwargs.items()):
+		for name, val in list(kwargs.items()):
 			if name in props:
 				kwargs_to_assign[name] = val
 		obj.__assign_properties__(kwargs_to_assign)
@@ -46,7 +46,7 @@ class SimulationParameterContainer(StrongPropertyInitializer):
 				p["structure"] = p["component"]
 				del p["component"]
 				from pysimul.log import PYSIMUL_LOG as LOG
-				LOG.deprecation_warning("Please switch the name of simulation parameter 'component' to 'structure'.",3)	 			
+				LOG.deprecation_warning("Please switch the name of simulation parameter 'component' to 'structure'.", 3)	 			
 			if (not isinstance(p, dict)):
 				raise PythonSimulateException("Keyword argument 'simul_params' must be of type 'dict'. Current type is : '%'" %type(p))
 			props = self.__unlocked_properties__()

@@ -44,7 +44,7 @@ class __GenericW1Slice__(__PhCAutoMap__, TriangularPhCLayout):
         cells = {}
         cell_letters = "ABCDEFGHIJKLMNOPQRSTUVWXY"
         L = len(self.unit_cells)
-        for i in range(0,L):
+        for i in range(0, L):
             H1 = cell_letters[2*i]
             C = self.unit_cells[i]
             if not C is None:
@@ -189,7 +189,7 @@ class GenericW1WaveguideTermination(__GenericW1Slice__):
             else:
                 maplist.append(" /%s /" % (H))        
         mymap = "\n".join(maplist)        
-        return (cells,mymap)
+        return (cells, mymap)
     
 
     def define_ports_coordinates(self):
@@ -202,7 +202,7 @@ class GenericW1WaveguideTermination(__GenericW1Slice__):
         port_col = self.port_offset / self.pitches[0]
         
         return [((-port_col, -port_row), -180, wg_def),
-                ((port_col , -port_row), 0.0, wg_def)
+                ((port_col, -port_row), 0.0, wg_def)
                  ]
     #def define_ports(self, prts):
         #if self.port_row is None: 
@@ -270,7 +270,7 @@ class GenericW1Waveguide(__GenericW1Waveguide__):
                 maplist.append(" /%d,%s /" % (self.n_o_periods-1, H))
         
         mymap = "\n".join(maplist)
-        return (cells,mymap)
+        return (cells, mymap)
 
     def define_ports_coordinates(self):
         from ipkiss.plugins.photonics.wg.basic import WgElDefinition
@@ -309,7 +309,7 @@ class __W1__(DodecPhCLayout):
     
     def define_ports_coordinates(self):
         from ipkiss.plugins.photonics.wg.basic import WgElDefinition
-        wg_def = WgElDefinition(wg_width = sqrt(3.0)*self.pitch ,
+        wg_def = WgElDefinition(wg_width = sqrt(3.0)*self.pitch,
                                 trench_width = TECH.WG.TRENCH_WIDTH,
                                 process = TECH.PROCESS.WG
                                 )

@@ -62,13 +62,13 @@ class OpticalPortAspect(PortAspect):
     
     def get_optical_ports_within_angles(self, start_angle, end_angle):
         p = self.optical_ports
-        return p.get_ports_within_angles(start_angle,end_angle)
+        return p.get_ports_within_angles(start_angle, end_angle)
 
     def define_optical_west_ports(self):
         return self.get_optical_ports_within_angles(180.0 - 0.5 * self.port_angle_decision, 180.0 + 0.5 * self.port_angle_decision)
     optical_west_ports = OpticalPortListProperty(locked = True)
 
-    def define_optical_east_ports(self,ports):
+    def define_optical_east_ports(self, ports):
         return self.get_optical_ports_within_angles(-0.5 * self.port_angle_decision, +0.5 * self.port_angle_decision)
     optical_east_ports = OpticalPortListProperty(locked = True)
 
@@ -93,7 +93,7 @@ class OpticalPortListAspect(__Aspect__):
     def define_optical_ports(self):
         pl = OpticalPortList()
         for p in self.get_ports_on_domain(OpticalDomain):
-            if not isinstance(p,VerticalOpticalPort):
+            if not isinstance(p, VerticalOpticalPort):
                 pl.append(p)
         return pl
     optical_ports = property(define_optical_ports)

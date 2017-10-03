@@ -86,7 +86,7 @@ class __MaterialStackGeometry2DVisualizationMixin__(StrongPropertyInitializer):
         prop = font_manager.FontProperties(size=10) 
         patches_for_legend = [ref[0] for ref in list(legend_refs.values())]
         labels_for_legend = [ref[1] for ref in list(legend_refs.values())]
-        axes.legend(patches_for_legend, labels_for_legend, loc=(0.5,0.9), prop=prop)
+        axes.legend(patches_for_legend, labels_for_legend, loc=(0.5, 0.9), prop=prop)
             
         return fig
 
@@ -157,10 +157,10 @@ class __MaterialStackGeometry3DVisualizationMixin__(StrongPropertyInitializer):
             for material, thickness in stack.materials_thicknesses:
                 # create the Wedge cell points and indices
                 # reuse the top points of the last cell as the bottom points of the new cell
-                wedge_points.append(point_array + numpy.array([0,0,z]))
-                wedge_points.append(point_array + numpy.array([0,0,z + 0.999*thickness]))
-                wedge_cell_indices.append(numpy.hstack([iar + numpy.array([3, N, N, N]) , # 3 adds to the existing 3: makes 6
-                                                        iar[:,1:] + numpy.array([N+ n_points, N + n_points, N + n_points])]
+                wedge_points.append(point_array + numpy.array([0, 0, z]))
+                wedge_points.append(point_array + numpy.array([0, 0, z + 0.999*thickness]))
+                wedge_cell_indices.append(numpy.hstack([iar + numpy.array([3, N, N, N]), # 3 adds to the existing 3: makes 6
+                                                        iar[:, 1:] + numpy.array([N+ n_points, N + n_points, N + n_points])]
                                                        ).ravel()
                                           ) 
                 N += 2 * n_points
@@ -194,7 +194,7 @@ class __MaterialStackGeometry3DVisualizationMixin__(StrongPropertyInitializer):
         cell_array = tvtk.CellArray()
         cell_array.set_cells(n_cells, numpy.hstack(wedge_cell_indices))
         cell_types = numpy.array([wedge_type for i in range(n_cells)])
-        cell_offset = numpy.array(list(range(0,7 * n_cells, 7))) # each cell has one counter and 6 points
+        cell_offset = numpy.array(list(range(0, 7 * n_cells, 7))) # each cell has one counter and 6 points
 
         # Now create the UnstructuredGrid which will contain the material data.
         ug = tvtk.UnstructuredGrid(points=numpy.vstack(wedge_points))

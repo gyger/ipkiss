@@ -48,7 +48,7 @@ def aperture_mounting_rowland(pole_vector, radius, angles):
     """ Generates a tuple of (positions, angles), with positions and angles lists, for 
     apertures ojn a Rowland circle wit a given pole and direction of the pole (a vector), 
     and the apertures pointing to the pole and for given angles with respect to the pole """
-    vectors = [Vector(position = (pole_vector[0] + 2*radius * cos(DEG2RAD* (a-pole_vector.angle_deg)) * cos(DEG2RAD * a) , 
+    vectors = [Vector(position = (pole_vector[0] + 2*radius * cos(DEG2RAD* (a-pole_vector.angle_deg)) * cos(DEG2RAD * a), 
                            pole_vector[1] + 2*radius * cos(DEG2RAD* (a-pole_vector.angle_deg)) * sin(DEG2RAD*a)),
                        angle = a) 
                         for a in angles]

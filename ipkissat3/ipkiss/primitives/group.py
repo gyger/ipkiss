@@ -90,7 +90,7 @@ class __Group__(StrongPropertyInitializer):
     def is_empty(self):   
         return self.elements.is_empty()
     
-    def __eq__(self,other):
+    def __eq__(self, other):
         if other == None:
             return False
         if not isinstance(other, Structure):
@@ -101,7 +101,7 @@ class __Group__(StrongPropertyInitializer):
         otherLen = len(otherElements)
         if (myLen != otherLen):
             return False
-        for myElem, otherElem in zip(myElements,otherElements):         
+        for myElem, otherElem in zip(myElements, otherElements):         
             if (myElem != otherElem):
                 return False
         return True

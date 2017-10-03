@@ -21,7 +21,7 @@
 
 from ipkiss.technology.technology import TechnologyLibrary, TechnologyTree, DelayedInitTechnologyTree
 from ipkiss.technology import get_technology
-from ipkiss.io.gds_layer import GdsiiLayerInputMap,GdsiiLayerOutputMap
+from ipkiss.io.gds_layer import GdsiiLayerInputMap, GdsiiLayerOutputMap
 from ipkiss.process.layer import PPLayer as PPLayer
 
 TECH = get_technology()
@@ -36,13 +36,13 @@ TECH.PPLAYER.WG = TechnologyTree()
 TECH.PPLAYER.FC = TechnologyTree()
 
 ### WG ###
-TECH.PPLAYER.WG.TRENCH = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.DF.TRENCH,name="WG_TRE")
-TECH.PPLAYER.WG.SQUARE = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.DF.TRENCH,name="WG_SQ")
-TECH.PPLAYER.WG.HOLE = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.DF.HOLE,name="WG_HEX")
-TECH.PPLAYER.WG.MARKER = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.DF.MARKER,name="WG_MRK")
-TECH.PPLAYER.WG.TEXT = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.DF.TEXT,name="WG_TXT")
-TECH.PPLAYER.WG.LINE = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.LF.LINE,name="WG_LIN")
-TECH.PPLAYER.WG.LF_AREA = PPLayer(TECH.PROCESS.WG,TECH.PURPOSE.LF_AREA,name="WG_LFAREA")
+TECH.PPLAYER.WG.TRENCH = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.DF.TRENCH, name="WG_TRE")
+TECH.PPLAYER.WG.SQUARE = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.DF.TRENCH, name="WG_SQ")
+TECH.PPLAYER.WG.HOLE = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.DF.HOLE, name="WG_HEX")
+TECH.PPLAYER.WG.MARKER = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.DF.MARKER, name="WG_MRK")
+TECH.PPLAYER.WG.TEXT = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.DF.TEXT, name="WG_TXT")
+TECH.PPLAYER.WG.LINE = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.LF.LINE, name="WG_LIN")
+TECH.PPLAYER.WG.LF_AREA = PPLayer(TECH.PROCESS.WG, TECH.PURPOSE.LF_AREA, name="WG_LFAREA")
 
 # generated layers, not to be used to draw on
 TECH.PPLAYER.WG.CRITICAL = TECH.PPLAYER.WG.TRENCH | TECH.PPLAYER.WG.SQUARE | TECH.PPLAYER.WG.HOLE | TECH.PPLAYER.WG.MARKER | (TECH.PPLAYER.WG.LINE ^ TECH.PPLAYER.WG.LF_AREA) & TECH.PPLAYER.WG.LF_AREA
@@ -54,13 +54,13 @@ TECH.PPLAYER.WG.SPACE.name = 'WG_SPACE'
 TECH.PPLAYER.WG.ALL = TECH.PPLAYER.WG.CRITICAL | TECH.PPLAYER.WG.NONCRITICAL
 
 ### FC ###
-TECH.PPLAYER.FC.TRENCH = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.DF.TRENCH,name="FC_TRE")
-TECH.PPLAYER.FC.SQUARE = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.DF.TRENCH,name="FC_SQ")
-TECH.PPLAYER.FC.HOLE = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.DF.HOLE,name="FC_HEX")
-TECH.PPLAYER.FC.MARKER = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.DF.MARKER,name="FC_MRK")
-TECH.PPLAYER.FC.TEXT = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.DF.TEXT,name="FC_TXT")
-TECH.PPLAYER.FC.LINE = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.LF.LINE,name="FC_LIN")
-TECH.PPLAYER.FC.LF_AREA = PPLayer(TECH.PROCESS.FC,TECH.PURPOSE.LF_AREA,name="FC_LFAREA")
+TECH.PPLAYER.FC.TRENCH = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.DF.TRENCH, name="FC_TRE")
+TECH.PPLAYER.FC.SQUARE = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.DF.TRENCH, name="FC_SQ")
+TECH.PPLAYER.FC.HOLE = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.DF.HOLE, name="FC_HEX")
+TECH.PPLAYER.FC.MARKER = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.DF.MARKER, name="FC_MRK")
+TECH.PPLAYER.FC.TEXT = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.DF.TEXT, name="FC_TXT")
+TECH.PPLAYER.FC.LINE = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.LF.LINE, name="FC_LIN")
+TECH.PPLAYER.FC.LF_AREA = PPLayer(TECH.PROCESS.FC, TECH.PURPOSE.LF_AREA, name="FC_LFAREA")
 
 # generated layers, not to be used to draw on
 TECH.PPLAYER.FC.CRITICAL = TECH.PPLAYER.FC.TRENCH | TECH.PPLAYER.FC.SQUARE | TECH.PPLAYER.FC.HOLE | (TECH.PPLAYER.FC.LINE ^ TECH.PPLAYER.FC.LF_AREA) & TECH.PPLAYER.FC.LF_AREA
@@ -88,11 +88,11 @@ TECH.GDSII.PURPOSE_DATATYPE_MAP = {
       TECH.PURPOSE.LF.DUMMY: 5,
       TECH.PURPOSE.LF_AREA: 9, 
       TECH.PURPOSE.DF_AREA: 10, 
-      TECH.PURPOSE.DF.MARKER : 11,
+      TECH.PURPOSE.DF.MARKER: 11,
       TECH.PURPOSE.DF.HOLE: 12, 
       TECH.PURPOSE.DF.TRENCH: 13,
       TECH.PURPOSE.DF.SQUARE: 14,
-      TECH.PURPOSE.DF.TEXT : 15,
+      TECH.PURPOSE.DF.TEXT: 15,
       TECH.PURPOSE.DF.DUMMY: 16,
       TECH.PURPOSE.NO_GEN: 20,
       TECH.PURPOSE.NO_FILL: 21,
@@ -177,8 +177,8 @@ from ipkiss.visualisation.color import *
 
 TECH.MATERIALS = MaterialFactory()
 
-TECH.MATERIALS.AIR = Material(name = "air",display_style = DisplayStyle(color = COLOR_GREEN), solid = False)
-TECH.MATERIALS.SILICON = Material(name = "silicon",display_style = DisplayStyle(color = COLOR_CYAN))
+TECH.MATERIALS.AIR = Material(name = "air", display_style = DisplayStyle(color = COLOR_GREEN), solid = False)
+TECH.MATERIALS.SILICON = Material(name = "silicon", display_style = DisplayStyle(color = COLOR_CYAN))
 TECH.MATERIALS.SILICON_OXIDE = Material(name = "silicon oxide", display_style = DisplayStyle(color = COLOR_BLUE))
 TECH.MATERIALS.GERMANIUM = Material(name = "germanium", display_style = DisplayStyle(color = COLOR_DARK_GREEN))
 
@@ -189,31 +189,31 @@ TECH.MATERIAL_STACKS = MaterialStackFactory()
 MSTACK_SOI_SILICON_OXIDE_HEIGHT = 0.500
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_AIR = MaterialStack(name = "Air", 
-                                                    materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                        (TECH.MATERIALS.AIR,0.380)], 
+                                                    materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                        (TECH.MATERIALS.AIR, 0.380)], 
                                                     display_style = DisplayStyle(color = COLOR_BLUE))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_80nm = MaterialStack(name = "80nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.080),
-                                                                            (TECH.MATERIALS.AIR,0.300)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.080),
+                                                                            (TECH.MATERIALS.AIR, 0.300)], 
                                                         display_style = DisplayStyle(color = COLOR_GREEN))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_150nm = MaterialStack(name = "150nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.150),
-                                                                            (TECH.MATERIALS.AIR,0.230)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.150),
+                                                                            (TECH.MATERIALS.AIR, 0.230)], 
                                                         display_style = DisplayStyle(color = COLOR_YELLOW))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_220nm = MaterialStack(name = "220nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.220),
-                                                                            (TECH.MATERIALS.AIR,0.160)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.220),
+                                                                            (TECH.MATERIALS.AIR, 0.160)], 
                                                         display_style = DisplayStyle(color = COLOR_RED))
 
 TECH.MATERIAL_STACKS.MSTACK_SOI_SI_380nm = MaterialStack(name = "380nm Si", 
-                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE,MSTACK_SOI_SILICON_OXIDE_HEIGHT),
-                                                                            (TECH.MATERIALS.SILICON,0.380)], 
+                                                        materials_heights = [(TECH.MATERIALS.SILICON_OXIDE, MSTACK_SOI_SILICON_OXIDE_HEIGHT),
+                                                                            (TECH.MATERIALS.SILICON, 0.380)], 
                                                         display_style = DisplayStyle(color = COLOR_WHITE))   
 
 TECH.MATERIALS.SILICON.epsilon = 12
@@ -247,8 +247,8 @@ TECH.VFABRICATION.PROCESS_FLOW = VFabricationProcessFlow(active_processes = [TEC
                         ((1, 0), TECH.MATERIAL_STACKS.MSTACK_SOI_SI_150nm),
                         ((1, 1), TECH.MATERIAL_STACKS.MSTACK_SOI_AIR),
                       ],   
-            is_lf_fabrication = {TECH.PROCESS.WG : False, 
-                                 TECH.PROCESS.FC : False,} #etch to 220nm is implicitely present over the whole canvas
+            is_lf_fabrication = {TECH.PROCESS.WG: False, 
+                                 TECH.PROCESS.FC: False,} #etch to 220nm is implicitely present over the whole canvas
             )
 
 

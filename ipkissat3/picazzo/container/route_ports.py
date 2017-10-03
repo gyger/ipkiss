@@ -182,19 +182,19 @@ class RoutePortsEastWest(__StructureContainerWithRoutes__):
         return west_routes + east_routes
     
     def define_elements(self, elems):
-        return super(RoutePortsEastWest,self).define_elements(elems)
+        return super(RoutePortsEastWest, self).define_elements(elems)
     
     def define_ports(self, port_list):
         from copy import deepcopy
         SPL= self.get_structure_port_list()
         west_routes = self.__get_west_routes__()
-        for port_ref,R in zip(self.ports_to_west, west_routes):
+        for port_ref, R in zip(self.ports_to_west, west_routes):
             new_port = deepcopy(SPL[port_ref])
             new_port.position = R.points[-1]
             new_port.angle = R.angles_deg()[-2]
             port_list += new_port
         east_routes = self.__get_east_routes__()  
-        for port_ref,R in zip(self.ports_to_east, east_routes):
+        for port_ref, R in zip(self.ports_to_east, east_routes):
             new_port = deepcopy(SPL[port_ref])
             new_port.position = R.points[-1]
             new_port.angle = R.angles_deg()[-2]

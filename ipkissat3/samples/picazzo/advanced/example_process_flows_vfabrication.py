@@ -27,16 +27,16 @@ from ipkiss.technology.technology import TechnologyLibrary, TechnologyTree, Dela
 
 TECH.PROCESS.ACL = ProcessLayer("Active Cladding", "ACL")
 TECH.PROCESS.ACO = ProcessLayer("Active Core", "ACO")
-TECH.PURPOSE.ACTIVE = PatternPurpose("Active material","ACT")
+TECH.PURPOSE.ACTIVE = PatternPurpose("Active material", "ACT")
 
 TECH.PPLAYER.ACL = TechnologyTree()
 TECH.PPLAYER.ACO = TechnologyTree()
         
-TECH.PPLAYER.ACL.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACL,TECH.PURPOSE.ACTIVE,name = "ACL")
+TECH.PPLAYER.ACL.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACL, TECH.PURPOSE.ACTIVE, name = "ACL")
 TECH.PPLAYER.ACL.ALL = TECH.PPLAYER.ACL.DEFAULT
 TECH.PPLAYER.ACL.ALL.NAME = "ACL_ALL"
 
-TECH.PPLAYER.ACO.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACO,TECH.PURPOSE.ACTIVE,name = "ACO")
+TECH.PPLAYER.ACO.DEFAULT = ProcessPurposeLayer(TECH.PROCESS.ACO, TECH.PURPOSE.ACTIVE, name = "ACO")
 TECH.PPLAYER.ACO.ALL = TECH.PPLAYER.ACO.DEFAULT
 TECH.PPLAYER.ACO.ALL.NAME = "ACO_ALL"
 
@@ -50,7 +50,7 @@ from pysics.materials.all import *
 
 #define the materials InP
 TECH.MATERIALS.InP = Material(name = "InP", display_style = DisplayStyle(color = COLOR_ORANGE))
-TECH.MATERIALS.BCB = Material(name = "BCB",display_style = DisplayStyle(color = COLOR_GREEN))
+TECH.MATERIALS.BCB = Material(name = "BCB", display_style = DisplayStyle(color = COLOR_GREEN))
 
 nInP = 3.1
 nBCB = 1.544 
@@ -58,21 +58,21 @@ TECH.MATERIALS.InP.epsilon = nInP**2 #9.61
 TECH.MATERIALS.BCB.epsilon = nBCB**2 #2.38
 
 TECH.MATERIAL_STACKS.MSTACK_BCB = MaterialStack(name = "BCB", 
-                                                        materials_heights = [(TECH.MATERIALS.BCB,0.480), 
-                                                                             (TECH.MATERIALS.AIR,1.3)], 
+                                                        materials_heights = [(TECH.MATERIALS.BCB, 0.480), 
+                                                                             (TECH.MATERIALS.AIR, 1.3)], 
                                                         display_style = DisplayStyle(color = COLOR_WHITE))
 
 
 TECH.MATERIAL_STACKS.MSTACK_ACLAD = MaterialStack(name = "ACTIVE CLADDING", 
-                                                           materials_heights = [(TECH.MATERIALS.BCB,0.480),
-                                                                                (TECH.MATERIALS.InP,0.2),
-                                                                                (TECH.MATERIALS.AIR,1.1)], 
+                                                           materials_heights = [(TECH.MATERIALS.BCB, 0.480),
+                                                                                (TECH.MATERIALS.InP, 0.2),
+                                                                                (TECH.MATERIALS.AIR, 1.1)], 
                                                            display_style = DisplayStyle(color = COLOR_BLACK))
 
 TECH.MATERIAL_STACKS.MSTACK_ACORE = MaterialStack(name = "ACTIVE CORE", 
-                                                  materials_heights = [(TECH.MATERIALS.BCB,0.480),
-                                                                       (TECH.MATERIALS.InP,0.8),
-                                                                       (TECH.MATERIALS.AIR,0.5)],
+                                                  materials_heights = [(TECH.MATERIALS.BCB, 0.480),
+                                                                       (TECH.MATERIALS.InP, 0.8),
+                                                                       (TECH.MATERIALS.AIR, 0.5)],
                                                   display_style = DisplayStyle(color = COLOR_ORANGE))
 
 ################# STEP 3 : DEFINE THE FABRICATION PROCESS FLOW ###############################   
@@ -119,10 +119,10 @@ class MyRing(Structure):
                 elems += self.wg_definition(shape = c)
                 elems += self.wg_definition(shape = w)
                 elems += Rectangle(center = (0.0, 0.0),
-                                   box_size=(9.0,9.0),
+                                   box_size=(9.0, 9.0),
                                    layer=TECH.PPLAYER.ACL.DEFAULT)
                 elems += Rectangle(center = (5.0, 0.0),
-                                   box_size=(1.0,2.0),
+                                   box_size=(1.0, 2.0),
                                    layer=TECH.PPLAYER.ACO.DEFAULT)                
                 
                 return elems
@@ -137,4 +137,4 @@ r.visualize_2d()
 r.visualize_3d_y_crosssection(y_co = 0.0, resolution = 30)
 
 vtk_filename = r.visualize_3d_vtk(resolution = 30)
-print("Generated VTK file : ",vtk_filename) 
+print("Generated VTK file : ", vtk_filename) 

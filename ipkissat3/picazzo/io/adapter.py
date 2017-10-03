@@ -44,8 +44,8 @@ class IoBlockAdapter(Structure, IoBlock):
     
 
     def define_name(self):
-        return "%s_%s_T%s_%d" % (self.__name_prefix__ ,
-                                          self.struct.name ,
+        return "%s_%s_T%s_%d" % (self.__name_prefix__,
+                                          self.struct.name,
                                           self.struct_transformation.id_string(),
                                           do_hash(str((str(self.offset) + str(self.y_spacing) + str(self.south_west) + str(self.south_east))))
                                       )

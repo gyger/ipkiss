@@ -187,7 +187,7 @@ class SRef(__AutoRefPositions__, MRef, MixinBowl):
             return False
         return (self.reference == other.reference) and (self.position == other.position) and (self.transformation == other.transformation)
     
-    def __ne__(self,other):
+    def __ne__(self, other):
         return not self.__eq__(other)    
     
    
@@ -225,7 +225,7 @@ class ARef(__AutoRefPositions__, MRef, MixinBowl):
         return S2.convex_hull().transform(self.transformation + Translation(self.origin))
 
     def __untransformed_positions__(self):
-        p = shape.Shape(transpose(reshape(meshgrid(list(range(self.n_o_periods[0])), list(range(self.n_o_periods[1]))),(2, self.n_o_periods[0]* self.n_o_periods[1]))) * array([self.period[0], self.period[1]]))
+        p = shape.Shape(transpose(reshape(meshgrid(list(range(self.n_o_periods[0])), list(range(self.n_o_periods[1]))), (2, self.n_o_periods[0]* self.n_o_periods[1]))) * array([self.period[0], self.period[1]]))
         return p
 
     def __positions__(self):
@@ -259,7 +259,7 @@ class ARef(__AutoRefPositions__, MRef, MixinBowl):
             return False
         return (self.reference == other.reference) and (self.transformation == other.transformation) and (self.origin == other.origin) and (self.period  == other.period) and (self.n_o_periods == other.n_o_periods)
     
-    def __ne__(self,other):
+    def __ne__(self, other):
         return not self.__eq__(other)    
     
 
@@ -389,7 +389,7 @@ class SoftRotationARef(CompoundArefElement):
                 period = transform.apply_to_coord(self.period)
                 period = (period[1], period[0])
                 n_o_periods = (self.n_o_periods[1], self.n_o_periods[0])
-                zero = (self.origin[0] , self.origin[1] - (n_o_periods[1] - 1) * period[1])
+                zero = (self.origin[0], self.origin[1] - (n_o_periods[1] - 1) * period[1])
                 elems.append(ARef(self.reference, zero, period, n_o_periods, transform))
             else:
                 elems.append(SoftARef(self.reference, self.origin, period, self.n_o_periods, self.transformation))
@@ -412,9 +412,9 @@ class StackARef(CompoundArefElement):
     
     def __init__(self,
                  reference,
-                 origin = (0.0,0.0),
+                 origin = (0.0, 0.0),
                  period = (1.0, 1.0) ,
-                 n_o_periods = (1,1),
+                 n_o_periods = (1, 1),
                  transformation= None,
                  stack_size = 20,
                  **kwargs):
@@ -461,7 +461,7 @@ class StackARef(CompoundArefElement):
         
         if self.n_o_periods[1] < 2 * self.stack_size:
             # soft_aref of X_cell
-            elems += SoftARef(x_cell, self.origin, self.period,(1, self.n_o_periods[1]))
+            elems += SoftARef(x_cell, self.origin, self.period, (1, self.n_o_periods[1]))
         else: # Y_periodicity < 2* stack_size:
             y_cell_stack = structure_module.Structure("R_" + x_cell.name + "_SY" + str(int(self.stack_size)),
                                          SoftARef(x_cell, (0.0, 0.0), (self.period[0], self.stack_size * self.period[1]), (1, self.n_o_periods[1] / self.stack_size)))

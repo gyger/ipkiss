@@ -67,7 +67,7 @@ class W1HeteroCavity1Mirror(Structure):
         return Coord2(0.0, 0.0)
     
     def define_cavity_pos(self):
-        return Coord2(self.mirror_pitch * (self.n_o_mirror_periods) - 0.5*(self.mirror_pitch - self.cavity_pitch) , 0.0)
+        return Coord2(self.mirror_pitch * (self.n_o_mirror_periods) - 0.5*(self.mirror_pitch - self.cavity_pitch), 0.0)
             
     def define_elements(self, elems):
         elems += SRef(self.mirror, self.mirror_pos)

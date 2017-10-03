@@ -121,8 +121,8 @@ class GenericGdsiiPPLayerOutputMap(StrongPropertyInitializer):
     ignore_undefined_mappings = BoolProperty(default = False)
     
     def __getitem__(self, key, default = None):
-        if (key.process,key.purpose) in self.pplayer_map:
-            (lay,dat) = self.pplayer_map[(key.process,key.purpose)]
+        if (key.process, key.purpose) in self.pplayer_map:
+            (lay, dat) = self.pplayer_map[(key.process, key.purpose)]
             return GdsiiLayer(number=lay, datatype=dat)
         else:
             error_message = "Warning during GDSII export : no corresponding GDSII layer/datatype found for process = %s and purpose = %s" %(key.process, key.purpose)
@@ -147,13 +147,13 @@ class GenericGdsiiPPLayerInputMap(GenericGdsiiPPLayerOutputMap):
         for k, v in list(self.pplayer_map.items()):
             if v in lm:
                 LOG.warning("PPLayer to GDSII layer mapping for GDSII %i:%i => %s:%s overwritten with %s:%s"
-                            %(v[0],v[1],lm[v][0],lm[v][1],k[0],k[1]))
+                            %(v[0], v[1], lm[v][0], lm[v][1], k[0], k[1]))
             lm[v] = k
         return lm
 
     def __getitem__(self, key, default = None):
-        if (key.number,key.datatype) in self.gdsiilayer_map:
-            (pl,pp) = self.gdsiilayer_map[(key.number,key.datatype)]
+        if (key.number, key.datatype) in self.gdsiilayer_map:
+            (pl, pp) = self.gdsiilayer_map[(key.number, key.datatype)]
             return PPLayer(process=pl, purpose = pp)
         else:
             error_message = "Warning during GDSII import : no corresponding process/purpose layer found for number = %i and datatype = %s" %(key.number, key.datatype)
@@ -190,7 +190,7 @@ class UnconstrainedGdsiiPPLayerInputMap(StrongPropertyInitializer):
             pr = self.layer_process_map.get(key.number, None)
             pu = self.datatype_purpose_map.get(key.datatype, None)
             if pr is None or pu is None: 
-                for gdsiilayer,pplayer  in list(self.layer_map.items()):
+                for gdsiilayer, pplayer  in list(self.layer_map.items()):
                     if (key.number == gdsiilayer.number) and (key.datatype == gdsiilayer.datatype):
                         return pplayer                
                 self.__warn__(key)                
@@ -228,12 +228,12 @@ class GdsiiPPLayerInputMap(GdsiiPPLayerOutputMap):
         layer_map = super(GdsiiPPLayerInputMap, self).define_layer_map()
         reverse_layer_map = dict()
         for pplayer, gdsiilayer in list(layer_map.items()):
-            reverse_layer_map[(gdsiilayer.number,gdsiilayer.datatype)] = pplayer
+            reverse_layer_map[(gdsiilayer.number, gdsiilayer.datatype)] = pplayer
         return reverse_layer_map
                 
     def __getitem__(self, gdsiilayer, default = None):
-        if (gdsiilayer.number,gdsiilayer.datatype) in self.layer_map:
-            return self.layer_map[(gdsiilayer.number,gdsiilayer.datatype)]
+        if (gdsiilayer.number, gdsiilayer.datatype) in self.layer_map:
+            return self.layer_map[(gdsiilayer.number, gdsiilayer.datatype)]
         else:
             error_message = "Warning during GDSII import : no corresponding process/purpose layer found for number = %i and datatype = %s" %(gdsiilayer.number, gdsiilayer.datatype)
             if self.ignore_undefined_mappings:

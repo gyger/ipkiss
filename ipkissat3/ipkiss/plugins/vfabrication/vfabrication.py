@@ -68,7 +68,7 @@ class VirtualFabrication(__VirtualFabrication__):
         #component_canvas_size = the number of points in the grid covering the component (without the growth)
         component_canvas_size = (int(numpy.ceil(component_size_info.width / self.grid)),
                                  int(numpy.ceil(component_size_info.height / self.grid)))    
-        LOG.debug("Component width: %s and height: %s" %(str(component_size_info.width),str(component_size_info.height)))
+        LOG.debug("Component width: %s and height: %s" %(str(component_size_info.width), str(component_size_info.height)))
         LOG.debug("Total canvas size : %s" %str(canvas_size))
         LOG.debug("Total canvas size info : %s" %str(size_info))
         LOG.debug("Component canvas size : %s" %str(component_canvas_size))
@@ -100,10 +100,10 @@ def __common_function_apply_polygon_to_array_memory_sparing__(array, polygon_poi
     if (not do_bitwise_or) and (value is None):
         raise Exception("Invalid parameters : if do_bitwise_or==False, then value should not be None")
     #calculate for which range in the array we have to calculate the overlap with this polygon
-    min_x = max(0,numpy.min([p[0] for p in polygon_points])-1)
-    max_x = min(array.shape[0],numpy.max([p[0] for p in polygon_points])+1)
-    min_y = max(0,numpy.min([p[1] for p in polygon_points])-1)
-    max_y = min(array.shape[1],numpy.max([p[1] for p in polygon_points])+1)
+    min_x = max(0, numpy.min([p[0] for p in polygon_points])-1)
+    max_x = min(array.shape[0], numpy.max([p[0] for p in polygon_points])+1)
+    min_y = max(0, numpy.min([p[1] for p in polygon_points])-1)
+    max_y = min(array.shape[1], numpy.max([p[1] for p in polygon_points])+1)
     #the range that requires overlap will be plit up in slices (so as to limit memory consumption) - only needed for large polygons spanning over huge canvas
     SLICE_X_SIZE = 10000.0
     SLICE_Y_SIZE = 10000.0
@@ -144,11 +144,11 @@ def __common_function_cartesian__(arrays, out=None):
     if out is None:
         out = numpy.zeros([n, len(arrays)], dtype=dtype)    
     m = n / arrays[0].size
-    out[:,0] = numpy.repeat(arrays[0], m)
+    out[:, 0] = numpy.repeat(arrays[0], m)
     if arrays[1:]:
-        __common_function_cartesian__(arrays[1:], out=out[0:m,1:])
+        __common_function_cartesian__(arrays[1:], out=out[0:m, 1:])
         for j in range(1, arrays[0].size):
-            out[j*m:(j+1)*m,1:] = out[0:m,1:]
+            out[j*m:(j+1)*m, 1:] = out[0:m, 1:]
     return out	    
 
 
@@ -171,7 +171,7 @@ class LayerShapelyPolygons(ShapelyPolygonCollection):
             raise IpkissException("Wrong parameter. Expected object of type __ShapeElement__")        
         if (isinstance(e, Path)):        
             grid = TECH.METRICS.GRID 
-            filter = PathCutFilter(max_path_length = int(constants.GDSII_MAX_COORDINATES/2) , grids_per_unit = int(1.0 / grid), overlap = 1)            
+            filter = PathCutFilter(max_path_length = int(constants.GDSII_MAX_COORDINATES/2), grids_per_unit = int(1.0 / grid), overlap = 1)            
             filter += PathToBoundaryFilter()
             elems = list(filter(e))
             for e2 in elems:
@@ -189,7 +189,7 @@ class LayerShapelyPolygons(ShapelyPolygonCollection):
                                     georep = georep)		
 
     def add_shape(self, shape):
-        pts = [(p[0],p[1]) for p in shape.points]
+        pts = [(p[0], p[1]) for p in shape.points]
         self.add_polygon_points(pts)
 
     def define_canvas_polygon(self):
@@ -197,9 +197,9 @@ class LayerShapelyPolygons(ShapelyPolygonCollection):
         ne = self.size_info.north_east
         se = self.size_info.south_east
         sw = self.size_info.south_west	
-        shape = Shape(points = [nw,ne,se,sw,nw])
+        shape = Shape(points = [nw, ne, se, sw, nw])
         shape.closed = True
-        pts = [(p[0],p[1]) for p in shape.points]	
+        pts = [(p[0], p[1]) for p in shape.points]	
         p = ShapelyPolygon(pts)
         return p	
 
@@ -235,7 +235,7 @@ class VirtualFabricationProcessSuperposition2DMaterialStackPolygonsOnly(VirtualF
         #size_info = the size of the total canvas, including growth
         size_info = copy.deepcopy(component_size_info)
         size_info.grow_absolute(self.include_growth)
-        LOG.debug("Component width: %s and height: %s" %(str(component_size_info.width),str(component_size_info.height)))
+        LOG.debug("Component width: %s and height: %s" %(str(component_size_info.width), str(component_size_info.height)))
         LOG.debug("Total canvas size info : %s" %str(size_info))
         LOG.debug("Component size info: %s" %str(component_size_info))
         return (size_info, component_size_info)    
@@ -248,7 +248,7 @@ class VirtualFabricationProcessSuperposition2DMaterialStackPolygonsOnly(VirtualF
         self.extend_component_at_ports() 
 
         for process in self.process_flow.active_processes:	    
-            if hasattr(TECH.PPLAYER,process.extension) and hasattr(TECH.PPLAYER.__getattribute__(process.extension),"ALL"):
+            if hasattr(TECH.PPLAYER, process.extension) and hasattr(TECH.PPLAYER.__getattribute__(process.extension), "ALL"):
                 shapely_geom = __get_composite_shapely_polygon_for_elements_on_generated_layer__(elements = self.structure.elements, 
                                                                                                  generated_layer = TECH.PPLAYER.__getattribute__(process.extension).ALL)
                 bm = LayerShapelyPolygons(layer = Layer(number = 0, name = "VFABRICATION_%s" %process.extension), size_info = size_info)	 	    
@@ -267,7 +267,7 @@ class VirtualFabricationProcessSuperposition2DMaterialStackPolygonsOnly(VirtualF
 
         if self.save_debug_images:
             for process, bm in list(process_polygons.items()):
-                bm.save_to_image("vfabrication_%s_process_polygon_%s.png" %(self.structure.name,process.extension))
+                bm.save_to_image("vfabrication_%s_process_polygon_%s.png" %(self.structure.name, process.extension))
 
         return (process_polygons, size_info)
 

@@ -162,7 +162,7 @@ class BroadWgSocket2dAsymmetric(WgSocket2d):
 
 def BroadWgSocket2d(wg_definition, wg_length, dev_angle, **kwargs):
     """ broad waveguide socket for 2-D fiber coupler with west-east symmetry for outcoupling """
-    return BroadWgSocket2dAsymmetric(wg_definitions = (wg_definition,wg_definition), wg_lengths = (wg_length,wg_length), dev_angles = (dev_angle, dev_angle), **kwargs)
+    return BroadWgSocket2dAsymmetric(wg_definitions = (wg_definition, wg_definition), wg_lengths = (wg_length, wg_length), dev_angles = (dev_angle, dev_angle), **kwargs)
 
 
 class BroadWgSocket3Port(WgSocket2d):

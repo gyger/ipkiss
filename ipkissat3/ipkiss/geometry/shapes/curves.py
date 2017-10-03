@@ -42,8 +42,8 @@ class ShapeBezier(__ShapeModifier__):
         Px = outer(P[:, 0], ones(size(t)))
         Py = outer(P[:, 1], ones(size(t)))
         for j in range(len(self.original_shape) - 1,  0, -1):
-            Px = Px[0:j, :] + diff(Px, 1, 0) * t
-            Py = Py[0:j, :] + diff(Py, 1, 0) * t
+            Px = Px[0:j,:] + diff(Px, 1, 0) * t
+            Py = Py[0:j,:] + diff(Py, 1, 0) * t
 
         pts = transpose(row_stack((Px, Py)))
         return pts

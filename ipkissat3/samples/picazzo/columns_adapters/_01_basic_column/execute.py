@@ -28,7 +28,7 @@ class ExampleColumn(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),  # column width = 2000um
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),  # column width = 2000um
                                   y_spacing = 25.0)           # vertical spacing between waveguides
         
         

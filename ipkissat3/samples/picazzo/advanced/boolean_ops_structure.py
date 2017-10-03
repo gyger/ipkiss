@@ -26,7 +26,7 @@ from ipkiss.all import *
 
 #STEP1 : create the original structure
 from picazzo.filters.mzi import WgMzi1x1Y90Asymmetric
-original_structure =  WgMzi1x1Y90Asymmetric(separation = 20.0,straight1=10.0,straight2=20.0)
+original_structure =  WgMzi1x1Y90Asymmetric(separation = 20.0, straight1=10.0, straight2=20.0)
 original_structure.write_gdsii("original.gds")
 
 

@@ -64,15 +64,15 @@ class ProcessTechnologyTree(DelayedInitTechnologyTree):
     def get_process_layers(self):
         from ipkiss.process.layer import ProcessLayerList, ProcessLayer
         pl = ProcessLayerList()
-        for k,v in list(self.__dict__.items()):
+        for k, v in list(self.__dict__.items()):
             if isinstance(v, ProcessLayer):
                 pl.append(v)
         return pl
     
     def get_key_from_process_layer(self, layer):
         from ipkiss.process.layer import ProcessLayer
-        for k,v in list(self.__dict__.items()):
-            if isinstance(v,ProcessLayer) and v==layer:
+        for k, v in list(self.__dict__.items()):
+            if isinstance(v, ProcessLayer) and v==layer:
                 return k
         return None
                 

@@ -45,50 +45,50 @@ class WgElPortTaperExtended(__WgElPortTaper__) :
     
     def define_taper(self) :
         tech = get_technology()
-        if hasattr(tech.PROCESS,'RFC'): # FIXME: dirty modular import
+        if hasattr(tech.PROCESS, 'RFC'): # FIXME: dirty modular import
             hasraised = True
         else:
             hasraised = False
         # Case: same waveguide definitions ...
-        if type(self.end_wg_def)==type(self.start_port.wg_definition) :
+        if isinstance(self.end_wg_def, type(self.start_port.wg_definition)) :
             taper = WgElPortTaperLinear(start_port=self.start_port, end_wg_def=self.end_wg_def, straight_extension=self.straight_extension)
         # Case: special tapering structures ...
-        elif (hasraised and type(self.start_port.wg_definition) == RaisedWGFCWgElDefinition) and (type(self.end_wg_def) == WGFCWgElDefinition) :
+        elif (hasraised and isinstance(self.start_port.wg_definition, RaisedWGFCWgElDefinition)) and (isinstance(self.end_wg_def, WGFCWgElDefinition)) :
                 taper = RaisedWGFCToWGFCPortTaper(start_port=self.start_port, 
                                                  end_wg_def=self.end_wg_def, 
                                                  straight_extension=self.straight_extension)
-        elif (hasraised and type(self.start_port.wg_definition) == WGFCWgElDefinition) and (type(self.end_wg_def) == RaisedWGFCWgElDefinition) :
+        elif (hasraised and isinstance(self.start_port.wg_definition, WGFCWgElDefinition)) and (isinstance(self.end_wg_def, RaisedWGFCWgElDefinition)) :
                 #we manually create a new port in the opposite direction and flip the straight_extensions, so that we can use the same class 'RaisedWGFCToWGFCPortTaper'
-                new_port = OpticalPort(position=(0.0,0.0), wg_definition=self.end_wg_def, angle=self.start_port.angle+180.0)
+                new_port = OpticalPort(position=(0.0, 0.0), wg_definition=self.end_wg_def, angle=self.start_port.angle+180.0)
                 taper = RaisedWGFCToWGFCPortTaper(start_port=new_port, 
                                                   end_wg_def=self.start_port.wg_definition, 
                                                   straight_extension=(self.straight_extension[1], self.straight_extension[0]))
                 taper = Translation(translation=self.start_position.move_polar_copy(self.length, self.start_port.angle_deg))(taper)
-        elif (hasraised and type(self.start_port.wg_definition) == RaisedFCWgElDefinition) and (type(self.end_wg_def) == WgElDefinition) :
+        elif (hasraised and isinstance(self.start_port.wg_definition, RaisedFCWgElDefinition)) and (isinstance(self.end_wg_def, WgElDefinition)) :
                 return RaisedFCToWgElPortTaper(start_port=self.start_port, end_wg_def=self.end_wg_def, straight_extension=self.straight_extension)
-        elif (hasraised and type(self.start_port.wg_definition) == RaisedWgElDefinition) and (type(self.end_wg_def) == WgElDefinition) :
+        elif (hasraised and isinstance(self.start_port.wg_definition, RaisedWgElDefinition)) and (isinstance(self.end_wg_def, WgElDefinition)) :
                 taper = RaisedWgElToWgElPortTaper(start_port=self.start_port, 
                                                  end_wg_def=self.end_wg_def, 
                                                  straight_extension=self.straight_extension)
-        elif hasraised and (type(self.start_port.wg_definition) == WgElDefinition) :
-            if type(self.end_wg_def) == RaisedFCWgElDefinition :
+        elif hasraised and (isinstance(self.start_port.wg_definition, WgElDefinition)) :
+            if isinstance(self.end_wg_def, RaisedFCWgElDefinition) :
                 #we manually create a new port in the opposite direction and flip the straight_extensions, so that we can use the same class 'RaisedFCToWgElPortTaper'
-                new_port = OpticalPort(position=(0.0,0.0), wg_definition=self.end_wg_def, angle=self.start_port.angle+180.0)
+                new_port = OpticalPort(position=(0.0, 0.0), wg_definition=self.end_wg_def, angle=self.start_port.angle+180.0)
                 taper = RaisedFCToWgElPortTaper(start_port=new_port, 
                                                 end_wg_def=self.start_port.wg_definition, 
                                                 straight_extension=(self.straight_extension[1], self.straight_extension[0]))
                 return Translation(translation=self.start_position.move_polar_copy(self.length, self.start_port.angle_deg))(taper)
-            elif type(self.end_wg_def) == RaisedWgElDefinition :
+            elif isinstance(self.end_wg_def, RaisedWgElDefinition) :
                 #we manually create a new port in the opposite direction and flip the straight_extensions, so that we can use the same class 'RaisedWgElToWgElPortTaper'
-                new_port = OpticalPort(position=(0.0,0.0), wg_definition=self.end_wg_def, angle=self.start_port.angle+180.0)
+                new_port = OpticalPort(position=(0.0, 0.0), wg_definition=self.end_wg_def, angle=self.start_port.angle+180.0)
                 taper = RaisedWgElToWgElPortTaper(start_port=new_port, 
                                                   end_wg_def=self.start_port.wg_definition, 
                                                   straight_extension=(self.straight_extension[1], self.straight_extension[0]))
                 taper = Translation(translation=self.start_position.move_polar_copy(self.length, self.start_port.angle_deg))(taper)
             else :
-                raise Exception("No taper could be generated between between waveguide types %s and %s." %(self.start_port.wg_definition,self.end_wg_def))
+                raise Exception("No taper could be generated between between waveguide types %s and %s." %(self.start_port.wg_definition, self.end_wg_def))
         else :
-            raise Exception("No taper could be generated between between waveguide types %s and %s." %(self.start_port.wg_definition,self.end_wg_def))
+            raise Exception("No taper could be generated between between waveguide types %s and %s." %(self.start_port.wg_definition, self.end_wg_def))
         if (self.__property_was_externally_set__("length")):
             taper.length = self.length
         return taper                
@@ -103,5 +103,5 @@ class WgElPortTaperExtended(__WgElPortTaper__) :
     
 # FIXME: Backward compatibility. This module originally contained these classes    
 TECH = get_technology()
-if hasattr(TECH.PROCESS,'RFC'):
+if hasattr(TECH.PROCESS, 'RFC'):
     from ..wgdefs.raised.tapers import RaisedFCToWgElPortTaper, RaisedWgElToWgElPortTaper, RaisedWGFCToWGFCPortTaper

@@ -37,29 +37,29 @@ STD_IOCOLUMN_Bottom_Margin = 300
 STD12MM_Column_Width = 12100
 STD12MM_Column_Spacing = 100
 STD12MM_Column_N_Lines = 320
-STD12MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD12MM_Column_Width + c*STD12MM_Column_Spacing,0.0)
-STD12MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD12MM_Column_Width + c*STD12MM_Column_Spacing,0.0)
+STD12MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD12MM_Column_Width + c*STD12MM_Column_Spacing, 0.0)
+STD12MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD12MM_Column_Width + c*STD12MM_Column_Spacing, 0.0)
 
 # STD6MM
 STD6MM_Column_Width = 6000.0
 STD6MM_Column_Spacing = 100
 STD6MM_Column_N_Lines = 320
-STD6MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD6MM_Column_Width + c*STD6MM_Column_Spacing,0.0)
-STD6MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD6MM_Column_Width + c*STD6MM_Column_Spacing,0.0)
+STD6MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD6MM_Column_Width + c*STD6MM_Column_Spacing, 0.0)
+STD6MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD6MM_Column_Width + c*STD6MM_Column_Spacing, 0.0)
 
 # STD4MM
 STD4MM_Column_Width = 4000
 STD4MM_Column_Spacing = 50
 STD4MM_Column_N_Lines = 320
-STD4MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD4MM_Column_Width + c*STD4MM_Column_Spacing,0.0)
-STD4MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD4MM_Column_Width + c*STD4MM_Column_Spacing,0.0)
+STD4MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD4MM_Column_Width + c*STD4MM_Column_Spacing, 0.0)
+STD4MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD4MM_Column_Width + c*STD4MM_Column_Spacing, 0.0)
 
 # STD3MM
 STD3MM_Column_Width = 2950
 STD3MM_Column_Spacing = 100
 STD3MM_Column_N_Lines = 320
-STD3MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD3MM_Column_Width + c*STD3MM_Column_Spacing,0.0)
-STD3MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD3MM_Column_Width + c*STD3MM_Column_Spacing,0.0)
+STD3MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD3MM_Column_Width + c*STD3MM_Column_Spacing, 0.0)
+STD3MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD3MM_Column_Width + c*STD3MM_Column_Spacing, 0.0)
 
 
 # STD1MM
@@ -77,8 +77,8 @@ STD1MM_Column_N_Lines = 320
                             #(STD_IOCOLUMN_Left_Margin + STD3MM_Column_Widths[0] + STD3MM_Column_Widths[1] + STD3MM_Column_Spacings[0] + STD3MM_Column_Widths[2] + STD3MM_Column_Spacings[1] + STD3MM_Column_Widths[3] + STD3MM_Column_Spacings[2], 0.0)
                             #]
 
-STD1MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD1MM_Column_Width + c*STD1MM_Column_Spacing,0.0)
-STD1MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD1MM_Column_Width + c*STD1MM_Column_Spacing,0.0)
+STD1MM_Column_Bottom_Left = lambda c: (STD_IOCOLUMN_Left_Margin + c*STD1MM_Column_Width + c*STD1MM_Column_Spacing, 0.0)
+STD1MM_Column_Bottom_Right = lambda c: (STD_IOCOLUMN_Left_Margin + (c+1)*STD1MM_Column_Width + c*STD1MM_Column_Spacing, 0.0)
 
 
 

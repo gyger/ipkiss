@@ -89,7 +89,7 @@ class BentDirectionalCoupler(DirectionalCoupler):
     """ a directional coupler with bends on each side """
     
     bend_radius =         PositiveNumberProperty(default = TECH.WG.BEND_RADIUS)
-    bend_angle =          AngleProperty(default = 45.0, restriction = RestrictRange(0,90, True, True)) # angle between 0 and 90 degrees, including 0 and 90
+    bend_angle =          AngleProperty(default = 45.0, restriction = RestrictRange(0, 90, True, True)) # angle between 0 and 90 degrees, including 0 and 90
     straight_after_bend = PositiveNumberProperty (default = TECH.WG.SHORT_STRAIGHT)
     
     # we need only to override the waveguide_routes. the rest of the parent class is reused!    

@@ -65,13 +65,13 @@ MY_OUTPUT_MAP.layer_map[PPLayer(process = MY_TECH.PROCESS.MET_4, purpose = MY_TE
 class Layout(Structure):
     
     def define_elements(self, elems):        
-        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0))
+        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0))
 
         #we first create a regular waveguide element 
         wg_def = WgElDefinition(wg_width = TECH.WG.WIRE_WIDTH, trench_width = TECH.WG.TRENCH_WIDTH, process = TECH.PROCESS.WG)
-        wg = wg_def(shape = [(0.0,0.0), (500.0,0.0)])
+        wg = wg_def(shape = [(0.0, 0.0), (500.0, 0.0)])
         #on top of it, we add a rectangle element with III-V
-        rectangle_III_V = Rectangle(PPLayer(MY_TECH.PROCESS.OL35_1, MY_TECH.PURPOSE.DEFAULT), center = (250.0, 0.0),box_size = (500.0, 20.0))
+        rectangle_III_V = Rectangle(PPLayer(MY_TECH.PROCESS.OL35_1, MY_TECH.PURPOSE.DEFAULT), center = (250.0, 0.0), box_size = (500.0, 20.0))
         
         #assemble both elemeents in a structure
         layout += Structure(name= "wg_with_III_V", elements = [wg, rectangle_III_V], ports = wg.ports)

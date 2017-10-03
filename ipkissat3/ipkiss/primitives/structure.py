@@ -93,7 +93,7 @@ class ChildStructuresProperty(DefinitionProperty):
     
     def __init__(self, internal_member_name = None, **kwargs):
         kwargs["restriction"] = RestrictType(allowed_types=[list])
-        super(ChildStructuresProperty,self).__init__(internal_member_name = internal_member_name, **kwargs)
+        super(ChildStructuresProperty, self).__init__(internal_member_name = internal_member_name, **kwargs)
         
     def __check_restriction__(self, obj, value):
         super(ChildStructuresProperty, self).__check_restriction__(obj, value)
@@ -117,7 +117,7 @@ class __StructureHierarchy__(StrongPropertyInitializer):
     def define_child_structures(self, children):
         return children
 
-    def __eq__(self,other):
+    def __eq__(self, other):
     # FIXME: Is not correct.
         if other == None:
             return False
@@ -158,7 +158,7 @@ class Structure(UnitGridContainer, __StructureHierarchy__, MixinBowl, metaclass=
 
 
     def define_name(self):
-        if (not hasattr(self,'__name__')) or (self.__name__ is None):
+        if (not hasattr(self, '__name__')) or (self.__name__ is None):
             self.__name__ = self.__name_generator__(self)          
         return self.__name__
    
@@ -209,7 +209,7 @@ class StructureList(TypedList):
                 if i.name == key: return i
             raise IndexError("Structure " + key + " cannot be found in StructureList.")
         else:
-            return list.__getitem__(self,key)
+            return list.__getitem__(self, key)
 
     def __setitem__(self, key, value):
         if isinstance(key, str):
@@ -217,16 +217,16 @@ class StructureList(TypedList):
                 if self[i].name == key: return list.__setitem__(self, i, value)
             list.append(self, value)
         else:
-            return list.__setitem__(self,key, value)
+            return list.__setitem__(self, key, value)
 
     def __delitem__(self, key):
         if isinstance(key, str):
             for i in range(0, len(self)):
-                if self[i].name == key: return list.__delitem__(self,i)
+                if self[i].name == key: return list.__delitem__(self, i)
                 return
-            return list.__delitem__(self,key)
+            return list.__delitem__(self, key)
         else:
-            return list.__delitem__(self,key)
+            return list.__delitem__(self, key)
 
     def __contains__(self, item):
         if isinstance(item, Structure):
@@ -238,7 +238,7 @@ class StructureList(TypedList):
                 if i.name == name: return True
             return False
         else:
-            return list.__contains__(self,item)
+            return list.__contains__(self, item)
         
     def __fast_contains__(self, name):
         for i in self:

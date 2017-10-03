@@ -73,7 +73,7 @@ except ImportError, e:
                 eps_values.append(landscape.simulation_volume.geometry.material_stack_factory[material_stack_id].effective_index_epsilon)	
             from pickle import dump
             file_handle = open(materials_2d_filename, "w")
-            dump((bitmap_polygons, eps_values, south_west),file_handle)
+            dump((bitmap_polygons, eps_values, south_west), file_handle)
             file_handle.close()
         else: #dim == 3
             materials_3d_filename = name_template+".materials3D.pysimul"
@@ -91,7 +91,7 @@ except ImportError, e:
             n_o_material_stacks = landscape.simulation_volume.geometry.get_number_of_material_stacks_in_store()
             from pickle import dump
             file_handle = open(materials_3d_filename, "w")
-            dump((bitmap_polygons, material_stack_ids, south_west, material_stacks_npy, n_o_material_stacks),file_handle)
+            dump((bitmap_polygons, material_stack_ids, south_west, material_stacks_npy, n_o_material_stacks), file_handle)
             file_handle.close()	    	    
         if( self.symmY ):
             self.__script__("symmetry_object = meep.mirror(meep.Y,meep_vol)")
@@ -182,10 +182,10 @@ except ImportError, e:
     def __make_meep_vec__(self, coord):
         '''Convert a Coord3 object into a Meep vec object'''
         if (self.dim == 3):
-            (x,y,z) = self.__calc_meep_coord__(coord)
+            (x, y, z) = self.__calc_meep_coord__(coord)
             return "meep.vec(%f,%f,[FIXME])" %(x, y)
         elif (self.dim == 2):
-            (x,y) = self.__calc_meep_coord__(coord)
+            (x, y) = self.__calc_meep_coord__(coord)
             return "meep.vec(%f,%f)" %(x, y)
         elif (self.dim == 1):
             (x) = self.__calc_meep_coord__(coord)
@@ -219,7 +219,7 @@ except ImportError, e:
         self.__script__("src%i_center_freq = 1.0 / (float(src%i_center_wavelength) / 1000.0)" %(seq_nr, seq_nr))
         if isinstance(src, __GaussianSource__):
             self.__script__("src%i_pulse_width_wl = %f" %(seq_nr, src.pulse_width))
-            self.__script__("src%i_pulse_width_freq = ( (float(src%i_pulse_width_wl)/1000.0) / (float(src%i_center_wavelength)/1000.0) ) * src%i_center_freq" %(seq_nr,seq_nr,seq_nr,seq_nr))
+            self.__script__("src%i_pulse_width_freq = ( (float(src%i_pulse_width_wl)/1000.0) / (float(src%i_center_wavelength)/1000.0) ) * src%i_center_freq" %(seq_nr, seq_nr, seq_nr, seq_nr))
             self.__script__("meepSource%i = meep.gaussian_src_time(src%i_center_freq, src%i_pulse_width_freq)" %(seq_nr, seq_nr, seq_nr))
         if isinstance(src, __ContinuousSource__):
             self.__script__("meepSource%i = meep.continuous_src_time(src%i_center_freq, %f, %f, %f, %f)" %(seq_nr, seq_nr, src.smoothing_width, src.start_time, src.stop_time, src.cutoff))
@@ -258,22 +258,22 @@ except ImportError, e:
         vec1 = self.__make_meep_vec__(flx.north)
         vec2 = self.__make_meep_vec__(flx.south)
         self.__script__("#flux plane %i" %seq_nr)
-        self.__script__("flx%i_vol = meep.volume(%s,%s)" %(seq_nr, vec1,vec2))
-        self.__script__("flx%i_center_wavelength = %f" %(seq_nr,flx.center_wavelength))
+        self.__script__("flx%i_vol = meep.volume(%s,%s)" %(seq_nr, vec1, vec2))
+        self.__script__("flx%i_center_wavelength = %f" %(seq_nr, flx.center_wavelength))
         self.__script__("flx%i_center_freq = 1.0 / (float(flx%i_center_wavelength) / 1000.0)" %(seq_nr, seq_nr))
-        self.__script__("flx%i_pulse_width_wl = %f" %(seq_nr,flx.pulse_width))
-        self.__script__("flx%i_pulse_width_freq = ( (float(flx%i_pulse_width_wl)/1000.0) / (float(flx%i_center_wavelength)/1000.0) ) * flx%i_center_freq" %(seq_nr,seq_nr,seq_nr,seq_nr))
-        self.__script__("flx%i_max_freq = flx%i_center_freq + flx%i_pulse_width_freq / 2.0" %(seq_nr,seq_nr,seq_nr))
-        self.__script__("flx%i_min_freq =  flx%i_center_freq - flx%i_pulse_width_freq / 2.0" %(seq_nr,seq_nr,seq_nr))
+        self.__script__("flx%i_pulse_width_wl = %f" %(seq_nr, flx.pulse_width))
+        self.__script__("flx%i_pulse_width_freq = ( (float(flx%i_pulse_width_wl)/1000.0) / (float(flx%i_center_wavelength)/1000.0) ) * flx%i_center_freq" %(seq_nr, seq_nr, seq_nr, seq_nr))
+        self.__script__("flx%i_max_freq = flx%i_center_freq + flx%i_pulse_width_freq / 2.0" %(seq_nr, seq_nr, seq_nr))
+        self.__script__("flx%i_min_freq =  flx%i_center_freq - flx%i_pulse_width_freq / 2.0" %(seq_nr, seq_nr, seq_nr))
         self.__script__("flx%i_plane = meep_fields.add_dft_flux_plane(flx%i_vol, flx%i_min_freq, flx%i_max_freq, %i )" %(seq_nr, seq_nr, seq_nr, seq_nr, flx.number_of_sampling_freq))
         if not (flx.init_hdf5 is None):
-            self.__script__("flx%i_plane.load_hdf5(meep_fields, \"%s\")" %(seq_nr,flx.init_hdf5.replace(".h5","")))
+            self.__script__("flx%i_plane.load_hdf5(meep_fields, \"%s\")" %(seq_nr, flx.init_hdf5.replace(".h5", "")))
 
 
     def __collectAndSaveFluxplane__(self, filename_prefix, flx, seq_nr = 1):
         self.__script__("#collect flux data and save it to file, so it can be retrieved later for analysis")	
         self.__script__("flux%i_data = meep.getFluxData(flx%i_plane)" %(seq_nr, seq_nr))
-        self.__script__("flux%i_file_handle = open(\"%s\",'w')" %(seq_nr,filename_prefix+".fluxplane_"+flx.name.replace(" ","_")))
+        self.__script__("flux%i_file_handle = open(\"%s\",'w')" %(seq_nr, filename_prefix+".fluxplane_"+flx.name.replace(" ", "_")))
         self.__script__("dump(flux%i_data, flux%i_file_handle)" %(seq_nr, seq_nr))
         self.__script__("flux%i_file_handle.close()" %seq_nr) 	
 
@@ -303,7 +303,7 @@ class MeepScripterProcedure(FDTDFieldCalculationProcedure):
     stopcriterium = RestrictedProperty(default=__StopCriterium__(), restriction = RestrictType(__StopCriterium__), doc = "Stopcriterium for the simulation procedure.")     
 
     def __init_script_file_handle__(self, filename):
-        self.__script_file_handle__ = open(filename,"w")	
+        self.__script_file_handle__ = open(filename, "w")	
 
     def __close_script_file_handle__(self):
         if not (self.__script_file_handle__ is None):
@@ -354,7 +354,7 @@ class MeepScripterProcedure(FDTDFieldCalculationProcedure):
             if not isinstance(self.stopcriterium, __StopCriterium__):
                 self.__script__("#STOPCRITERIUM : type %s was not yet implemented : manually add the code for your stopcriterium" %type(self.stopcriterium))
         self.engine.fini_script(self.landscape, self.__script__, name_template)
-        self.__script__(append_script.replace("%name",name_template))
+        self.__script__(append_script.replace("%name", name_template))
         self.__close_script_file_handle__()
         print("Meep script generated : %s" %script_filename)
 

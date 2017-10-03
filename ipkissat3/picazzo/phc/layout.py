@@ -106,7 +106,7 @@ class PhCLayout(Structure):
         
         return elems
 
-    def define_ports(self,prts):
+    def define_ports(self, prts):
         from ipkiss.plugins.photonics.port.port import OpticalPort
         for coord, angle, wg_def in self.ports_coordinates:
             p = OpticalPort(position = (self.pitches[0] * coord[0], self.pitches[1] * coord[1]),
@@ -124,7 +124,7 @@ class TriangularPhCLayout(PhCLayout):
         pitches = (0.5 * self.lattice_pitches[0], sqrt(0.75)*self.lattice_pitches[1])
         return pitches
 
-    def define_ports(self,prts):
+    def define_ports(self, prts):
         from ipkiss.plugins.photonics.port.port import OpticalPort
         for coord, angle, wg_def in self.ports_coordinates:
             p = OpticalPort(position = (self.lattice_pitches[0] * coord[0], self.lattice_pitches[1]*sqrt(3.0) * coord[1]),

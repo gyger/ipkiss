@@ -28,7 +28,7 @@ class ExampleStacking(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),
                                   y_spacing = 25.0) 
         
         
@@ -51,7 +51,7 @@ class ExampleStacking2(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),
                                   y_spacing = 25.0) 
         
         
@@ -82,7 +82,7 @@ class ExampleStackAndStraighten(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),
                                   y_spacing = 25.0) 
         
         
@@ -113,7 +113,7 @@ class ExampleStackAndStraighten2(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),
                                   y_spacing = 25.0) 
         
         
@@ -142,7 +142,7 @@ class ExampleStackAndStraighten3(Structure):
     def define_elements(self, elems):
         # define a column
         from picazzo.io.column import IoColumnGroup
-        my_column = IoColumnGroup(south_east = (2000.0,0.0),
+        my_column = IoColumnGroup(south_east = (2000.0, 0.0),
                                   y_spacing = 25.0) 
         
         

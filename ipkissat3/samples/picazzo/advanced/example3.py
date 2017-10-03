@@ -32,7 +32,7 @@ from .example3_three_port import * # our structure
 class PicazzoExample3(Structure):
         
         def define_elements(self, elems):
-                layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0))
+                layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0))
                 
                 # alignment waveguide
                 wg_def = WgElDefinition()
@@ -41,7 +41,7 @@ class PicazzoExample3(Structure):
                 layout += align        
                 # add 2 ThreePort components
                 layout += ThreePort(width = 5.0, height = 2.0)        
-                layout.add(ThreePortToEast(width = 5.0, height = 2.0),merged_waveguides=False)
+                layout.add(ThreePortToEast(width = 5.0, height = 2.0), merged_waveguides=False)
 
                 elems += layout
                 return elems

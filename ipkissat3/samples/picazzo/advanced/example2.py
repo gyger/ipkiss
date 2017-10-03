@@ -36,7 +36,7 @@ from ipkiss.io.output_gdsii import FileOutputGdsii
 class PicazzoExample2(Structure):
     
     def define_elements(self, elems):
-        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0,0.0))
+        layout = IoColumnGroup(y_spacing=25.0, south_east=(6000.0, 0.0))
         
         # alignment waveguide
         wg_def = WgElDefinition()

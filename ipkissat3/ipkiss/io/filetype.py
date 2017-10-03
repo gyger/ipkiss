@@ -19,7 +19,7 @@
 # 
 # Contact: ipkiss@intec.ugent.be
 
-from ipcore.all import StrongPropertyInitializer,StringProperty,RestrictedProperty, RestrictType
+from ipcore.all import StrongPropertyInitializer, StringProperty, RestrictedProperty, RestrictType
 
 class FileType(StrongPropertyInitializer):
     name = StringProperty(required=True)
@@ -28,7 +28,7 @@ class FileType(StrongPropertyInitializer):
     def __str__(self):
         return self.name
 def FileTypeProperty(internal_member_name= None, restriction = None,**kwargs): 
-    return RestrictedProperty(restriction = RestrictType(FileType),**kwargs) 
+    return RestrictedProperty(restriction = RestrictType(FileType), **kwargs) 
 
 GDSII = FileType(name="GDSII", doc="GDSII stream file")
 OASIS = FileType(name="OASIS", doc="OASIS file")

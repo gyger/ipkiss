@@ -29,7 +29,7 @@ class Logo(Structure):
     layer = LayerProperty(required = True)
     size = Size2Property(default = (50.0, 50.0))
     
-    def __init__(self, layer, size= (50.0,50.0), **kwargs):
+    def __init__(self, layer, size= (50.0, 50.0), **kwargs):
         super(Logo, self).__init__(
             layer = layer,
             size = size,
@@ -39,8 +39,8 @@ class Logo(Structure):
 
     def define_name(self):
         logo_size = (1.0, 1.1)
-        scale = min([self.size[0]/logo_size[0],self.size[1]/logo_size[1]])
-        return "%s_L%d_S%d" % (self.__name_prefix__ ,
+        scale = min([self.size[0]/logo_size[0], self.size[1]/logo_size[1]])
+        return "%s_L%d_S%d" % (self.__name_prefix__,
                                self.layer.id(),
                                int(scale*1000)
                            )

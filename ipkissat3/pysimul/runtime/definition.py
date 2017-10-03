@@ -68,7 +68,7 @@ class SimulationDefinition(StrongPropertyInitializer):
 			filename = self.__get_default_filename_without_extension()+ '.def.pysimul'	
 		f = open(filename, 'wb')
 		LOG.debug("Persisting simulation definition to file : %s" %filename)
-		pickle.dump(self,f)
+		pickle.dump(self, f)
 		f.close()
 		return filename
 		
@@ -78,15 +78,15 @@ class SimulationDefinition(StrongPropertyInitializer):
 			filename = self.__get_default_filename_without_extension()		
 			filename = filename + '.datacollectors.pysimul'
 		f = open(filename, 'wb')
-		pickle.dump(self.landscape.datacollectors,f)
+		pickle.dump(self.landscape.datacollectors, f)
 		f.close()		
 		self.save_datacollectors_to_file_function(filename+".png")
 		
 	@classmethod
-	def load_from_file(cls,filename):
+	def load_from_file(cls, filename):
 		'''deserialize a SimulationDefinition from file'''
 		LOG.debug("Loading simulation definition from file : %s" %filename)		
-		f = open(filename,'rb')
+		f = open(filename, 'rb')
 		simul_def = pickle.load(f)
 		f.close()
 		return simul_def

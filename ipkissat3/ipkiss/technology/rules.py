@@ -20,13 +20,13 @@
 # Contact: ipkiss@intec.ugent.be
 
 from ipkiss.technology import get_technology
-from ipkiss.primitives.layer import Layer, LayerProperty, LayerList,__GeneratedLayer__
-from ipcore.all import StrongPropertyInitializer, StringProperty, PositiveNumberProperty,MixinBowl, RestrictedProperty, RestrictType, ListProperty
+from ipkiss.primitives.layer import Layer, LayerProperty, LayerList, __GeneratedLayer__
+from ipcore.all import StrongPropertyInitializer, StringProperty, PositiveNumberProperty, MixinBowl, RestrictedProperty, RestrictType, ListProperty
 from ipcore.properties.predefined import RESTRICT_NUMBER, RESTRICT_POSITIVE
 
 TECH = get_technology()
 
-class __DesignRule__(StrongPropertyInitializer,MixinBowl):
+class __DesignRule__(StrongPropertyInitializer, MixinBowl):
     """ Design rule base class """
     doc = StringProperty(default="", doc="Documentation of design rule")
     name = StringProperty(default="")
@@ -45,7 +45,7 @@ class __LayerDesignRule__(__DesignRule__):
 
     def get_layers(self):
         l = LayerList()
-        if isinstance(self.layer,__GeneratedLayer__):
+        if isinstance(self.layer, __GeneratedLayer__):
             l += self.layer.layers()
         else:
             l += self.layer
@@ -58,52 +58,52 @@ class __TwoLayerDesignRule__(__DesignRule__):
     layer2 = LayerProperty(required=True, doc="Second layer the rule applies to")
     def get_layers(self):
         l = LayerList()
-        if isinstance(self.layer1,__GeneratedLayer__):
+        if isinstance(self.layer1, __GeneratedLayer__):
             l += self.layer1.layers()
         else:
             l += self.layer1
-        if isinstance(self.layer2,__GeneratedLayer__):
+        if isinstance(self.layer2, __GeneratedLayer__):
             l += self.layer2.layers()
         else:
             l += self.layer2
         return l
     
     def __str__(self):
-        return "Two layer rule %s %s"%(self.layer1,self.layer2)
+        return "Two layer rule %s %s"%(self.layer1, self.layer2)
 
 class MinimumSpaceDesignRule(__LayerDesignRule__):
     """ Minimum allowed space between two edges or vertices in a single layer """
     minimum_space = PositiveNumberProperty(required=True)
     def __str__(self):
-        return "Minimum space %.3f on layer %s"%(self.minimum_space,self.layer)
+        return "Minimum space %.3f on layer %s"%(self.minimum_space, self.layer)
 
 class MaximumSpaceDesignRule(__LayerDesignRule__):
     """ Maximum allowed space between two edges or vertices in a single layer """
     maximum_space = PositiveNumberProperty(required=True)
     
     def __str__(self):
-        return "Maximum space %.3f on layer %s"%(self.maximum_space,self.layer)
+        return "Maximum space %.3f on layer %s"%(self.maximum_space, self.layer)
 
 class MinimumWidthDesignRule(__LayerDesignRule__):
     """ Minimum allowed width between two edges or vertices in a single layer """
     minimum_width = PositiveNumberProperty(required=True)
     
     def __str__(self):
-        return "Minimum width %.3f on layer %s"%(self.minimum_width,self.layer)
+        return "Minimum width %.3f on layer %s"%(self.minimum_width, self.layer)
 
 class MinimumDiameterDesignRule(__LayerDesignRule__):
     """ Minimum allowed width between two edges or vertices in a single layer """
     minimum_diameter = PositiveNumberProperty(required=True)
     
     def __str__(self):
-        return "Minimum diameter %.3f on layer %s"%(self.minimum_diameter,self.layer)
+        return "Minimum diameter %.3f on layer %s"%(self.minimum_diameter, self.layer)
 
 class MaximumWidthDesignRule(__LayerDesignRule__):
     """ Maximum allowed width between two edges or vertices in a single layer """
     maximum_width = PositiveNumberProperty(required=True)
     
     def __str__(self):
-        return "Maximum width %.3f on layer %s"%(self.maximum_width,self.layer)
+        return "Maximum width %.3f on layer %s"%(self.maximum_width, self.layer)
 
 class AllowedWidthsDesignRule(__LayerDesignRule__):
     """ Allowed width between two edges or vertices in a single layer """
@@ -127,21 +127,21 @@ class AllowedDiameterDesignRule(__LayerDesignRule__):
     
 class NoOverlapDesignRule(__TwoLayerDesignRule__):
     def __str__(self):
-        return "Layer %s not on layer %s"%(self.layer1,self.layer2)
+        return "Layer %s not on layer %s"%(self.layer1, self.layer2)
 
 class OverlapDesignRule(__TwoLayerDesignRule__):
     def __str__(self):
-        return "Layer %s must be on layer %s"%(self.layer1,self.layer2)
+        return "Layer %s must be on layer %s"%(self.layer1, self.layer2)
 
 class InsideDesignRule(__TwoLayerDesignRule__):
     def __str__(self):
-        return "Layer %s must be fully covered by layer %s"%(self.layer1,self.layer2)
+        return "Layer %s must be fully covered by layer %s"%(self.layer1, self.layer2)
     
 class MinimumEnclosureDesignRule(__TwoLayerDesignRule__):
     minimum_enclosure = PositiveNumberProperty(required=True)
     
     def __str__(self):
-        return "Layer %s must be enclosed by layer %s by at least %.3f micron"%(self.layer1,self.layer2,self.minimum_enclosure)
+        return "Layer %s must be enclosed by layer %s by at least %.3f micron"%(self.layer1, self.layer2, self.minimum_enclosure)
 
 class Rule(StrongPropertyInitializer):
     design_rule = DesignRuleProperty(required=True)

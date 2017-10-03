@@ -72,7 +72,7 @@ my_ring_routed_2 = RoutePortsAroundCorner(structure = my_ring_routed,
 my_ring_routed_2.write_gdsii('matrioszka_4.gds')
 # do a small fanout (bundled) to arrange waveguides to equal spacing
 my_ring_routed_3 = FanoutPorts(structure = my_ring_routed_2,
-                               port_labels = ["W0","W1", "W2"],
+                               port_labels = ["W0", "W1", "W2"],
                                output_direction = WEST,
                                reference_coordinate = 10.0,
                                spacing = 10.0,

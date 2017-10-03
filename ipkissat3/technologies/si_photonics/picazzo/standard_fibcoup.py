@@ -43,7 +43,7 @@ class TechFibcoupTree(DelayedInitTechnologyTree):
             std1550_grating_n_o_periods = 25
             std_lin_grating_wg_def = WgElDefinition(wg_width = 10.0)
             G = _ULG(name = "std_grating_1550",
-                     origin = (0.0,0.0),
+                     origin = (0.0, 0.0),
                      period = std1550_grating_period, 
                      line_width = std1550_grating_trench, 
                      n_o_periods = std1550_grating_n_o_periods, 
@@ -60,7 +60,7 @@ class TechFibcoupTree(DelayedInitTechnologyTree):
             std1550_grating_n_o_periods = 16
             std_lin_grating_wg_def = WgElDefinition(wg_width = 10.0)
             G = _ULG(name = "std_grating_1550_tm",
-                     origin = (0.0,0.0),
+                     origin = (0.0, 0.0),
                      period = std1550_grating_period, 
                      line_width = std1550_grating_trench, 
                      n_o_periods = std1550_grating_n_o_periods, 

@@ -52,7 +52,7 @@ class StipplePattern(StrongPropertyInitializer):
         self.pattern = pattern
     
     def __eq__(self, other):
-        return numpy.array_equal(self.pattern,other.pattern)
+        return numpy.array_equal(self.pattern, other.pattern)
     
     def __str__(self):
         return self.name
@@ -289,4 +289,4 @@ STIPPLE_LINES_V_DENSE = StipplePattern(name = "LINES_V_DENSE", pattern = __PATTE
 STIPPLE_LINES_V_BOLD = StipplePattern(name = "LINES_V_BOLD", pattern = __PATTERN_LINES_V_BOLD)
 STIPPLE_LINES_DIAGONAL_L = StipplePattern(name = "LINES_DIAG_L", pattern = __PATTERN_LINES_DIAG_L, matplotlib_hatch='/')
 STIPPLE_LINES_DIAGONAL_R = StipplePattern(name = "LINES_DIAG_R", pattern = __PATTERN_LINES_DIAG_R, matplotlib_hatch='\\')
-STIPPLE_TRIANGLE = StipplePattern(name = "TRIANGLE", pattern = __PATTERN_TRIANGLE , matplotlib_hatch='*')
+STIPPLE_TRIANGLE = StipplePattern(name = "TRIANGLE", pattern = __PATTERN_TRIANGLE, matplotlib_hatch='*')

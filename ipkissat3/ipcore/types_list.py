@@ -71,7 +71,7 @@ class TypedList(StrongPropertyInitializer, list):
             self.__raise_invalid_type_exception__(item)
 
     def extend(self, items):
-        if type(self) == type(items):
+        if isinstance(self, type(items)):
             # we are certain that all items are of a valid type. No need to check each item individually
             list.extend(self, items)
         elif isinstance(items, list) or isinstance(items, set):

@@ -30,7 +30,7 @@ from ipcore.mixin.mixin import MixinBowl
 
 __all__ = ["Group"]
 
-class Group(__Group__,__Element__, MixinBowl):
+class Group(__Group__, __Element__, MixinBowl):
     
     def __init__(self, transformation = None, **kwargs):
         super(Group, self).__init__(transformation = transformation, **kwargs)

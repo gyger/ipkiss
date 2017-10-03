@@ -52,10 +52,10 @@ class BaseWaveguideDefinition(StrongPropertyInitializer, Transformable):
         return not self.__eq__(other)
     
     def get_bend90_size(self):
-        return 0,0
+        return 0, 0
     
     def get_bend_size(self, angle):
-        return 0,0
+        return 0, 0
     
     def get_wg_definition_cross_section(self):
         return self
@@ -67,7 +67,7 @@ class WaveguideDefCrossSectionProperty(DefinitionProperty):
     
     def __init__(self, internal_member_name = None, **kwargs):
         kwargs["restriction"] = RestrictType(allowed_types=[BaseWaveguideDefinition])
-        super(WaveguideDefCrossSectionProperty,self).__init__(internal_member_name = internal_member_name, **kwargs)                           
+        super(WaveguideDefCrossSectionProperty, self).__init__(internal_member_name = internal_member_name, **kwargs)                           
     
     def __set__(self, obj, value):
         wg_def_cross_section = value.get_wg_definition_cross_section()

@@ -32,8 +32,8 @@ class ImportLibraryExample(Structure):
                   #--------------------------------------------------
                   # Make a simple structure containing two rectangles
                   rectangles = Structure("rectangles")
-                  rectangles += [ Rectangle(layer = Layer(0), center = (0.0, -150),box_size = (200, 200.0)),
-                                            RectanglePath(layer = Layer(0), center = (0.0, 150),box_size = (200, 200.0), line_width= 4.0) ]                                    
+                  rectangles += [ Rectangle(layer = Layer(0), center = (0.0, -150), box_size = (200, 200.0)),
+                                            RectanglePath(layer = Layer(0), center = (0.0, 150), box_size = (200, 200.0), line_width= 4.0) ]                                    
                   #import another GDS-II file, put it in the
                   #structure "imported" and prefix all structure names with "imp_"
                   fnGds = path.join(my_path, "import/hex.gds")

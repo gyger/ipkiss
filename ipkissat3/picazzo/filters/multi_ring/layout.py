@@ -60,7 +60,7 @@ def MultiRingRectNotchFilter(coupler_spacings,
 
 def MultiRingRect180DropFilter(coupler_spacings, 
                                ring_wg_definition = TECH.WGDEF.WIRE,
-                               coupler_wg_definitions = [TECH.WGDEF.WIRE,TECH.WGDEF.WIRE],
+                               coupler_wg_definitions = [TECH.WGDEF.WIRE, TECH.WGDEF.WIRE],
                                bend_radius= TECH.WG.BEND_RADIUS, 
                                straights = (TECH.WG.SHORT_STRAIGHT, TECH.WG.SHORT_STRAIGHT), 
                                **kwargs):

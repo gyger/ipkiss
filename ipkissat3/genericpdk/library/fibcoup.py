@@ -34,7 +34,7 @@ std_lin_grating_wg_width = 10.0
 def STANDARD_GRATING_1550_TE(process = TECH.PROCESS.FC):
     wg_def = WgElDefinition(wg_width = std_lin_grating_wg_width)
     G = _ULG(name = "std_grating_1550",
-                           origin = (0.0,0.0),
+                           origin = (0.0, 0.0),
                            period = std1550_grating_period, 
                            line_width = std1550_grating_trench, 
                            n_o_periods = std1550_grating_n_o_periods, 
@@ -54,7 +54,7 @@ std_lin_grating_wg_width = 10.0
 def STANDARD_GRATING_1300_TE(process = TECH.PROCESS.FC):
     wg_def = WgElDefinition(wg_width = std_lin_grating_wg_width)
     return _ULG(name = "std_grating_1300",
-                origin = (0.0,0.0),
+                origin = (0.0, 0.0),
                 period = std1300_grating_period, 
                 line_width = std1300_grating_trench, 
                 n_o_periods = std1300_grating_n_o_periods, 
@@ -73,10 +73,10 @@ std_lin_grating_wg_width = 10.0
 def STANDARD_GRATING_1550_TM(process = TECH.PROCESS.FC):
     wg_def = WgElDefinition(wg_width = std_lin_grating_wg_width) 
     return _ULG(name = "std_grating_TM_1550",
-                origin = (0.0,0.0),
+                origin = (0.0, 0.0),
                 period = std1550tm_grating_period, 
                 line_width = std1550tm_grating_trench, 
                 n_o_periods = std1550tm_grating_n_o_periods, 
-                wg_definition = wg_def ,
+                wg_definition = wg_def,
                 process = process )
 

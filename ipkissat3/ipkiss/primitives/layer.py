@@ -75,7 +75,7 @@ class __Layer__(StrongPropertyInitializer, metaclass=MetaLayerCreator):
         elif other is None:
             return self
         else:
-            raise TypeError("Cannot AND %s with %s" % (type(self),type(other)))
+            raise TypeError("Cannot AND %s with %s" % (type(self), type(other)))
 
     def __iand__(self, other):
         C = self.__and__(other)
@@ -88,7 +88,7 @@ class __Layer__(StrongPropertyInitializer, metaclass=MetaLayerCreator):
         elif other is None:
             return self
         else:
-            raise TypeError("Cannot OR %s with %s" % (type(self),type(other)))
+            raise TypeError("Cannot OR %s with %s" % (type(self), type(other)))
 
     def __ior__(self, other):
         C = self.__and__(other)
@@ -101,7 +101,7 @@ class __Layer__(StrongPropertyInitializer, metaclass=MetaLayerCreator):
         elif other is None:
             return self
         else:
-            raise TypeError("Cannot XOR %s with %s" % (type(self),type(other)))
+            raise TypeError("Cannot XOR %s with %s" % (type(self), type(other)))
 
     def __ixor__(self, other):
         C = self.__xor__(other)
@@ -128,7 +128,7 @@ class __GeneratedLayer__(__Layer__):
 
 class __GeneratedLayer_2Layer__(__GeneratedLayer__):
     def __init__(self, layer1, layer2):
-        super(__GeneratedLayer_2Layer__,self).__init__()
+        super(__GeneratedLayer_2Layer__, self).__init__()
         self.layer1 = layer1
         self.layer2 = layer2      
   
@@ -161,7 +161,7 @@ class __GeneratedLayerXor__(__GeneratedLayer_2Layer__):
         
 class __GeneratedLayerNot__(__GeneratedLayer__):
     def __init__(self, layer1):
-        super(__GeneratedLayerNot__,self).__init__()
+        super(__GeneratedLayerNot__, self).__init__()
         self.layer1 = layer1
         
     def __repr__(self):
@@ -247,14 +247,14 @@ class LayerList(TypedList):
     def __delitem__(self, key):
         if isinstance(key, int):
             for i in range(0, len(self)):
-                if list.__getitem__(self,i).id() == key: return list.__delitem__(self,i)
+                if list.__getitem__(self, i).id() == key: return list.__delitem__(self, i)
                 return
-            return list.__delitem__(self,key)
+            return list.__delitem__(self, key)
         if isinstance(key, str):
             for i in range(0, len(self)):
-                if list.__getitem__(self,i).name == key: return list.__delitem__(self,i)
+                if list.__getitem__(self, i).name == key: return list.__delitem__(self, i)
                 return
-            return list.__delitem__(self,key)
+            return list.__delitem__(self, key)
         else:
             raise TypeError("Index is wrong type " + str(type(key)) + " in LayerList")
 
@@ -300,7 +300,7 @@ class LayerList(TypedList):
     def add(self, item, overwrite = False):
         if isinstance(item, Layer):
             if not item in self:
-                list.append(self,item)
+                list.append(self, item)
             elif overwrite:
                 self[item.id()] = item
                 return

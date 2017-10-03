@@ -53,7 +53,7 @@ class OneEndedNaturalSpline(Shape):
     radius = PositiveNumberProperty(required = True)
     angle = AngleProperty(required = True)
     angle_step = AngleProperty(default  = TECH.METRICS.ANGLE_STEP)
-    def define_points(self,pts):
+    def define_points(self, pts):
         alpha = self.angle * DEG2RAD
         c = math.sin(alpha)
         if self.angle == 45.0:
@@ -68,8 +68,8 @@ class OneEndedNaturalSpline(Shape):
         
         # control points of full natural spline (right angle)
         q0_0 = Coord2(-L, 0)
-        q0_1 = Coord2(0,0)
-        q0_2 = Coord2(0,0)
+        q0_1 = Coord2(0, 0)
+        q0_2 = Coord2(0, 0)
         q0_3 = Coord2(0, L)
         
         # control points of first section of the spline
@@ -92,7 +92,7 @@ class AdiabaticSplineCircleSplineShape(Shape):
     adiabatic_angles = RestrictedProperty(allow_none = True, doc = "tuple of adiabatic transistion angles for input and output")
     angle_step = AngleProperty(default = TECH.METRICS.ANGLE_STEP)
     
-    def define_points(self,pts):
+    def define_points(self, pts):
         alpha_in = self.adiabatic_angles[0]
         alpha_out = self.adiabatic_angles[1]
         turn_angle = turn_deg(self.start_point, self.turn_point, self.end_point)
@@ -134,7 +134,7 @@ class AdiabaticSplineCircleSplineShape(Shape):
         if turn_angle < 0:
             S.v_mirror()
     
-        L = straight_line_from_point_angle((0.0,0.0), turn_angle)
+        L = straight_line_from_point_angle((0.0, 0.0), turn_angle)
         d = L.distance(S[-1])
     
         ep = S[-1]
@@ -144,7 +144,7 @@ class AdiabaticSplineCircleSplineShape(Shape):
             d = ep.x - ep.y*math.cos(turn_angle * DEG2RAD)/ math.sin(turn_angle*DEG2RAD)
         
         S.move((-d, 0.0))
-        S.rotate((0.0,0.0), angle_deg(self.turn_point, self.start_point))
+        S.rotate((0.0, 0.0), angle_deg(self.turn_point, self.start_point))
         S.move(self.turn_point)
         S.remove_identicals()
         
@@ -166,9 +166,9 @@ class ShapeRoundAdiabaticSplineGeneric(__ShapeModifier__):
             straight[-1]= False
         R = numpy.delete(self.radii, straight.nonzero()[0], 0)
         A = numpy.delete(self.adiabatic_angles_list, straight.nonzero()[0], 0)
-        return (S,R,A)
+        return (S, R, A)
     
-    def define_points(self,pts):
+    def define_points(self, pts):
         
         (s, R, A) = self.__original_shape_without_straight_angles__()        
 
@@ -231,7 +231,7 @@ class ShapeRoundAdiabaticSplineGeneric(__ShapeModifier__):
 class ShapeRoundAdiabaticSpline(ShapeRoundAdiabaticSplineGeneric):
     """ returns a shape with adiabatic spline corners """
     adiabatic_angles_list = LockedProperty()
-    adiabatic_angles = RestrictedProperty(default=(0.0,0.0))
+    adiabatic_angles = RestrictedProperty(default=(0.0, 0.0))
     radii = LockedProperty()
     radius = NonNegativeNumberProperty(required = True)
         
@@ -245,7 +245,7 @@ class ShapeRoundAdiabaticSpline(ShapeRoundAdiabaticSplineGeneric):
 from functools import partial
 
 def SplineRoundingAlgorithm(adiabatic_angles = (0.0, 0.0)):
-    return partial(ShapeRoundAdiabaticSpline,adiabatic_angles =adiabatic_angles)        
+    return partial(ShapeRoundAdiabaticSpline, adiabatic_angles =adiabatic_angles)        
 
 
 

@@ -35,7 +35,7 @@ class BoundaryCutFilter(Filter):
     def __filter_Boundary__(self, item, DEBUG_ID = None): 
         if DEBUG_ID is None:
             import random
-            DEBUG_ID = str(random.randint(0,999999))          
+            DEBUG_ID = str(random.randint(0, 999999))          
         
         if len(item.shape)<=self.max_vertex_count:
             result_boundaries = [item]                           
@@ -73,7 +73,7 @@ class BoundaryCutFilter(Filter):
                     transition_points_unsorted.append(c)
                     current_side = c.side            
         
-            transition_points = sorted(transition_points_unsorted, cmp = lambda p1,p2: int(numpy.sign(p1.x - p2.x)))  
+            transition_points = sorted(transition_points_unsorted, cmp = lambda p1, p2: int(numpy.sign(p1.x - p2.x)))  
             
             #if the 2 first transition points are consecutive points in the list of points, then ignore these
             while (len(transition_points)>0) and ((abs(transition_points[0].index - transition_points[1].index) == 1) or (transition_points[0].index == 0 and transition_points[1].index == len(points)-1) or (transition_points[1].index == 0 and transition_points[0].index == len(points)-1)):

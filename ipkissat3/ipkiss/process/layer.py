@@ -217,9 +217,9 @@ class ProcessLayerList(list):
     def __delitem__(self, key):
         if isinstance(key, str):
             for i in range(0, len(self)):
-                if list.__getitem__(self,i).extension == key: return list.__delitem__(self,i)
+                if list.__getitem__(self, i).extension == key: return list.__delitem__(self, i)
                 return
-            return list.__delitem__(self,key)
+            return list.__delitem__(self, key)
         else:
             raise TypeError("Index is wrong type " + str(type(key)) + " in ProcessLayerList")
 
@@ -251,7 +251,7 @@ class ProcessLayerList(list):
     def add(self, item, overwrite = False):
         if isinstance(item, ProcessLayer):
             if not item in self:
-                list.append(self,item)
+                list.append(self, item)
             elif overwrite:
                 self[item.extension] = item
                 return

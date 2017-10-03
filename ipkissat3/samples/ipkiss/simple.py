@@ -28,16 +28,16 @@ class SimpleExample(Structure):
 
     def define_elements(self, elems):
         boundaries = Structure(name = "boundaries")
-        boundaries += Rectangle  (layer=Layer(0), center=(0,150),box_size=(200, 200.0)) #rectangle 
+        boundaries += Rectangle  (layer=Layer(0), center=(0, 150), box_size=(200, 200.0)) #rectangle 
 
-        boundaries += Circle(layer=Layer(1), center=(0,-150), radius=100) #circle        
+        boundaries += Circle(layer=Layer(1), center=(0, -150), radius=100) #circle        
    
         paths = Structure(name = "paths")
-        paths += RectanglePath(layer=Layer(2), center=(0,150),box_size=(200, 200), line_width=4.0) #rectangle
-        paths += CirclePath(layer=Layer(3), center=(0,-150),radius=100, line_width=4.0) #circle 
+        paths += RectanglePath(layer=Layer(2), center=(0, 150), box_size=(200, 200), line_width=4.0) #rectangle
+        paths += CirclePath(layer=Layer(3), center=(0, -150), radius=100, line_width=4.0) #circle 
  
-        elems +=  SRef(boundaries, (0,0))
-        elems += SRef(paths, (300,0))   #simple references
+        elems +=  SRef(boundaries, (0, 0))
+        elems += SRef(paths, (300, 0))   #simple references
 
         return elems
     

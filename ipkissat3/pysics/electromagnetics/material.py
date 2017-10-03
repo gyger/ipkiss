@@ -46,8 +46,8 @@ class __BlendedElectroMagneticMaterial__(__ElectroMagneticMaterial__):
 #before doing the mixin, assess that we are not overwriting any epsilon values that were already set in the technology settings.
 from ipkiss.technology import get_technology
 TECH=get_technology()
-if hasattr(TECH,"MATERIALS"):
-    for (material_id,material) in TECH.MATERIALS:    
+if hasattr(TECH, "MATERIALS"):
+    for (material_id, material) in TECH.MATERIALS:    
         if hasattr(material, "epsilon"):
             raise Exception("Epsilon value of material '%s' is about to be overwritten by mixin of class __ElectroMagneticMaterial__.\nMake sure you do \"from pysics.electromagnetics import *\" in your technology settings before setting epsilon values." %material.name)
     

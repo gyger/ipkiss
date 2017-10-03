@@ -89,7 +89,7 @@ class IoTitleBlock(IoBlockStructure):
         title = Structure(self.name + "_1", PolygonText(PPLayer(self.process, TECH.PURPOSE.DF.TEXT), 
                                                         self.text, 
                                                         (0.0, 0.0), 
-                                                        alignment = (TEXT_ALIGN_CENTER, TEXT_ALIGN_MIDDLE) , 
+                                                        alignment = (TEXT_ALIGN_CENTER, TEXT_ALIGN_MIDDLE), 
                                                         font = TEXT_FONT_COMPACT, 
                                                         height = 0.7 * self.y_spacing))
         w = title.size_info().width

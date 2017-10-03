@@ -24,7 +24,7 @@ from technologies.si_photonics.picazzo.default import *
 from ipkiss.plugins.vfabrication import *
 from picazzo.filters.ring import RingRectSBend180DropFilter
 
-ring = RingRectSBend180DropFilter(straights=(TECH.WG.SHORT_STRAIGHT,TECH.WG.SHORT_STRAIGHT+3.0),
+ring = RingRectSBend180DropFilter(straights=(TECH.WG.SHORT_STRAIGHT, TECH.WG.SHORT_STRAIGHT+3.0),
                                       coupler_angles = [30.0, 10.0],
                                       coupler_spacings = [1.0, 0.8],
                                       coupler_lengths = [6.0, 2.0],
@@ -41,7 +41,7 @@ from picazzo.fibcoup.socket import BroadWgSocket
 
 wg_def = WgElDefinition(wg_width=5.0)
 socket = BroadWgSocket(wg_definition = wg_def, wg_length = 15.0)
-C = FiberCouplerGratingLine(line_widths_positions=[(1.0,1.0),(3.0,3.0),(4.0,7.0)],
+C = FiberCouplerGratingLine(line_widths_positions=[(1.0, 1.0), (3.0, 3.0), (4.0, 7.0)],
                             line_length = 7.0,
                             socket=socket)
 C.visualize_2d()

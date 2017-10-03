@@ -171,7 +171,7 @@ class Fluxplane(__DataCollector__):
     pulse_width = RestrictedProperty(required = True, restriction = RESTRICT_FLOAT & RESTRICT_NONNEGATIVE, doc = "Wavelength width (in nm) for collecting the flux")    
     number_of_sampling_freq = RestrictedProperty(required = True, restriction = RESTRICT_INT & RESTRICT_NONNEGATIVE, doc = "Number of discrete sampling frequencies to monitor the flux")   
     flux_per_freq_callback = lambda : 0  #callback function (probably to the engine), to get the flux values. To be set upon initialisation
-    flux_per_freq = RestrictedProperty(default = [[],[]], restriction = RestrictType(list), doc = "the flux per frequency that was collected during the simulation")   
+    flux_per_freq = RestrictedProperty(default = [[], []], restriction = RestrictType(list), doc = "the flux per frequency that was collected during the simulation")   
     init_hdf5 = StringProperty(default=None, doc = "The name of a HDF5 file from which to load initial values of the flux")        
 	
     def initialize(self):
@@ -188,7 +188,7 @@ class Fluxplane(__DataCollector__):
 	f = open(filename, 'wb')
 	LOG.debug("Persisting Fluxplane to file : %s" %filename)
 	import pickle
-	pickle.dump(self,f)
+	pickle.dump(self, f)
 	f.close()	  	
     
     def save_hdf5(self, filename):
@@ -293,7 +293,7 @@ class SimulationVolume2D(CartesianGeometry2D, SimulationVolume1D):
 	    for y in y_range:
 		x_co = float(x) / float(resolution)
 		y_co = float(y) / float(resolution)
-		mat[x,y] = self.get_material(Coord3(x_co,y_co,0))
+		mat[x, y] = self.get_material(Coord3(x_co, y_co, 0))
 	return mat
  
 
