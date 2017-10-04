@@ -61,10 +61,9 @@ class OutputGdsii(OutputBasic):
                 super(OutputGdsii, self).__init__(o_stream = o_stream, **kwargs)
                 if 'flatten_structure_container' in kwargs:
                         self.flatten_structure_container = kwargs.get('flatten_structure_container')
-                elif hasattr(TECH.GDSII, 'FLATTEN_STRUCTURE_CONTAINER'):
-                        self.flatten_structure_container = TECH.GDSII.FLATTEN_STRUCTURE_CONTAINER
                 else:
-                        self.flatten_structure_container = False                        
+                        self.flatten_structure_container = getattr(TECH.GDSII, 'FLATTEN_STRUCTURE_CONTAINER', False)
+ 
                 self.__ref_referenced_structures__ = set()
                 if sys.platform == "win32":
                         import os

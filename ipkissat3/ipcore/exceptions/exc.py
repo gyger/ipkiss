@@ -31,7 +31,7 @@ class IpcoreException(Exception):
         super(IpcoreException, self).__init__(Msg)
 
 
-class IpcoreAttributeException(IpcoreException):
+class IpcoreAttributeException(IpcoreException, AttributeError):
     """Exception with attributes """
     def __init__(self, Msg):
         super(IpcoreAttributeException, self).__init__(Msg)
@@ -49,13 +49,13 @@ class IpcoreRestrictionException(IpcorePropertyDescriptorException):
         super(IpcoreRestrictionException, self).__init__(Msg)
 
 
-class NotImplementedException(IpcoreException):
+class NotImplementedException(IpcoreException, NotImplementedError):
     """Exception for functionality that the user must implement through subclassing """
     def __init__(self, Msg="Method not implemented."):
         super(NotImplementedException, self).__init__(Msg)
 
 
-class InvalidArgumentException(IpcoreException):
+class InvalidArgumentException(IpcoreException, TypeError):
     """Exception indicating the use of an invalid argument """
     def __init__(self, Msg):
         super(InvalidArgumentException, self).__init__(Msg)
