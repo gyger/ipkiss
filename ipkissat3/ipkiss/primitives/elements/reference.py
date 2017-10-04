@@ -33,7 +33,6 @@ from ... import settings
 from ipcore.properties.descriptor import RestrictedProperty, DefinitionProperty, FunctionNameProperty
 from ipcore.properties.predefined import RESTRICT_INT_TUPLE2, RESTRICT_POSITIVE, RESTRICT_NONZERO, IntProperty, NumberProperty
 from ipcore.properties.initializer import SUPPRESSED
-from types import NoneType
 from copy import copy, deepcopy
 from numpy import transpose, reshape, meshgrid, array
 from ipkiss.log import IPKISS_LOG as LOG

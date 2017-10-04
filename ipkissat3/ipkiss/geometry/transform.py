@@ -24,7 +24,7 @@ from copy import deepcopy
 from ipcore.properties.descriptor import RestrictedProperty
 from ipcore.properties.restrictions import RestrictType
 from ipcore.properties.processors import ProcessorTypeCast
-from types import NoneType
+
 from ipcore.properties.initializer import StrongPropertyInitializer
 
 __all__ = ["generic_TransformationProperty",
@@ -60,7 +60,7 @@ class Transform(StrongPropertyInitializer):
     def __call__(self, item):
         """ if item is Transformable: applies the transform to a copy of the transformable item
             if item is a transform: returns a new transform that is a concatenation of this one and item """
-        if isinstance(item, NoneType):
+        if item is None:
             return self
         if isinstance(item, Transform):
             return item + self

@@ -23,7 +23,6 @@ from .restrictions import RestrictNothing, RestrictFunction, RestrictionError
 from .restrictions import RestrictTypeList
 from .processors import PropertyProcessor, ProcessorException
 
-from types import NoneType
 
 from ipcore.log import IPCORE_LOG as LOG
 from ipcore.exceptions.exc import *
@@ -190,7 +189,7 @@ class DefinitionProperty(__BasePropertyDescriptor__):
                 raise IpcorePropertyDescriptorException("Invalid assignment for Property '%s' of '%s' with value %s: not compatible with restriction %s." % (self.name, obj.__class__.__name__, str(value), str(self.restriction)))
 
     def __cache_property_value_on_object__(self, obj, value):
-        if not isinstance(obj, NoneType): #FIXME: ???
+        if obj is not None: #FIXME: ???
             new_value = self.preprocess(value, obj)
             self.__check_restriction__(obj, new_value)
             obj.__store__[self.__name__] = (new_value, CACHED)
